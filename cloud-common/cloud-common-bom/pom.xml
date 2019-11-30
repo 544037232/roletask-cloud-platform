@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>spring-cloud-dependencies-parent</artifactId>
+        <groupId>org.springframework.cloud</groupId>
+        <version>2.1.6.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <packaging>pom</packaging>
+    <artifactId>cloud-common-bom</artifactId>
+    <version>1.0.0.0</version>
+
+    <properties>
+        <!-- roletask大版本 -->
+        <roletask.version>1.0.0.0</roletask.version>
+        <!-- mybatis增强工具 -->
+        <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <!-- 阿里连接池 -->
+        <druid.version>1.1.21</druid.version>
+        <!-- 工具类 -->
+        <hutool.version>5.0.6</hutool.version>
+        <!-- 第三方登陆集成平台 -->
+        <third.oauth.version>1.13.1</third.oauth.version>
+        <!-- jwt -->
+        <jwt.version>0.9.1</jwt.version>
+        <!-- 阿里fastjson -->
+        <fastjson.version>1.2.62</fastjson.version>
+        <!-- aviator表达式引擎 -->
+        <aviator.version>4.2.5</aviator.version>
+        <!-- guava -->
+        <guava.version>28.1-jre</guava.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.refordom</groupId>
+                <artifactId>dev-user-api</artifactId>
+                <version>${roletask.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.refordom</groupId>
+                <artifactId>enterprise-user-api</artifactId>
+                <version>${roletask.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.refordom</groupId>
+                <artifactId>cloud-common-core</artifactId>
+                <version>${roletask.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.refordom</groupId>
+                <artifactId>cloud-common-data</artifactId>
+                <version>${roletask.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.refordom</groupId>
+                <artifactId>cloud-common-security</artifactId>
+                <version>${roletask.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.refordom</groupId>
+                <artifactId>cloud-common-rpc-user</artifactId>
+                <version>${roletask.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>me.zhyd.oauth</groupId>
+                <artifactId>JustAuth</artifactId>
+                <version>${third.oauth.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.googlecode.aviator/aviator -->
+            <dependency>
+                <groupId>com.googlecode.aviator</groupId>
+                <artifactId>aviator</artifactId>
+                <version>${aviator.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

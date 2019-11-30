@@ -1,0 +1,11 @@
+# Project exclude paths
+/cloud-auth-server/target/
+/cloud-common/cloud-common-core/target/
+/cloud-common/cloud-common-data/target/
+/cloud-common/cloud-common-rpc-user/target/
+/cloud-common/cloud-common-security/target/
+/cloud-gateway-server/target/
+/dev-platform/dev-user/dev-user-api/target/
+/dev-platform/dev-user/dev-user-server/target/
+/enterprise-platform/enterprise-user/enterprise-user-api/target/
+/enterprise-platform/enterprise-user/enterprise-user-server/target/

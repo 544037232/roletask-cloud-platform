@@ -1,0 +1,41 @@
+server:
+  port: 1000
+spring:
+  application:
+    name: auth-server
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS-HOST:127.0.0.1}:${NACOS-PORT:8849}
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        shared-dataids: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+  profiles:
+    active: dev
+
+  redis:
+    database: 1
+    host : 192.168.3.201
+    port: 6379
+    password: 123456
+dubbo:
+  consumer:
+    check: false
+  registry:
+    address: spring-cloud://127.0.0.1
+  cloud:
+    subscribed-services: dev-user-server
+auth:
+  validate:
+    image:
+      enable: false
+  social:
+    type:
+      QQ:
+        client-id: 101650278
+        client-secret: 4c638b24ae48de5937b5968f5d330dbb
+        redirect-uri: http://www.roletask.com/oauth/callback/qq
+
