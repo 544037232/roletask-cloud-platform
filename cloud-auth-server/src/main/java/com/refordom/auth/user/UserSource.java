@@ -1,6 +1,7 @@
 package com.refordom.auth.user;
 
 import com.refordom.common.rpc.user.RpcUserService;
+import com.refordom.common.rpc.user.UserServiceAdapter;
 
 /**
  * @author pricess.wang
@@ -9,6 +10,8 @@ import com.refordom.common.rpc.user.RpcUserService;
 public interface UserSource {
 
     RpcUserService userService();
+
+    UserServiceAdapter userServiceAdapter();
 
     void config();
 }

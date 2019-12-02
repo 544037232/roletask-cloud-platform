@@ -1,6 +1,6 @@
 package com.refordom.auth.service;
 
-import com.refordom.auth.user.UserDefaultSource;
+import com.refordom.auth.user.UserServiceFactory;
 import com.refordom.common.rpc.user.UserInfo;
 import com.refordom.common.security.authentication.SecurityUserDetailsService;
 import com.refordom.common.security.util.ClientUtils;
@@ -23,30 +23,39 @@ public class UserDetailServiceImpl implements SecurityUserDetailsService {
     @Resource
     private HttpServletRequest request; //自动注入request
 
+    @Resource
+    private UserServiceFactory userServiceFactory;
+
+    @Resource
+    private UserClientDetailsService userClientDetailsService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         String[] tokens = ClientUtils.getClientInfo(request);
 
-        UserInfo devUserInfo = UserDefaultSource.DEV_USER.userService().getByUsername(username);
+        AuthClientDetails authClientDetails = (AuthClientDetails) userClientDetailsService.loadClientByClientId(tokens[0]);
 
-        if (null == devUserInfo) {
+        UserInfo userInfo = userServiceFactory.getRpcService(authClientDetails.getAuthTarget()).getByUsername(username);
+
+        if (null == userInfo) {
             throw new UsernameNotFoundException("用户名不存在.");
         }
-        return null;
+        return userServiceFactory.getAdapter(authClientDetails.getAuthTarget()).adapter(userInfo);
     }
 
     @Override
     public UserDetails loadUserByMobile(String mobile) throws UsernameNotFoundException {
         String[] tokens = ClientUtils.getClientInfo(request);
 
+        AuthClientDetails authClientDetails = (AuthClientDetails) userClientDetailsService.loadClientByClientId(tokens[0]);
 
-        UserInfo userInfo =  UserDefaultSource.DEV_USER.userService().getByMobile(mobile);
+        UserInfo userInfo = userServiceFactory.getRpcService(authClientDetails.getAuthTarget()).getByMobile(mobile);
 
         if (null == userInfo) {
             throw new UsernameNotFoundException("未找到手机号:" + mobile + " 的用户信息.");
         }
-        return null;
+        return userServiceFactory.getAdapter(authClientDetails.getAuthTarget()).adapter(userInfo);
     }
 
 }

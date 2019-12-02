@@ -15,6 +15,5 @@ public class SecurityAuthenticationSuccessEventHandler extends AbstractAuthentic
 
 	@Override
 	public void handle(Authentication authentication) {
-		log.info("认证成功");
 	}
 }
