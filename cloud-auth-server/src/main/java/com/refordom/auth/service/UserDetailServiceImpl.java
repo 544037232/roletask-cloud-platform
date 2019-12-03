@@ -6,6 +6,7 @@ import com.refordom.common.security.authentication.SecurityUserDetailsService;
 import com.refordom.common.security.util.ClientUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -27,14 +28,14 @@ public class UserDetailServiceImpl implements SecurityUserDetailsService {
     private UserServiceFactory userServiceFactory;
 
     @Resource
-    private UserClientDetailsService userClientDetailsService;
+    private ClientDetailsService clientDetailsService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         String[] tokens = ClientUtils.getClientInfo(request);
 
-        AuthClientDetails authClientDetails = (AuthClientDetails) userClientDetailsService.loadClientByClientId(tokens[0]);
+        AuthClientDetails authClientDetails = (AuthClientDetails) clientDetailsService.loadClientByClientId(tokens[0]);
 
         UserInfo userInfo = userServiceFactory.getRpcService(authClientDetails.getAuthTarget()).getByUsername(username);
 
@@ -48,7 +49,7 @@ public class UserDetailServiceImpl implements SecurityUserDetailsService {
     public UserDetails loadUserByMobile(String mobile) throws UsernameNotFoundException {
         String[] tokens = ClientUtils.getClientInfo(request);
 
-        AuthClientDetails authClientDetails = (AuthClientDetails) userClientDetailsService.loadClientByClientId(tokens[0]);
+        AuthClientDetails authClientDetails = (AuthClientDetails) clientDetailsService.loadClientByClientId(tokens[0]);
 
         UserInfo userInfo = userServiceFactory.getRpcService(authClientDetails.getAuthTarget()).getByMobile(mobile);
 
