@@ -36,7 +36,7 @@ public class DevUser extends BaseModel<DevUser> {
     private String mobile;
 
     /**
-     * 认证类型
+     * 认证类型，1为个人开发者，2为企业认证
      */
     private Integer certificationType;
 
