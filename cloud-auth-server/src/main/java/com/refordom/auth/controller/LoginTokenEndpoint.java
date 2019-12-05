@@ -32,7 +32,7 @@ public class LoginTokenEndpoint {
      */
     @GetMapping("/login")
     public ModelAndView require(ModelAndView modelAndView) {
-        modelAndView.addObject("tokenForm", SecurityConstants.DEFAULT_SIGN_IN_LOGIN_FORM);
+        modelAndView.addObject("tokenForm", SecurityConstants.DEFAULT_AUTH_LOGIN_FORM_ACCESS_TOKEN);
         modelAndView.setViewName("views/login");
         return modelAndView;
     }

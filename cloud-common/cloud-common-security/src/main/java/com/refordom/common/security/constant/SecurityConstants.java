@@ -14,17 +14,22 @@ public interface SecurityConstants {
     /**
      * 表单登录默认认证接口
      */
-    String DEFAULT_SIGN_IN_LOGIN_FORM = "/login/form/auth";
+    String DEFAULT_AUTH_LOGIN_FORM_ACCESS_TOKEN = "/login/form/access_token";
 
     /**
      * 表单登录默认请求地址
      */
-    String DEFAULT_SIGN_IN_LOGIN_PAGE = "/login/form/page";
+    String DEFAULT_AUTH_LOGIN_PAGE_ACCESS_TOKEN = "/login/form/page";
 
     /**
      * 默认的手机验证码登录请求处理url
      */
-    String DEFAULT_SIGN_IN_LOGIN_MOBILE = "/login/mobile";
+    String DEFAULT_AUTH_LOGIN_MOBILE_ACCESS_TOKEN = "/login/mobile";
+
+    /**
+     * 默认的oauth2协议登录请求地址
+     */
+    String DEFAULT_AUTH_LOGIN_OAUTH2_ACCESS_TOKEN = "/login/oauth2/authorize";
 
     /**
      * 默认的OPENID登录请求处理url

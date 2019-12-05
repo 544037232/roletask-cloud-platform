@@ -23,9 +23,9 @@ public class SecurityAuthorizeConfigProvider implements AuthorizeConfigProvider 
 
     @Override
     public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
-        config.antMatchers(SecurityConstants.DEFAULT_SIGN_IN_LOGIN_PAGE,
-                SecurityConstants.DEFAULT_SIGN_IN_LOGIN_FORM,
-                SecurityConstants.DEFAULT_SIGN_IN_LOGIN_MOBILE,
+        config.antMatchers(SecurityConstants.DEFAULT_AUTH_LOGIN_PAGE_ACCESS_TOKEN,
+                SecurityConstants.DEFAULT_AUTH_LOGIN_FORM_ACCESS_TOKEN,
+                SecurityConstants.DEFAULT_AUTH_LOGIN_MOBILE_ACCESS_TOKEN,
                 SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
                 SecurityConstants.OAUTH + "/**",
                 securityProperties.getBrowser().getLoginSignIn(),

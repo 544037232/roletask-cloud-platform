@@ -23,9 +23,10 @@ public class LoginAuthenticationConfiguration  {
 
     public void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .loginPage(SecurityConstants.DEFAULT_SIGN_IN_LOGIN_PAGE)
-                .loginProcessingUrl(SecurityConstants.DEFAULT_SIGN_IN_LOGIN_FORM)
+                .loginPage(SecurityConstants.DEFAULT_AUTH_LOGIN_PAGE_ACCESS_TOKEN)
+                .loginProcessingUrl(SecurityConstants.DEFAULT_AUTH_LOGIN_FORM_ACCESS_TOKEN)
                 .failureHandler(securityAuthenticationFailHandler)
-                .successHandler(loginFormAuthenticationSuccessHandler);
+                .successHandler(loginFormAuthenticationSuccessHandler)
+           ;
     }
 }

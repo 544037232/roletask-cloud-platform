@@ -50,12 +50,12 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
 
         // 开启图形验证码时才校验图形验证码
         if (codeProperties.getImage().isEnable()) {
-            urlMap.put(SecurityConstants.DEFAULT_SIGN_IN_LOGIN_FORM, ValidateCodeType.IMAGE);
+            urlMap.put(SecurityConstants.DEFAULT_AUTH_LOGIN_FORM_ACCESS_TOKEN, ValidateCodeType.IMAGE);
             urlMap.put(SecurityConstants.SPRING_SECURITY_OAUTH_TOKEN, ValidateCodeType.IMAGE);
             addUrlToMap(codeProperties.getImage().getUrl(), ValidateCodeType.IMAGE);
         }
 
-        urlMap.put(SecurityConstants.DEFAULT_SIGN_IN_LOGIN_MOBILE, ValidateCodeType.SMS);
+        urlMap.put(SecurityConstants.DEFAULT_AUTH_LOGIN_MOBILE_ACCESS_TOKEN, ValidateCodeType.SMS);
         addUrlToMap(codeProperties.getSms().getUrl(), ValidateCodeType.SMS);
     }
 
