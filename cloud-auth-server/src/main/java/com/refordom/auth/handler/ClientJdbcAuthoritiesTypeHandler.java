@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * 客户端登录处理权限对应List<GrantedAuthority>参数处理器
  * @author pricess.wang
  * @date 2019/12/2 17:22
  */

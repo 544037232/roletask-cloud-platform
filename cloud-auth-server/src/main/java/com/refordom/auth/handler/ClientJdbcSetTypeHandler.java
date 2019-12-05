@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * 客戶端登录处理set属性的处理器
  * @author pricess.wang
  * @date 2019/12/2 16:51
  */

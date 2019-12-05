@@ -55,7 +55,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
             addUrlToMap(codeProperties.getImage().getUrl(), ValidateCodeType.IMAGE);
         }
 
-        urlMap.put(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE, ValidateCodeType.SMS);
+        urlMap.put(SecurityConstants.DEFAULT_SIGN_IN_LOGIN_MOBILE, ValidateCodeType.SMS);
         addUrlToMap(codeProperties.getSms().getUrl(), ValidateCodeType.SMS);
     }
 

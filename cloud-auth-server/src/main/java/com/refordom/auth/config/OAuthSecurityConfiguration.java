@@ -3,7 +3,8 @@ package com.refordom.auth.config;
 import com.refordom.auth.authentication.SmsCodeAuthenticationSecurityConfiguration;
 import com.refordom.common.security.authentication.AuthorizeConfigManager;
 import com.refordom.common.security.authentication.SecurityUserDetailsService;
-import com.refordom.common.security.config.FormAuthenticationConfiguration;
+import com.refordom.common.security.config.LoginAuthenticationConfiguration;
+import com.refordom.common.security.config.LoginAuthenticationConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,11 +41,11 @@ public class OAuthSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private SmsCodeAuthenticationSecurityConfiguration smsCodeAuthenticationSecurityConfiguration;
 
     @Resource
-    private FormAuthenticationConfiguration formAuthenticationConfiguration;
+    private LoginAuthenticationConfiguration loginAuthenticationConfiguration;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        formAuthenticationConfiguration.configure(http);
+        loginAuthenticationConfiguration.configure(http);
 
         http.apply(validateSecurityConfiguration)
                 .and()

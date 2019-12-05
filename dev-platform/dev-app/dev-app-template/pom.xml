@@ -2,21 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
     <parent>
+        <artifactId>dev-platform</artifactId>
         <groupId>com.refordom</groupId>
-        <artifactId>roletask-cloud-platform</artifactId>
         <version>1.0.0.0</version>
     </parent>
 
-    <artifactId>dev-platform</artifactId>
-    <version>1.0.0.0</version>
 
-    <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
 
-    <modules>
-        <module>dev-user</module>
-        <module>dev-app</module>
-    </modules>
+    <artifactId>dev-app-template</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.refordom</groupId>
+            <artifactId>cloud-common-data</artifactId>
+        </dependency>
+    </dependencies>
 </project>

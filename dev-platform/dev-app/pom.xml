@@ -6,17 +6,18 @@
 
     <parent>
         <groupId>com.refordom</groupId>
-        <artifactId>roletask-cloud-platform</artifactId>
+        <artifactId>dev-platform</artifactId>
         <version>1.0.0.0</version>
     </parent>
 
-    <artifactId>dev-platform</artifactId>
+    <artifactId>dev-app</artifactId>
     <version>1.0.0.0</version>
 
     <packaging>pom</packaging>
 
     <modules>
-        <module>dev-user</module>
-        <module>dev-app</module>
+        <module>dev-app-template</module>
+        <module>dev-app-server</module>
     </modules>
+
 </project>

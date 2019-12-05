@@ -21,10 +21,10 @@ public class BaseModel<T extends Model<?>> extends Model<T> {
     private LocalDateTime crtTime;
 
     /**
-     * 创建者
+     * 创建者,本字段不建议存储ID，仅用作追查，若对追溯级别要求比较高，可存储具体ID，以防止改名或重名而不知道是哪个创建者
      */
     @TableField(fill = FieldFill.INSERT)
-    private Long creator;
+    private String creator;
 
     /**
      * 修改时间
@@ -36,7 +36,7 @@ public class BaseModel<T extends Model<?>> extends Model<T> {
      * 修改者
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Long modifier;
+    private String modifier;
 
     public LocalDateTime getCrtTime() {
         return crtTime;
@@ -54,19 +54,19 @@ public class BaseModel<T extends Model<?>> extends Model<T> {
         this.modTime = modTime;
     }
 
-    public Long getCreator() {
+    public String getCreator() {
         return creator;
     }
 
-    public void setCreator(Long creator) {
+    public void setCreator(String creator) {
         this.creator = creator;
     }
 
-    public Long getModifier() {
+    public String getModifier() {
         return modifier;
     }
 
-    public void setModifier(Long modifier) {
+    public void setModifier(String modifier) {
         this.modifier = modifier;
     }
 }

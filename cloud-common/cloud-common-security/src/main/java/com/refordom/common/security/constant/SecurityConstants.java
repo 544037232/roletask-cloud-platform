@@ -7,28 +7,29 @@ package com.refordom.common.security.constant;
 public interface SecurityConstants {
 
     /**
-     * spring security默认的token接口
+     * spring security默认的登录接口，本项目弃用该入口，使用自定义实现
      */
     String SPRING_SECURITY_OAUTH_TOKEN = "/oauth/token";
-    /**
-     * 默认登录请求表单接口
-     */
-    String DEFAULT_SIGN_IN_LOGIN_FORM = "/token/form";
 
     /**
-     * 当请求需要身份认证时，默认跳转的url
+     * 表单登录默认认证接口
      */
-    String DEFAULT_AUTHENTICATION_URL = "/token/login";
+    String DEFAULT_SIGN_IN_LOGIN_FORM = "/login/form/auth";
+
+    /**
+     * 表单登录默认请求地址
+     */
+    String DEFAULT_SIGN_IN_LOGIN_PAGE = "/login/form/page";
 
     /**
      * 默认的手机验证码登录请求处理url
      */
-    String DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE = "/oauth/mobile";
+    String DEFAULT_SIGN_IN_LOGIN_MOBILE = "/login/mobile";
 
     /**
      * 默认的OPENID登录请求处理url
      */
-    String DEFAULT_SIGN_IN_PROCESSING_URL_OPENID = "/oauth/openid";
+    String DEFAULT_SIGN_IN_LOGIN_OPENID = "/login/openid";
 
     /**
      * 默认的处理验证码的url前缀
@@ -83,4 +84,5 @@ public interface SecurityConstants {
      * 第三方登录
      */
     String OAUTH = "/oauth";
+
 }
