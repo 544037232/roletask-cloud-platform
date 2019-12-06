@@ -19,7 +19,7 @@
         <!-- roletask大版本 -->
         <roletask.version>1.0.0.0</roletask.version>
         <!-- mybatis增强工具 -->
-        <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <mybatis-plus.version>3.3.0</mybatis-plus.version>
         <!-- 阿里连接池 -->
         <druid.version>1.1.21</druid.version>
         <!-- 工具类 -->
