@@ -66,7 +66,7 @@ public class CloudUser extends BaseModel<CloudUser> implements UserInfo {
      * 角色
      */
     @TableField(exist = false)
-    private List<Long> roles;
+    private List<String> roles;
 
     /**
      * 权限
