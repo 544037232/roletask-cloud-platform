@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * @author pricess.wang
  * @date 2019/9/18 17:16
  */
-@Service(group = "dev",version = "1.0.0.0")
+@Service(group = "user",version = "1.0.0.0")
 public class ICloudUserServiceImpl implements IUserService {
 
     @Resource
