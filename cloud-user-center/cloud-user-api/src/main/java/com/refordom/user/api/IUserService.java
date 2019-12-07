@@ -22,5 +22,5 @@ public interface IUserService {
      * @param phone 手机号
      * @return T
      */
-    UserInfo getByMobile(String phone);
+    UserInfo getByPhone(String phone);
 }

@@ -28,7 +28,7 @@ public class ICloudUserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserInfo getByMobile(String phone) {
+    public UserInfo getByPhone(String phone) {
         return cloudUserService.getOne(Wrappers.<CloudUser>query()
                 .lambda().eq(CloudUser::getPhone, phone));
     }
