@@ -19,8 +19,8 @@ public interface IUserService {
     /**
      * 根据手机号获取用户信息
      *
-     * @param mobile 手机号
+     * @param phone 手机号
      * @return T
      */
-    UserInfo getByMobile(String mobile);
+    UserInfo getByMobile(String phone);
 }
