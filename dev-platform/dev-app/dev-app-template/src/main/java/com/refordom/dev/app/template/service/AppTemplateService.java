@@ -10,7 +10,7 @@ import com.refordom.dev.app.template.entity.AppTemplate;
 public interface AppTemplateService extends IService<AppTemplate> {
     /**
      * 发布应用
-     * @param appId
+     * @param appId 应用id
      */
     void release(String appId);
 }
