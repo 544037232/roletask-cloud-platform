@@ -75,5 +75,5 @@ public interface UserInfo extends Serializable {
      * 获取角色
      * @return role
      */
-    List<Long> getRoles();
+    List<String> getRoles();
 }
