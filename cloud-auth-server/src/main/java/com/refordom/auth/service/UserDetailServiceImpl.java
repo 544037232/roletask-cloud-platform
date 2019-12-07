@@ -25,7 +25,7 @@ import java.util.Set;
 @Component
 public class UserDetailServiceImpl implements SecurityUserDetailsService {
 
-    @Reference
+    @Reference(group = "dev",version = "1.0.0.0")
     private IUserService userService;
 
     @Override
