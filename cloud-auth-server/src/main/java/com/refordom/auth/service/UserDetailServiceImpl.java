@@ -41,7 +41,7 @@ public class UserDetailServiceImpl implements SecurityUserDetailsService {
 
     @Override
     public UserDetails loadUserByMobile(String mobile) throws UsernameNotFoundException {
-        UserInfo userInfo = userService.getByMobile(mobile);
+        UserInfo userInfo = userService.getByPhone(mobile);
 
         if (null == userInfo) {
             throw new UsernameNotFoundException("未找到手机号:" + mobile + " 的用户信息.");
