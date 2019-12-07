@@ -17,10 +17,10 @@ spring:
         shared-dataids: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
     gateway:
       routes:
-        - id: dev-user-server
-          uri: lb://dev-user-server
+        - id: cloud-user-server
+          uri: lb://cloud-user-server
           predicates:
-            - Path=/dev/user/**
+            - Path=/user/**
           filters:
             - StripPrefix=1
         - id: cloud-auth-server
