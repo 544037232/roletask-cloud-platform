@@ -16,6 +16,12 @@
         <option value="$PROJECT_DIR$/dev-app-template/pom.xml" />
         <option value="$PROJECT_DIR$/dev-center/dev-user-api/pom.xml" />
         <option value="$PROJECT_DIR$/dev-center/dev-user-server/pom.xml" />
+        <option value="$PROJECT_DIR$/dev-platform/dev-user/dev-user-api/pom.xml" />
+        <option value="$PROJECT_DIR$/dev-platform/dev-user/dev-user-server/pom.xml" />
+        <option value="$PROJECT_DIR$/dev-platform/dev-user/pom.xml" />
+        <option value="$PROJECT_DIR$/enterprise-platform/enterprise-user/enterprise-user-api/pom.xml" />
+        <option value="$PROJECT_DIR$/enterprise-platform/enterprise-user/enterprise-user-server/pom.xml" />
+        <option value="$PROJECT_DIR$/enterprise-platform/enterprise-user/pom.xml" />
       </set>
     </option>
   </component>

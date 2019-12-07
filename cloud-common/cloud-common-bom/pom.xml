@@ -41,12 +41,7 @@
 
             <dependency>
                 <groupId>com.refordom</groupId>
-                <artifactId>dev-user-api</artifactId>
-                <version>${roletask.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.refordom</groupId>
-                <artifactId>enterprise-user-api</artifactId>
+                <artifactId>cloud-user-api</artifactId>
                 <version>${roletask.version}</version>
             </dependency>
 

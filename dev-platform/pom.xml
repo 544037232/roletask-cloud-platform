@@ -16,7 +16,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>dev-user</module>
         <module>dev-app</module>
     </modules>
 </project>

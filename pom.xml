@@ -29,10 +29,14 @@
         <module>cloud-auth-server</module>
         <!-- 开发者平台 -->
         <module>dev-platform</module>
+        <!-- 云平台用户 -->
+        <module>cloud-user-center</module>
         <!-- 云平台网关服务 -->
         <module>cloud-gateway-server</module>
         <!-- 企业管理平台 -->
         <module>enterprise-platform</module>
+        <module>cloud-user-center/cloud-user-api</module>
+        <module>cloud-user-center/cloud-user-server</module>
     </modules>
     <dependencies>
         <dependency>

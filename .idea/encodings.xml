@@ -15,32 +15,20 @@
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-data/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-rpc-user" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-rpc-user/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-rpc-user/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-security" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-security/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-security/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-gateway-server" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-gateway-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-gateway-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-user-center/cloud-user-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-user-center/cloud-user-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-user-center/cloud-user-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-user-center/cloud-user-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dev-platform" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dev-platform/dev-app/dev-app-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dev-platform/dev-app/dev-app-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dev-platform/dev-app/dev-app-template/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/dev-platform/dev-app/dev-app-template/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/dev-platform/dev-user" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/dev-platform/dev-user/dev-user-api" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/dev-platform/dev-user/dev-user-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/dev-platform/dev-user/dev-user-api/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/dev-platform/dev-user/dev-user-server" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/dev-platform/dev-user/dev-user-server/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/dev-platform/dev-user/dev-user-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/enterprise-platform" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/enterprise-platform/enterprise-user" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/enterprise-platform/enterprise-user/enterprise-user-api" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/enterprise-platform/enterprise-user/enterprise-user-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/enterprise-platform/enterprise-user/enterprise-user-api/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/enterprise-platform/enterprise-user/enterprise-user-server" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/enterprise-platform/enterprise-user/enterprise-user-server/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/enterprise-platform/enterprise-user/enterprise-user-server/src/main/resources" charset="UTF-8" />
   </component>
 </project>
