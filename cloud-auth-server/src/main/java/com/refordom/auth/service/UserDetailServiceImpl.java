@@ -1,6 +1,8 @@
 package com.refordom.auth.service;
 
+import com.refordom.common.core.constant.CommonConstants;
 import com.refordom.common.security.authentication.SecurityUserDetailsService;
+import com.refordom.common.security.model.AuthUserDetail;
 import com.refordom.user.api.IUserService;
 import com.refordom.user.api.UserInfo;
 import org.apache.dubbo.config.annotation.Reference;
@@ -25,7 +27,6 @@ public class UserDetailServiceImpl implements SecurityUserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-
         UserInfo userInfo = userService.getByUsername(username);
 
         if (null == userInfo) {
@@ -45,6 +46,19 @@ public class UserDetailServiceImpl implements SecurityUserDetailsService {
     }
 
     private UserDetails userDetailAdapter(UserInfo userInfo) {
-        return null;
+        return new AuthUserDetail(
+                userInfo.getId(),
+                userInfo.getNickname(),
+                userInfo.getUsername(),
+                userInfo.getPassword(),
+                userInfo.getPhone(),
+                userInfo.getEmail(),
+                userInfo.getAvatar(),
+                !userInfo.getDelFlag(),
+                true,
+                true,
+                true,
+                null
+        );
     }
 }

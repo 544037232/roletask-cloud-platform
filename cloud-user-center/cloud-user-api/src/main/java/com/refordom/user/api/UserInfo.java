@@ -8,4 +8,60 @@ import java.io.Serializable;
  */
 public interface UserInfo extends Serializable {
 
+    /**
+     * 获取用户唯一ID
+     *
+     * @return ID
+     */
+    Long getId();
+
+    /**
+     * 获取用户名称
+     *
+     * @return nickname
+     */
+    String getNickname();
+
+    /**
+     * 获取用户名
+     *
+     * @return jobNumber
+     */
+    String getUsername();
+
+    /**
+     * 获取用户已加密的密码
+     *
+     * @return password
+     */
+    String getPassword();
+
+    /**
+     * 获取用户手机号
+     *
+     * @return phone
+     */
+    String getPhone();
+
+    /**
+     * 获取用户邮箱
+     *
+     * @return email
+     */
+    String getEmail();
+
+    /**
+     * 获取用户头像
+     *
+     * @return avatar
+     */
+    String getAvatar();
+
+    /**
+     * 删除表示
+     *
+     * @return delFlag
+     */
+    Boolean getDelFlag();
+
 }

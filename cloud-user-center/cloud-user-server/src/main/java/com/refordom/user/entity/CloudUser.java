@@ -3,8 +3,10 @@ package com.refordom.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.refordom.common.data.BaseModel;
 import com.refordom.user.api.UserInfo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -13,9 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @author pricess.wang
  * @date 2019/12/7 11:06
  */
+@EqualsAndHashCode(callSuper = true)
 @TableName("cloud_user")
 @Data
-public class CloudUser implements UserInfo {
+public class CloudUser extends BaseModel<CloudUser> implements UserInfo {
 
     @TableId
     private Long id;
@@ -26,9 +29,9 @@ public class CloudUser implements UserInfo {
     private String nickname;
 
     /**
-     * 工号，全表唯一
+     * 登录名
      */
-    private String jobNumber;
+    private String username;
 
     /**
      * @see BCryptPasswordEncoder
@@ -39,7 +42,7 @@ public class CloudUser implements UserInfo {
     /**
      * 用户手机号，全表唯一
      */
-    private String mobile;
+    private String phone;
 
     /**
      * 邮箱，用户接受验证码等
@@ -50,5 +53,10 @@ public class CloudUser implements UserInfo {
      * 头像，可为空
      */
     private String avatar;
+
+    /**
+     * 删除标识，true为删除，false为正常
+     */
+    private Boolean delFlag;
 
 }
