@@ -81,13 +81,12 @@ public interface SecurityConstants {
     String DEFAULT_HEADER_TOKEN_TYPE_PREFIX = "bearer ";
 
     /**
-     * 角色前缀
-     */
-    String ROLE = "ROLE_";
-
-    /**
      * 第三方登录
      */
     String OAUTH = "/oauth";
 
+    /**
+     * 角色标识前缀
+     */
+    String ROLE_PREFIX = "ROLE_";
 }

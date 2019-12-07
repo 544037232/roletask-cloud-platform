@@ -1,6 +1,7 @@
 package com.refordom.user.api;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author pricess.wang
@@ -64,4 +65,15 @@ public interface UserInfo extends Serializable {
      */
     Boolean getDelFlag();
 
+    /**
+     * 获取权限
+     * @return permission
+     */
+    List<String> getPermissions();
+
+    /**
+     * 获取角色
+     * @return role
+     */
+    List<Long> getRoles();
 }

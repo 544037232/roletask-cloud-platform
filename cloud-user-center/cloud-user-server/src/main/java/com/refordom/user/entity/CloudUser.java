@@ -1,6 +1,7 @@
 package com.refordom.user.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.refordom.common.data.BaseModel;
@@ -8,6 +9,8 @@ import com.refordom.user.api.UserInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.List;
 
 /**
  * <p>用户云属性，本平台通用信息</p>
@@ -58,5 +61,17 @@ public class CloudUser extends BaseModel<CloudUser> implements UserInfo {
      * 删除标识，true为删除，false为正常
      */
     private Boolean delFlag;
+
+    /**
+     * 角色
+     */
+    @TableField(exist = false)
+    private List<Long> roles;
+
+    /**
+     * 权限
+     */
+    @TableField(exist = false)
+    private List<String> permissions;
 
 }

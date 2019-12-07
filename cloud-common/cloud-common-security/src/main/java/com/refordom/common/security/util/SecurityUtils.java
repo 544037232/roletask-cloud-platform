@@ -55,9 +55,9 @@ public class SecurityUtils {
 
         List<Integer> roleIds = new ArrayList<>();
         authorities.stream()
-                .filter(granted -> StrUtil.startWith(granted.getAuthority(), SecurityConstants.ROLE))
+                .filter(granted -> StrUtil.startWith(granted.getAuthority(), SecurityConstants.ROLE_PREFIX))
                 .forEach(granted -> {
-                    String id = StrUtil.removePrefix(granted.getAuthority(), SecurityConstants.ROLE);
+                    String id = StrUtil.removePrefix(granted.getAuthority(), SecurityConstants.ROLE_PREFIX);
                     roleIds.add(Integer.parseInt(id));
                 });
         return roleIds;
