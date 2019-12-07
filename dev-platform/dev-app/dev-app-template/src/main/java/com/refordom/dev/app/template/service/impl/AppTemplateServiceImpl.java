@@ -13,4 +13,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AppTemplateServiceImpl extends ServiceImpl<AppTemplateDao, AppTemplate> implements AppTemplateService {
 
+    @Override
+    public void release(String appId) {
+
+    }
 }

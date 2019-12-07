@@ -8,4 +8,9 @@ import com.refordom.dev.app.template.entity.AppTemplate;
  * @date 2019/12/3 11:40
  */
 public interface AppTemplateService extends IService<AppTemplate> {
+    /**
+     * 发布应用
+     * @param appId
+     */
+    void release(String appId);
 }

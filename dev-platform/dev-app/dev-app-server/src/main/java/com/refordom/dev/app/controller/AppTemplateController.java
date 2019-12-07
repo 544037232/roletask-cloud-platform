@@ -4,6 +4,7 @@ import com.refordom.common.core.util.R;
 import com.refordom.dev.app.template.entity.AppTemplate;
 import com.refordom.dev.app.template.service.AppTemplateService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,15 @@ public class AppTemplateController {
 
     @Resource
     private AppTemplateService appTemplateService;
+
+    @PostMapping("/release")
+    public R release(String appId) {
+
+        appTemplateService.release(appId);
+
+        return R.ok();
+    }
+
 
     @GetMapping
     public R<List<AppTemplate>> list() {
