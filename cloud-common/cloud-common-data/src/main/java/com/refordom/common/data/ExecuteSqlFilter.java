@@ -15,11 +15,16 @@ import java.util.List;
 /**
  * <p>执行sql过滤器，只在开发或测试环境打印sql，生产环境不打印</p>
  * {@link MybatisPlusConfig#slf4jLogFilter()}
+ *
  * @author pricess.wang
  * @date 2019/11/22 16:22
  */
 public class ExecuteSqlFilter extends Slf4jLogFilter {
     private Logger sqlLogger = LoggerFactory.getLogger("SQL");
+
+    public ExecuteSqlFilter() {
+        sqlLogger.info("当前为非生产环境,每次执行的sql将打印到日志");
+    }
 
     /**
      * Must be true, otherwise {@link StatementProxy#getLastExecuteTimeNano()} doesn't work.
