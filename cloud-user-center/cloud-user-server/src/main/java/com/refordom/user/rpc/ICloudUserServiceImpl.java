@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * @author pricess.wang
  * @date 2019/9/18 17:16
  */
-@Service(group = "user",version = "1.0.0.0")
+@Service(group = "user", version = "1.0.0.0")
 public class ICloudUserServiceImpl implements IUserService {
 
     @Resource
@@ -23,14 +23,17 @@ public class ICloudUserServiceImpl implements IUserService {
 
     @Override
     public UserInfo getByUsername(String username) {
-        return cloudUserService.getOne(Wrappers.<CloudUser>query()
-                .lambda().eq(CloudUser::getNickname, username));
+        CloudUser cloudUser = cloudUserService.getOne(Wrappers.<CloudUser>query()
+                .lambda().eq(CloudUser::getUsername, username));
+
+        return cloudUser.userInfoAdapter(cloudUser);
     }
 
     @Override
     public UserInfo getByPhone(String phone) {
-        return cloudUserService.getOne(Wrappers.<CloudUser>query()
+        CloudUser cloudUser = cloudUserService.getOne(Wrappers.<CloudUser>query()
                 .lambda().eq(CloudUser::getPhone, phone));
+        return cloudUser.userInfoAdapter(cloudUser);
     }
 
 }

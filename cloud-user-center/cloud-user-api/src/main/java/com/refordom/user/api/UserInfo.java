@@ -1,5 +1,9 @@
 package com.refordom.user.api;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -7,73 +11,58 @@ import java.util.List;
  * @author pricess.wang
  * @date 2019/11/29 20:46
  */
-public interface UserInfo extends Serializable {
+@Builder
+@Data
+@ToString
+public class UserInfo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private Long id;
 
     /**
-     * 获取用户唯一ID
-     *
-     * @return ID
+     * 用户显示名
      */
-    Long getId();
+    private String nickname;
 
     /**
-     * 获取用户名称
-     *
-     * @return nickname
+     * 登录名
      */
-    String getNickname();
+    private String username;
 
     /**
-     * 获取用户名
-     *
-     * @return jobNumber
+     * 密码
      */
-    String getUsername();
+    private String password;
 
     /**
-     * 获取用户已加密的密码
-     *
-     * @return password
+     * 用户手机号，全表唯一
      */
-    String getPassword();
+    private String phone;
 
     /**
-     * 获取用户手机号
-     *
-     * @return phone
+     * 邮箱，用户接受验证码等
      */
-    String getPhone();
+    private String email;
 
     /**
-     * 获取用户邮箱
-     *
-     * @return email
+     * 头像，可为空
      */
-    String getEmail();
+    private String avatar;
 
     /**
-     * 获取用户头像
-     *
-     * @return avatar
+     * 删除标识，true为删除，false为正常
      */
-    String getAvatar();
+    private Boolean delFlag;
 
     /**
-     * 删除表示
-     *
-     * @return delFlag
+     * 角色
      */
-    Boolean getDelFlag();
+    private List<String> roles;
 
     /**
-     * 获取权限
-     * @return permission
+     * 权限
      */
-    List<String> getPermissions();
+    private List<String> permissions;
 
-    /**
-     * 获取角色
-     * @return role
-     */
-    List<String> getRoles();
 }

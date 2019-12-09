@@ -9,7 +9,9 @@ import com.refordom.user.api.UserInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,22 +21,22 @@ import java.util.List;
  * @date 2019/12/7 11:06
  */
 @EqualsAndHashCode(callSuper = true)
-@TableName("cloud_user")
+@TableName("sys_cloud_user")
 @Data
-public class CloudUser extends BaseModel<CloudUser> implements UserInfo {
+public class CloudUser extends BaseModel<CloudUser> {
 
     @TableId
     private Long id;
 
     /**
-     * 用户显示名
-     */
-    private String nickname;
-
-    /**
      * 登录名
      */
     private String username;
+
+    /**
+     * 用户显示名
+     */
+    private String nickname;
 
     /**
      * @see BCryptPasswordEncoder
@@ -74,4 +76,18 @@ public class CloudUser extends BaseModel<CloudUser> implements UserInfo {
     @TableField(exist = false)
     private List<String> permissions;
 
+    public UserInfo userInfoAdapter(CloudUser cloudUser) {
+        return UserInfo.builder()
+                .id(cloudUser.id)
+                .avatar(cloudUser.avatar)
+                .email(cloudUser.email)
+                .nickname(cloudUser.nickname)
+                .password(cloudUser.password)
+                .phone(cloudUser.phone)
+                .username(cloudUser.username)
+                .roles(CollectionUtils.isEmpty(cloudUser.roles) ? new ArrayList<>() : cloudUser.roles)
+                .permissions(CollectionUtils.isEmpty(cloudUser.permissions) ? new ArrayList<>() : cloudUser.permissions)
+                .delFlag(cloudUser.delFlag)
+                .build();
+    }
 }

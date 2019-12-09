@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -52,7 +53,7 @@ public class UserDetailServiceImpl implements SecurityUserDetailsService {
     private UserDetails userDetailAdapter(UserInfo userInfo) {
         Set<String> authorities = new HashSet<>();
 
-        if (ArrayUtil.isNotEmpty(userInfo.getRoles())) {
+        if (!CollectionUtils.isEmpty(userInfo.getRoles())) {
             // 角色
             userInfo.getRoles().forEach(roleId -> authorities.add(SecurityConstants.ROLE_PREFIX + roleId));
             // 资源权限

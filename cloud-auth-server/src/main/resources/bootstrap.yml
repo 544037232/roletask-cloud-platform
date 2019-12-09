@@ -27,7 +27,7 @@ dubbo:
   registry:
     address: spring-cloud://127.0.0.1
   cloud:
-    subscribed-services: dev-user-server
+    subscribed-services: cloud-user-server
 auth:
   validate:
     image:
