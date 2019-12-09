@@ -7,17 +7,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cloud-user-api" />
-        <module name="cloud-common-security" />
         <module name="cloud-common-data" />
         <module name="cloud-auth-server" />
         <module name="dev-app-server" />
         <module name="cloud-user-server" />
+        <module name="cloud-gateway-server" />
         <module name="dev-app-template" />
         <module name="cloud-common-core" />
-        <module name="cloud-gateway-server" />
+        <module name="cloud-common-security" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="cloud-common-rpc-user" target="1.8" />
       <module name="cloud-server" target="1.8" />
       <module name="dev-user" target="1.8" />
       <module name="dev-user-api" target="1.8" />
