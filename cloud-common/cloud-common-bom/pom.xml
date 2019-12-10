@@ -34,6 +34,8 @@
         <aviator.version>4.2.5</aviator.version>
         <!-- guava -->
         <guava.version>28.1-jre</guava.version>
+
+        <java.jwt.version>3.8.3</java.jwt.version>
     </properties>
 
     <dependencyManagement>
@@ -117,6 +119,13 @@
                 <groupId>com.googlecode.aviator</groupId>
                 <artifactId>aviator</artifactId>
                 <version>${aviator.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${java.jwt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
