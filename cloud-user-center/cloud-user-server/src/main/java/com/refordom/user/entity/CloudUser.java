@@ -9,9 +9,7 @@ import com.refordom.user.api.UserInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,18 +63,13 @@ public class CloudUser extends BaseModel<CloudUser> {
     private Boolean delFlag;
 
     /**
-     * 角色
+     * 用户身份，一个用户可以有多个身份，包括开发者，企业成员，客户后台管理员
      */
     @TableField(exist = false)
-    private List<String> roles;
-
-    /**
-     * 权限
-     */
-    @TableField(exist = false)
-    private List<String> permissions;
+    private List<UserIdentity> identities;
 
     public UserInfo userInfoAdapter(CloudUser cloudUser) {
+
         return UserInfo.builder()
                 .id(cloudUser.id)
                 .avatar(cloudUser.avatar)
@@ -85,8 +78,6 @@ public class CloudUser extends BaseModel<CloudUser> {
                 .password(cloudUser.password)
                 .phone(cloudUser.phone)
                 .username(cloudUser.username)
-                .roles(CollectionUtils.isEmpty(cloudUser.roles) ? new ArrayList<>() : cloudUser.roles)
-                .permissions(CollectionUtils.isEmpty(cloudUser.permissions) ? new ArrayList<>() : cloudUser.permissions)
                 .delFlag(cloudUser.delFlag)
                 .build();
     }

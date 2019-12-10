@@ -35,8 +35,6 @@
         <module>cloud-gateway-server</module>
         <!-- 企业管理平台 -->
         <module>enterprise-platform</module>
-        <module>cloud-user-center/cloud-user-api</module>
-        <module>cloud-user-center/cloud-user-server</module>
     </modules>
     <dependencies>
         <dependency>

@@ -6,23 +6,34 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="cloud-user-api" />
-        <module name="cloud-common-data" />
+        <module name="cloud-common-security" />
+        <module name="app-model" />
+        <module name="cloud-common-builder" />
+        <module name="cloud-gateway-server" />
         <module name="cloud-auth-server" />
+        <module name="cloud-common-data" />
         <module name="dev-app-server" />
         <module name="cloud-user-server" />
-        <module name="cloud-gateway-server" />
-        <module name="dev-app-template" />
+        <module name="cloud-user-api" />
         <module name="cloud-common-core" />
-        <module name="cloud-common-security" />
+        <module name="dev-app-template" />
+        <module name="app-developer" />
+        <module name="app-store" />
+        <module name="app-api" />
+        <module name="enterprise-platform-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="app-service" target="1.8" />
       <module name="cloud-common-rpc-user" target="1.8" />
       <module name="cloud-server" target="1.8" />
       <module name="dev-user" target="1.8" />
       <module name="dev-user-api" target="1.8" />
       <module name="dev-user-server" target="1.8" />
+      <module name="enterprise-app" target="1.8" />
+      <module name="enterprise-app-customer" target="1.8" />
+      <module name="enterprise-app-server" target="1.8" />
+      <module name="enterprise-platform-server" target="1.8" />
       <module name="enterprise-user" target="1.8" />
       <module name="enterprise-user-api" target="1.8" />
       <module name="enterprise-user-server" target="1.8" />

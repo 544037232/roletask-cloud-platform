@@ -20,5 +20,6 @@
         <module>cloud-common-core</module>
         <module>cloud-common-data</module>
         <module>cloud-common-security</module>
+        <module>cloud-common-builder</module>
     </modules>
 </project>
