@@ -13,6 +13,8 @@
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-core/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-data" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-data-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-data-security/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-data/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-data/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-security" charset="UTF-8" />

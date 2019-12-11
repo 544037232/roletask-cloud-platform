@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.refordom.common.data.MybatisPlusConfig
+    com.refordom.common.data.security.DataSecurityConfig

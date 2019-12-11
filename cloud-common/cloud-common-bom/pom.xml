@@ -67,6 +67,12 @@
 
             <dependency>
                 <groupId>com.refordom</groupId>
+                <artifactId>cloud-common-data-security</artifactId>
+                <version>${roletask.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.refordom</groupId>
                 <artifactId>cloud-common-rpc-user</artifactId>
                 <version>${roletask.version}</version>
             </dependency>

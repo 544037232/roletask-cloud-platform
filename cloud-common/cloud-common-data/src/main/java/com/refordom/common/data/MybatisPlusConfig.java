@@ -3,6 +3,7 @@ package com.refordom.common.data;
 import com.alibaba.druid.filter.logging.Slf4jLogFilter;
 import com.alibaba.druid.sql.SQLUtils;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Profile;
 
 /**
  * <p>持久层配置</p>
+ *
  * @author : 王晟权
  * @date : 2019/5/13 15:04
  */
@@ -21,7 +23,7 @@ import org.springframework.context.annotation.Profile;
 public class MybatisPlusConfig {
 
     /**
-     *	 mybatis-plus分页插件
+     * mybatis-plus分页插件
      */
     @Bean
     @ConditionalOnMissingBean
@@ -40,16 +42,22 @@ public class MybatisPlusConfig {
     }
 
     @Bean
-    public MybatisConfiguration mybatisConfiguration(){
+    public MybatisConfiguration mybatisConfiguration() {
         MybatisConfiguration mybatisConfiguration = new MybatisConfiguration();
         mybatisConfiguration.setMapUnderscoreToCamelCase(true);
         return mybatisConfiguration;
     }
 
     @Bean
+    @ConditionalOnMissingBean
+    public MetaObjectHandler metaObjectHandler() {
+        return new BeanBaseAttrMetaObjectHandler();
+    }
+
+    @Bean
     @ConfigurationProperties("spring.datasource.druid.filter.slf4j")
     @Primary
-    @Profile({"dev","test"})// 设置 dev test 环境开启
+    @Profile({"dev", "test"})// 设置 dev test 环境开启
     public Slf4jLogFilter slf4jLogFilter() {
         Slf4jLogFilter slf4jLogFilter = new ExecuteSqlFilter();
         slf4jLogFilter.setConnectionLogEnabled(false);

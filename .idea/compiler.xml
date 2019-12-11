@@ -17,6 +17,7 @@
         <module name="cloud-user-api" />
         <module name="cloud-common-core" />
         <module name="dev-app-template" />
+        <module name="cloud-common-data-security" />
         <module name="app-developer" />
         <module name="app-store" />
         <module name="app-api" />

@@ -14,12 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.refordom</groupId>
-            <artifactId>cloud-common-data</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.refordom</groupId>
-            <artifactId>cloud-common-security</artifactId>
+            <artifactId>cloud-common-data-security</artifactId>
         </dependency>
 
         <dependency>

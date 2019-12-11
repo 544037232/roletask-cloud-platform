@@ -2,7 +2,6 @@ package com.refordom.common.data;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
@@ -12,8 +11,7 @@ import java.time.LocalDateTime;
  * @author pricess.wang
  * @date 2019/9/18 10:32
  */
-@Component
-public class BeanTimeMetaObjectHandler implements MetaObjectHandler {
+public class BeanBaseAttrMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
