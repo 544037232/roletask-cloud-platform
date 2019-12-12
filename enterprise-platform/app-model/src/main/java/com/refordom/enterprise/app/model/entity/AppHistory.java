@@ -1,5 +1,7 @@
-package com.refordom.enterprise.app.model.version;
+package com.refordom.enterprise.app.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.refordom.enterprise.app.model.App;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -13,6 +15,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ToString
+@TableName("app_history")
 public class AppHistory extends App {
 
     /**

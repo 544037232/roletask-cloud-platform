@@ -21,5 +21,10 @@
             <groupId>com.refordom</groupId>
             <artifactId>cloud-common-data</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.refordom</groupId>
+            <artifactId>cloud-common-builder</artifactId>
+        </dependency>
     </dependencies>
 </project>

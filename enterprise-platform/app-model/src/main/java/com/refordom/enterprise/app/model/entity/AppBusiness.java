@@ -3,6 +3,7 @@ package com.refordom.enterprise.app.model.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.refordom.common.data.BaseModel;
+import com.refordom.enterprise.app.model.AppModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -17,7 +18,7 @@ import lombok.ToString;
 @TableName("app_business")
 @Data
 @ToString
-public class AppBusiness extends BaseModel<AppBusiness> {
+public class AppBusiness extends BaseModel<AppBusiness> implements AppModel {
 
     @TableId
     private Long id;

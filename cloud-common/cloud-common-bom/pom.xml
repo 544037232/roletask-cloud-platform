@@ -73,7 +73,7 @@
 
             <dependency>
                 <groupId>com.refordom</groupId>
-                <artifactId>cloud-common-rpc-user</artifactId>
+                <artifactId>cloud-common-builder</artifactId>
                 <version>${roletask.version}</version>
             </dependency>
 
