@@ -1,5 +1,6 @@
 package com.refordom.enterprise.app.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.refordom.common.data.BaseModel;
 import lombok.Data;
@@ -17,9 +18,10 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ToString
-@TableName("app_ambient_licence ")
+@TableName("app_ambient_licence")
 public class AppAmbientLicence extends BaseModel<AppAmbientLicence> {
 
+    @TableId
     private Long id;
 
     /**
