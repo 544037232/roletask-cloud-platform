@@ -36,9 +36,7 @@ public class AppRequestConfigurerAdapter implements AppConfigurer<AppRequest> {
         appAction = new AppAction(objectPostProcessor);
 
         appAction
-                .paramsCheck()
-                .and()
-                .auth();
+                .paramsCheck();
 
         configure(appAction);
 

@@ -4,7 +4,6 @@ import com.refordom.app.config.AppActionBuilder;
 import com.refordom.app.config.AppActionMatcher;
 import com.refordom.app.config.AppRequestMatcher;
 import com.refordom.app.config.configurer.ActionParamsCheckConfigurer;
-import com.refordom.app.config.configurer.AuthenticationConfigurer;
 import com.refordom.app.config.filter.DefaultAppFilterChain;
 import com.refordom.common.builder.AbstractConfiguredObjectBuilder;
 import com.refordom.common.builder.ObjectBuilder;
@@ -32,11 +31,6 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
 
     public ActionParamsCheckConfigurer<AppAction> paramsCheck() throws Exception {
         return getOrApply(new ActionParamsCheckConfigurer<>());
-    }
-
-
-    public AuthenticationConfigurer<AppAction> auth() throws Exception {
-        return getOrApply(new AuthenticationConfigurer<>());
     }
 
     @Override
