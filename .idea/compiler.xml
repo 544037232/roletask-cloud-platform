@@ -21,6 +21,7 @@
         <module name="app-developer" />
         <module name="app-store" />
         <module name="app-api" />
+        <module name="app-config" />
         <module name="enterprise-platform-server" />
       </profile>
     </annotationProcessing>

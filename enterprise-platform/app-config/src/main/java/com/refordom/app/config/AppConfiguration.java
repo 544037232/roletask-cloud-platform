@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 import javax.servlet.Filter;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
  * @author pricess.wang
  * @date 2019/12/13 18:20
  */
+@ComponentScan("com.refordom.app.config")
 public class AppConfiguration {
 
     private AppRequest appRequest;

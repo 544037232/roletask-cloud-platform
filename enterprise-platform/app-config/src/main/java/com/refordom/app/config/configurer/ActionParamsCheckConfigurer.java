@@ -10,24 +10,17 @@ import com.refordom.app.config.filter.ParamsEmptyCheckFilter;
 public class ActionParamsCheckConfigurer<H extends AppActionBuilder<H>>
         extends AbstractAppActionConfigurer<ActionParamsCheckConfigurer<H>, H> {
 
-    private ParamsEmptyCheckFilter paramsEmptyCheckFilter;
+    private final ParamsEmptyCheckFilter paramsEmptyCheckFilter = new ParamsEmptyCheckFilter();
 
     @Override
-    public void init(H builder) throws Exception {
-        if (paramsEmptyCheckFilter == null) {
-            paramsEmptyCheckFilter = new ParamsEmptyCheckFilter();
-        }
+    public final void init(H builder) throws Exception {
+        builder.addFilter(paramsEmptyCheckFilter);
         initDefaultParamsCheck();
     }
 
     private void initDefaultParamsCheck() {
-        paramsEmptyCheckFilter.checkRule("app_id","参数app_id不能为空");
-        paramsEmptyCheckFilter.checkRule("app_type","参数app_type不能为空");
-    }
-
-    @Override
-    public void configure(H builder) throws Exception {
-        super.configure(builder);
+        paramsEmptyCheckFilter.checkRule("app_id", "参数app_id不能为空");
+        paramsEmptyCheckFilter.checkRule("app_type", "参数app_type不能为空");
     }
 
     public ActionParamsCheckConfigurer<H> defaultValue(String paramName, Object value) {
