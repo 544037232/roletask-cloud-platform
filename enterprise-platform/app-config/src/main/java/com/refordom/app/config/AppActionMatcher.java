@@ -16,6 +16,6 @@ public final class AppActionMatcher implements AppRequestMatcher {
 
     @Override
     public boolean matches(HttpServletRequest request) {
-        return action.equals(request.getRequestURI());
+        return request.getRequestURI().contains(action);
     }
 }

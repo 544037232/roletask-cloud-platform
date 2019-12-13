@@ -1,5 +1,6 @@
 package com.refordom.app.config;
 
+import com.refordom.app.config.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -41,7 +42,7 @@ public class AppDebugFilter implements Filter {
 
         List<Filter> filters = getFilters(request);
         logger.info("Request received for " + request.getMethod() + " '"
-                + buildRequestUrl(request) + "': \n\n"
+                + RequestUtils.buildRequestUrl(request) + "': \n\n"
                 + "servletPath:" + request.getServletPath() + "\n" + "pathInfo:"
                 + request.getPathInfo() + "\n" + "headers: \n" + formatHeaders(request)
                 + "\n\n" + formatFilters(filters));
@@ -54,35 +55,6 @@ public class AppDebugFilter implements Filter {
         }
     }
 
-    private String buildRequestUrl(HttpServletRequest r) {
-        return buildRequestUrl(r.getServletPath(), r.getRequestURI(), r.getContextPath(),
-                r.getPathInfo(), r.getQueryString());
-    }
-
-    /**
-     * Obtains the web application-specific fragment of the URL.
-     */
-    private String buildRequestUrl(String servletPath, String requestURI,
-                                   String contextPath, String pathInfo, String queryString) {
-
-        StringBuilder url = new StringBuilder();
-
-        if (servletPath != null) {
-            url.append(servletPath);
-            if (pathInfo != null) {
-                url.append(pathInfo);
-            }
-        }
-        else {
-            url.append(requestURI.substring(contextPath.length()));
-        }
-
-        if (queryString != null) {
-            url.append("?").append(queryString);
-        }
-
-        return url.toString();
-    }
 
     private void invokeWithWrappedRequest(HttpServletRequest request,
                                           HttpServletResponse response, FilterChain filterChain) throws IOException,
