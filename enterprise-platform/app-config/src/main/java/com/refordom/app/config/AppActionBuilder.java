@@ -24,4 +24,5 @@ public interface AppActionBuilder<H extends AppActionBuilder<H>> extends
     <C> C getSharedObject(Class<C> sharedType);
 
     H addFilter(Filter filter);
+
 }

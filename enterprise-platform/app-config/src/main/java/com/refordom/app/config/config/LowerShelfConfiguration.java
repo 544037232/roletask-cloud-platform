@@ -1,8 +1,9 @@
 package com.refordom.app.config.config;
 
 import com.refordom.app.config.AppRequestConfigurerAdapter;
-import com.refordom.app.config.business.uppershelf.AppStateLowerCheckFilter;
+import com.refordom.app.config.business.lowershelf.AppStateUpperCheckFilter;
 import com.refordom.app.config.core.AppAction;
+import com.refordom.app.config.core.AppRequest;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -10,12 +11,12 @@ import org.springframework.context.annotation.Configuration;
  * @date 2019/12/13 19:02
  */
 @Configuration
-public class UpperShelfConfiguration extends AppRequestConfigurerAdapter {
+public class LowerShelfConfiguration extends AppRequestConfigurerAdapter {
 
     @Override
     protected void configure(AppAction appAction) throws Exception {
-        appAction.paramsCheck().defaultValue("price", 0).and().actionRequestMatcher("upperShelf")
-                .addFilter(new AppStateLowerCheckFilter());
+        appAction.actionRequestMatcher("lowerShelf")
+                .addFilter(new AppStateUpperCheckFilter());
     }
 
 }
