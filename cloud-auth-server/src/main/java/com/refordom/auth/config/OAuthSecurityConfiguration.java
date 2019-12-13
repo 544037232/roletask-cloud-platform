@@ -4,8 +4,10 @@ import com.refordom.auth.authentication.SmsCodeAuthenticationSecurityConfigurati
 import com.refordom.common.security.authentication.AuthorizeConfigManager;
 import com.refordom.common.security.authentication.SecurityUserDetailsService;
 import com.refordom.common.security.config.LoginAuthenticationConfiguration;
-import com.refordom.common.security.config.LoginAuthenticationConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -65,5 +67,12 @@ public class OAuthSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/css/**");
+    }
+
+    @Bean
+    @Override
+    @ConditionalOnMissingBean(AuthenticationManager.class)
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }

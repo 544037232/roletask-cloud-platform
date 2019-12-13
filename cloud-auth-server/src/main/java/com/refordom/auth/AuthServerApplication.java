@@ -12,7 +12,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @author pricess.wang
  * @date 2019/9/16 16:30
  */
-
 @SpringBootApplication(exclude = {ErrorMvcAutoConfiguration.class})
 @EnableDiscoveryClient
 @MapperScan("com.refordom.auth.dao")

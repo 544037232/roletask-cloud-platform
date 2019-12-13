@@ -2,7 +2,6 @@ package com.refordom.common.security.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @author : 王晟权
  * @date : 2019/6/21 16:11
  */
-@Configuration
 @Order(101)
 public class AuthenticationManagerConfiguration extends WebSecurityConfigurerAdapter {
 

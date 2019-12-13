@@ -1,5 +1,6 @@
 package com.refordom.common.security.annotation;
 
+import com.refordom.common.security.config.AuthenticationManagerConfiguration;
 import com.refordom.common.security.config.ResourceServerAutoConfiguration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -19,6 +20,6 @@ import java.lang.annotation.*;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Import({ResourceServerAutoConfiguration.class})
+@Import({ResourceServerAutoConfiguration.class, AuthenticationManagerConfiguration.class})
 public @interface ResourceServer {
 }
