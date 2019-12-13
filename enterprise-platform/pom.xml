@@ -16,11 +16,11 @@
     <modules>
         <!-- 应用模型，包含客户应用环境，业务应用，科目应用 -->
         <module>app-model</module>
-        <!-- 应用商店 -->
-        <module>app-store</module>
         <!-- 应用开发者 -->
         <module>app-developer</module>
         <!-- 应用api -->
         <module>app-api</module>
+        <!-- 应用接口配置 -->
+        <module>app-config</module>
     </modules>
 </project>
