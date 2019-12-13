@@ -18,7 +18,9 @@ import java.util.Map;
  */
 public class ParamsEmptyCheckFilter extends GenericFilterBean {
 
-    private Map<String, String> paramsRule = new HashMap<>();
+    private final Map<String, String> paramsRule = new HashMap<>();
+
+    private final Map<String, Object> paramInit = new HashMap<>();
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse rep, FilterChain chain) throws IOException, ServletException {
@@ -26,15 +28,26 @@ public class ParamsEmptyCheckFilter extends GenericFilterBean {
         HttpServletRequest request = (HttpServletRequest) req;
 
         paramsRule.forEach((param, errorMessage) -> {
+            // 初始化参数到上下文
             if (StringUtils.isEmpty(request.getParameter(param))) {
                 throw new RuntimeException(errorMessage);
             }
         });
 
+        paramInit.forEach((param, value) -> {
+            if (request.getParameter(param) == null) {
+                // 设定默认值到上下文
+            }
+        });
         chain.doFilter(req, rep);
     }
 
-    public void setParamRule(String paramName, String errorMessage) {
+    public void defaultValue(String paramName, Object value) {
+        paramInit.put(paramName, value);
+    }
+
+    public void checkRule(String paramName, String errorMessage) {
         paramsRule.put(paramName, errorMessage);
     }
+
 }

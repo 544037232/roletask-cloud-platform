@@ -14,7 +14,7 @@ public class UpperShelfConfiguration extends AppRequestConfigurerAdapter {
 
     @Override
     protected void configure(AppAction appAction) throws Exception {
-        appAction.paramsCheck().paramsEmptyCheck("app_id","应用ID不能为空");
+        appAction.paramsCheck().defaultValue("price", 0).and().actionRequestMatcher("upperShelf");
     }
 
     @Override

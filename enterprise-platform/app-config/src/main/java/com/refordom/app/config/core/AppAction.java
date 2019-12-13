@@ -9,6 +9,7 @@ import com.refordom.app.config.filter.DefaultAppFilterChain;
 import com.refordom.common.builder.AbstractConfiguredObjectBuilder;
 import com.refordom.common.builder.ObjectBuilder;
 import com.refordom.common.builder.ObjectPostProcessor;
+import com.refordom.common.builder.exception.ObjectBuiltException;
 
 import javax.servlet.Filter;
 import java.util.ArrayList;
@@ -40,6 +41,9 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
 
     @Override
     protected DefaultAppFilterChain performBuild() throws Exception {
+        if (requestMatcher == null) {
+            throw new ObjectBuiltException("this requestMatcher must bu appoint");
+        }
         return new DefaultAppFilterChain(requestMatcher, filters);
     }
 

@@ -17,6 +17,12 @@ public class ActionParamsCheckConfigurer<H extends AppActionBuilder<H>>
         if (paramsEmptyCheckFilter == null) {
             paramsEmptyCheckFilter = new ParamsEmptyCheckFilter();
         }
+        initDefaultParamsCheck();
+    }
+
+    private void initDefaultParamsCheck() {
+        paramsEmptyCheckFilter.checkRule("app_id","参数app_id不能为空");
+        paramsEmptyCheckFilter.checkRule("app_type","参数app_type不能为空");
     }
 
     @Override
@@ -24,8 +30,13 @@ public class ActionParamsCheckConfigurer<H extends AppActionBuilder<H>>
         super.configure(builder);
     }
 
+    public ActionParamsCheckConfigurer<H> defaultValue(String paramName, Object value) {
+        paramsEmptyCheckFilter.defaultValue(paramName, value);
+        return this;
+    }
+
     public ActionParamsCheckConfigurer<H> paramsEmptyCheck(String paramName, String errorMessage) {
-        paramsEmptyCheckFilter.setParamRule(paramName, errorMessage);
+        paramsEmptyCheckFilter.checkRule(paramName, errorMessage);
         return this;
     }
 }
