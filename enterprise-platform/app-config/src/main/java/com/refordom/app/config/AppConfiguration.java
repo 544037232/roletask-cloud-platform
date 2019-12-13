@@ -24,7 +24,7 @@ public class AppConfiguration {
     private List<ObjectConfigurer<Filter, AppRequest>> requestAppStoreConfigurers;
 
     @Bean
-    public Filter appStoreFilterChain(ObjectPostProcessor<Object> objectPostProcessor) throws Exception {
+    public Filter appFilterChain(ObjectPostProcessor<Object> objectPostProcessor) throws Exception {
         boolean hasConfigurers = requestAppStoreConfigurers != null
                 && !requestAppStoreConfigurers.isEmpty();
 
@@ -38,7 +38,7 @@ public class AppConfiguration {
     }
 
     @Autowired(required = false)
-    public void setFilterChainProxySecurityConfigurer(
+    public void setFilterChainProxyConfigurer(
             ObjectPostProcessor<Object> objectPostProcessor,
             @Value("#{@autowiredAppRequestConfigurersIgnoreParents.getAppRequestConfigurers()}") List<ObjectConfigurer<Filter, AppRequest>> requestConfigurers)
             throws Exception {
