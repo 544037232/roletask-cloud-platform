@@ -84,7 +84,7 @@ public class AppFilterChainProxy extends GenericFilterBean {
             return;
         }
 
-        AppFilterChainProxy.VirtualFilterChain vfc = new AppFilterChainProxy.VirtualFilterChain(chain, filters);
+        VirtualFilterChain vfc = new VirtualFilterChain(chain, filters);
         vfc.doFilter(request, response);
     }
 

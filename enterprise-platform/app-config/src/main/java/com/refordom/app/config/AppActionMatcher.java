@@ -16,6 +16,6 @@ public final class AppActionMatcher implements AppRequestMatcher {
 
     @Override
     public boolean matches(HttpServletRequest request) {
-        return request.getRequestURI().contains(action);
+        return request.getRequestURI().toUpperCase().contains(action.toUpperCase());
     }
 }
