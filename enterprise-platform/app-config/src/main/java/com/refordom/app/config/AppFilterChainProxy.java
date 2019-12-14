@@ -29,7 +29,7 @@ public class AppFilterChainProxy extends GenericFilterBean {
 
     private List<AppFilterChain> filterChains;
 
-    private AppFilterChainProxy.FilterChainValidator filterChainValidator = new AppFilterChainProxy.NullFilterChainValidator();
+    private FilterChainValidator filterChainValidator = new NullFilterChainValidator();
 
     // ~ Methods
     // ========================================================================================================
