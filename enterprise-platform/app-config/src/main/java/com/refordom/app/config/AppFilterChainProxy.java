@@ -2,8 +2,6 @@ package com.refordom.app.config;
 
 import com.refordom.app.config.util.RequestUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
 
 import javax.servlet.*;
