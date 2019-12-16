@@ -1,9 +1,8 @@
 package com.refordom.app.config;
 
 import com.refordom.app.config.util.RequestUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.web.filter.GenericFilterBean;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -15,19 +14,12 @@ import java.util.List;
  * @author pricess.wang
  * @date 2019/12/12 17:02
  */
-public class AppFilterChainProxy extends GenericFilterBean {
+@Slf4j
+public class AppFilterChainProxy implements Filter, InitializingBean {
     // ~ Static fields/initializers
     // =====================================================================================
 
-    private static final Log logger = LogFactory.getLog(AppFilterChainProxy.class);
-
-    // ~ Instance fields
-    // ================================================================================================
-
-    private final static String FILTER_APPLIED = AppFilterChainProxy.class.getName().concat(
-            ".APPLIED");
-
-    private List<AppFilterChain> filterChains;
+    private final List<AppFilterChain> filterChains;
 
     private FilterChainValidator filterChainValidator = new NullFilterChainValidator();
 
@@ -35,6 +27,7 @@ public class AppFilterChainProxy extends GenericFilterBean {
     // ========================================================================================================
 
     public AppFilterChainProxy() {
+        this(Collections.emptyList());
     }
 
     public AppFilterChainProxy(AppFilterChain chain) {
@@ -42,7 +35,7 @@ public class AppFilterChainProxy extends GenericFilterBean {
     }
 
     public AppFilterChainProxy(List<AppFilterChain> filterChains) {
-        this.filterChains = filterChains;
+        this.filterChains = Collections.unmodifiableList(filterChains);
     }
 
     @Override
@@ -51,30 +44,14 @@ public class AppFilterChainProxy extends GenericFilterBean {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response,
+    public void doFilter(ServletRequest req, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
-        boolean clearContext = request.getAttribute(FILTER_APPLIED) == null;
-        if (clearContext) {
-            try {
-                request.setAttribute(FILTER_APPLIED, Boolean.TRUE);
-                doFilterInternal(request, response, chain);
-            } finally {
-                request.removeAttribute(FILTER_APPLIED);
-            }
-        } else {
-            doFilterInternal(request, response, chain);
-        }
-    }
-
-    private void doFilterInternal(ServletRequest req, ServletResponse response,
-                                  FilterChain chain) throws IOException, ServletException {
-
         HttpServletRequest request = (HttpServletRequest) req;
         List<Filter> filters = getFilters(request);
 
         if (filters == null || filters.size() == 0) {
-            if (logger.isDebugEnabled()) {
-                logger.debug(RequestUtils.buildRequestUrl(request)
+            if (log.isDebugEnabled()) {
+                log.debug(RequestUtils.buildRequestUrl(request)
                         + (filters == null ? " has no matching filters"
                         : " has an empty filter list"));
             }
@@ -85,6 +62,7 @@ public class AppFilterChainProxy extends GenericFilterBean {
         }
 
         VirtualFilterChain vfc = new VirtualFilterChain(chain, filters);
+
         vfc.doFilter(request, response);
     }
 
@@ -100,7 +78,6 @@ public class AppFilterChainProxy extends GenericFilterBean {
                 return chain.getFilters();
             }
         }
-
         return null;
     }
 
@@ -109,7 +86,7 @@ public class AppFilterChainProxy extends GenericFilterBean {
      * applied to incoming requests.
      */
     public List<AppFilterChain> getFilterChains() {
-        return Collections.unmodifiableList(filterChains);
+        return filterChains;
     }
 
     /**
@@ -161,9 +138,9 @@ public class AppFilterChainProxy extends GenericFilterBean {
 
                 Filter nextFilter = additionalFilters.get(currentPosition - 1);
 
-                if (logger.isDebugEnabled()) {
+                if (log.isDebugEnabled()) {
                     HttpServletRequest request = (HttpServletRequest) req;
-                    logger.debug(RequestUtils.buildRequestUrl(request)
+                    log.debug(RequestUtils.buildRequestUrl(request)
                             + " at position " + currentPosition + " of " + size
                             + " in additional filter chain; firing Filter: '"
                             + nextFilter.getClass().getSimpleName() + "'");
@@ -178,7 +155,7 @@ public class AppFilterChainProxy extends GenericFilterBean {
         void validate(AppFilterChainProxy filterChainProxy);
     }
 
-    private static class NullFilterChainValidator implements AppFilterChainProxy.FilterChainValidator {
+    private static class NullFilterChainValidator implements FilterChainValidator {
         @Override
         public void validate(AppFilterChainProxy filterChainProxy) {
         }

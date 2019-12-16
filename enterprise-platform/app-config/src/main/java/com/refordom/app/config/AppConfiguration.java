@@ -1,18 +1,18 @@
 package com.refordom.app.config;
 
+import com.refordom.app.config.constant.AppConstant;
 import com.refordom.app.config.core.AppRequest;
 import com.refordom.common.builder.ObjectConfigurer;
 import com.refordom.common.builder.ObjectPostProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
 import javax.servlet.Filter;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,7 +29,7 @@ public class AppConfiguration {
     private List<ObjectConfigurer<Filter, AppRequest>> requestAppStoreConfigurers;
 
     @Bean
-    public Filter appFilterChain(ObjectPostProcessor<Object> objectPostProcessor) throws Exception {
+    public FilterRegistrationBean<Filter> appFilterChain(ObjectPostProcessor<Object> objectPostProcessor) throws Exception {
         boolean hasConfigurers = requestAppStoreConfigurers != null
                 && !requestAppStoreConfigurers.isEmpty();
 
@@ -39,23 +39,10 @@ public class AppConfiguration {
                     });
             appRequest.apply(adapter);
         }
-        return appRequest.build();
-    }
-
-    @Bean
-    public FilterRegistrationBean<Filter> securityFilterChain(
-            @Qualifier(AbstractSecurityWebApplicationInitializer.DEFAULT_FILTER_NAME)
-                    Filter securityFilter) {
-        FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<>(securityFilter);
-        registration.setOrder(Integer.MAX_VALUE - 1);
-        registration.setName(AbstractSecurityWebApplicationInitializer.DEFAULT_FILTER_NAME);
-        return registration;
-    }
-
-    @Bean
-    public FilterRegistrationBean<Filter> appFilterChain(@Qualifier("appFilterChain") Filter appFilterChain) {
-        FilterRegistrationBean<Filter> registrationBean = new FilterRegistrationBean<>(appFilterChain);
+        FilterRegistrationBean<Filter> registrationBean = new FilterRegistrationBean<>(appRequest.build());
         registrationBean.setOrder(Integer.MAX_VALUE);
+        registrationBean.setName(AppConstant.APP_FILTER_CHAIN_NAME);
+        registrationBean.setUrlPatterns(Collections.singletonList(AppConstant.APP_URL_PATTERNS));
         return registrationBean;
     }
 
