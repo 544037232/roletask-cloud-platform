@@ -1,7 +1,8 @@
 package com.refordom.app.config;
 
 import com.refordom.app.config.util.RequestUtils;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
 
 import javax.servlet.*;
@@ -14,10 +15,17 @@ import java.util.List;
  * @author pricess.wang
  * @date 2019/12/12 17:02
  */
-@Slf4j
 public class AppFilterChainProxy implements Filter, InitializingBean {
     // ~ Static fields/initializers
     // =====================================================================================
+
+    private static final Log logger = LogFactory.getLog(AppFilterChainProxy.class);
+
+    // ~ Instance fields
+    // ================================================================================================
+
+    private final static String FILTER_APPLIED = AppFilterChainProxy.class.getName().concat(
+            ".APPLIED");
 
     private final List<AppFilterChain> filterChains;
 
@@ -44,14 +52,30 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
     }
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse response,
+    public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
+        boolean clearContext = request.getAttribute(FILTER_APPLIED) == null;
+        if (clearContext) {
+            try {
+                request.setAttribute(FILTER_APPLIED, Boolean.TRUE);
+                doFilterInternal(request, response, chain);
+            } finally {
+                request.removeAttribute(FILTER_APPLIED);
+            }
+        } else {
+            doFilterInternal(request, response, chain);
+        }
+    }
+
+    private void doFilterInternal(ServletRequest req, ServletResponse response,
+                                  FilterChain chain) throws IOException, ServletException {
+
         HttpServletRequest request = (HttpServletRequest) req;
         List<Filter> filters = getFilters(request);
 
         if (filters == null || filters.size() == 0) {
-            if (log.isDebugEnabled()) {
-                log.debug(RequestUtils.buildRequestUrl(request)
+            if (logger.isDebugEnabled()) {
+                logger.debug(RequestUtils.buildRequestUrl(request)
                         + (filters == null ? " has no matching filters"
                         : " has an empty filter list"));
             }
@@ -62,7 +86,6 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
         }
 
         VirtualFilterChain vfc = new VirtualFilterChain(chain, filters);
-
         vfc.doFilter(request, response);
     }
 
@@ -78,6 +101,7 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
                 return chain.getFilters();
             }
         }
+
         return null;
     }
 
@@ -138,9 +162,9 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
 
                 Filter nextFilter = additionalFilters.get(currentPosition - 1);
 
-                if (log.isDebugEnabled()) {
+                if (logger.isDebugEnabled()) {
                     HttpServletRequest request = (HttpServletRequest) req;
-                    log.debug(RequestUtils.buildRequestUrl(request)
+                    logger.debug(RequestUtils.buildRequestUrl(request)
                             + " at position " + currentPosition + " of " + size
                             + " in additional filter chain; firing Filter: '"
                             + nextFilter.getClass().getSimpleName() + "'");
