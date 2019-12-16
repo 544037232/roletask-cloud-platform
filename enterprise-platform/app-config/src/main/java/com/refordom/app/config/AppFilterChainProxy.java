@@ -1,6 +1,7 @@
 package com.refordom.app.config;
 
 import com.refordom.app.config.util.RequestUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -15,11 +16,10 @@ import java.util.List;
  * @author pricess.wang
  * @date 2019/12/12 17:02
  */
+@Slf4j
 public class AppFilterChainProxy implements Filter, InitializingBean {
     // ~ Static fields/initializers
     // =====================================================================================
-
-    private static final Log logger = LogFactory.getLog(AppFilterChainProxy.class);
 
     // ~ Instance fields
     // ================================================================================================
@@ -74,8 +74,8 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
         List<Filter> filters = getFilters(request);
 
         if (filters == null || filters.size() == 0) {
-            if (logger.isDebugEnabled()) {
-                logger.debug(RequestUtils.buildRequestUrl(request)
+            if (log.isDebugEnabled()) {
+                log.debug(RequestUtils.buildRequestUrl(request)
                         + (filters == null ? " has no matching filters"
                         : " has an empty filter list"));
             }
@@ -154,6 +154,7 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
         @Override
         public void doFilter(ServletRequest req, ServletResponse response)
                 throws IOException, ServletException {
+
             if (currentPosition == size) {
 
                 originalChain.doFilter(req, response);
@@ -162,9 +163,9 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
 
                 Filter nextFilter = additionalFilters.get(currentPosition - 1);
 
-                if (logger.isDebugEnabled()) {
+                if (log.isDebugEnabled()) {
                     HttpServletRequest request = (HttpServletRequest) req;
-                    logger.debug(RequestUtils.buildRequestUrl(request)
+                    log.debug(RequestUtils.buildRequestUrl(request)
                             + " at position " + currentPosition + " of " + size
                             + " in additional filter chain; firing Filter: '"
                             + nextFilter.getClass().getSimpleName() + "'");
