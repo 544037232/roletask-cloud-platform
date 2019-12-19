@@ -1,9 +1,8 @@
 package com.refordom.app.config.config;
 
 import com.refordom.app.config.AppRequestConfigurerAdapter;
-import com.refordom.app.config.business.lowershelf.AppStateUpperCheckFilter;
+import com.refordom.app.config.business.uppershelf.AppStateLowerCheckFilter;
 import com.refordom.app.config.core.AppAction;
-import com.refordom.app.config.core.AppRequest;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -16,7 +15,7 @@ public class LowerShelfConfiguration extends AppRequestConfigurerAdapter {
     @Override
     protected void configure(AppAction appAction) throws Exception {
         appAction.actionRequestMatcher("lowerShelf")
-                .addFilter(new AppStateUpperCheckFilter());
+                .addFilter(new AppStateLowerCheckFilter());
     }
 
 }

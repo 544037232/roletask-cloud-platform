@@ -2,9 +2,11 @@ package com.refordom.app.config.core;
 
 import com.refordom.app.config.AppActionBuilder;
 import com.refordom.app.config.AppActionMatcher;
+import com.refordom.app.config.AppProvider;
 import com.refordom.app.config.AppRequestMatcher;
 import com.refordom.app.config.configurer.ActionParamsCheckConfigurer;
 import com.refordom.app.config.filter.DefaultAppFilterChain;
+import com.refordom.app.config.filter.StandardAppPrimaryFilter;
 import com.refordom.common.builder.AbstractConfiguredObjectBuilder;
 import com.refordom.common.builder.ObjectBuilder;
 import com.refordom.common.builder.ObjectPostProcessor;
@@ -25,6 +27,10 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
 
     private List<Filter> filters = new ArrayList<>();
 
+    private List<AppProvider> providers = new ArrayList<>();
+
+    private AbstractAppPrimaryFilter primaryFilter = new StandardAppPrimaryFilter();
+
     public AppAction(ObjectPostProcessor<Object> objectPostProcessor) {
         super(objectPostProcessor);
     }
@@ -38,6 +44,9 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
         if (requestMatcher == null) {
             throw new ObjectBuiltException("this requestMatcher must bu appoint");
         }
+        filters.add(primaryFilter);
+        primaryFilter.setProviders(providers);
+
         return new DefaultAppFilterChain(requestMatcher, filters);
     }
 
@@ -47,8 +56,18 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
     }
 
     @Override
+    public AppAction addProvider(AppProvider appProvider) {
+        this.providers.add(appProvider);
+        return this;
+    }
+
+    @Override
     public AppAction addFilter(Filter filter) {
-        this.filters.add(filter);
+        if (filter instanceof AbstractAppPrimaryFilter) {
+            this.primaryFilter = (AbstractAppPrimaryFilter) filter;
+        } else {
+            this.filters.add(filter);
+        }
         return this;
     }
 }

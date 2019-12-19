@@ -1,5 +1,6 @@
 package com.refordom.app.config;
 
+import com.refordom.app.config.core.AppContextHolder;
 import com.refordom.app.config.util.RequestUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -58,6 +59,7 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
                 request.setAttribute(FILTER_APPLIED, Boolean.TRUE);
                 doFilterInternal(request, response, chain);
             } finally {
+                AppContextHolder.clearContext();
                 request.removeAttribute(FILTER_APPLIED);
             }
         } else {
