@@ -58,6 +58,7 @@ public abstract class AbstractAppDetails implements AppDetails {
         return token.substring(7);
     }
 
+    @Override
     public AppModel getAppModel() {
         return appModel;
     }
@@ -66,18 +67,22 @@ public abstract class AbstractAppDetails implements AppDetails {
         this.appModel = appModel;
     }
 
+    @Override
     public String getAppId() {
         return appId;
     }
 
+    @Override
     public String getAction() {
         return action;
     }
 
+    @Override
     public String getAccessToken() {
         return accessToken;
     }
 
+    @Override
     public AppEnum getAppType() {
         return appType;
     }
