@@ -21,7 +21,7 @@ import java.util.List;
  * @author pricess.wang
  * @date 2019/12/13 18:20
  */
-@ComponentScan("com.refordom.app.config")
+@ComponentScan("com.refordom.app.*")
 public class AppConfiguration {
 
     private AppRequest appRequest;
