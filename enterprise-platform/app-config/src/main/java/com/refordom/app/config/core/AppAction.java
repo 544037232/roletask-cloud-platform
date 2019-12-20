@@ -7,6 +7,7 @@ import com.refordom.app.config.AppRequestMatcher;
 import com.refordom.app.config.configurer.ActionParamsCheckConfigurer;
 import com.refordom.app.config.filter.DefaultAppFilterChain;
 import com.refordom.app.config.filter.StandardAppPrimaryFilter;
+import com.refordom.app.config.provisioning.configurers.AppModelConfigurer;
 import com.refordom.common.builder.AbstractConfiguredObjectBuilder;
 import com.refordom.common.builder.ObjectBuilder;
 import com.refordom.common.builder.ObjectPostProcessor;
@@ -15,6 +16,7 @@ import com.refordom.common.builder.exception.ObjectBuiltException;
 import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author pricess.wang
@@ -31,8 +33,12 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
 
     private AbstractAppPrimaryFilter primaryFilter = new StandardAppPrimaryFilter();
 
-    public AppAction(ObjectPostProcessor<Object> objectPostProcessor) {
+    @SuppressWarnings("unchecked")
+    public AppAction(ObjectPostProcessor<Object> objectPostProcessor, Map<Class<?>, Object> sharedObjects) {
         super(objectPostProcessor);
+        for (Map.Entry<Class<?>, Object> entry : sharedObjects.entrySet()) {
+            setSharedObject((Class<Object>) entry.getKey(), entry.getValue());
+        }
     }
 
     public ActionParamsCheckConfigurer<AppAction> paramsCheck() throws Exception {

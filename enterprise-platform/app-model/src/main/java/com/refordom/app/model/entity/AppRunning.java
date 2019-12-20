@@ -30,4 +30,8 @@ public class AppRunning extends App {
      */
     private String clientId;
 
+    /**
+     * 定制打包的版本号，与应用商店隔离版本
+     */
+    private String madeVersion;
 }

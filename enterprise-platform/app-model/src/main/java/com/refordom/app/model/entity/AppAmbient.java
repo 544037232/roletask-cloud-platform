@@ -18,7 +18,7 @@ import lombok.ToString;
 @TableName("app_ambient")
 @Data
 @ToString
-public class AppAmbient extends BaseModel<AppAmbient> implements AppModel {
+public class AppAmbient extends BaseModel<AppAmbient> {
 
     @TableId
     private Long id;

@@ -21,5 +21,14 @@ public enum AppEnum {
     /**
      * 第三方应用
      */
-    THIRD_PARTY
+    THIRD_PARTY;
+
+    public static AppEnum valuesOf(String name) {
+        for (AppEnum appEnum : AppEnum.values()) {
+            if (appEnum.name().equals(name)) {
+                return appEnum;
+            }
+        }
+        return null;
+    }
 }

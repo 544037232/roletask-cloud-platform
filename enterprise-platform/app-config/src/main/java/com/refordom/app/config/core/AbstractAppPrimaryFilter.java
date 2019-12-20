@@ -5,6 +5,8 @@ import com.refordom.app.config.AppProvider;
 import com.refordom.app.config.event.FilterSuccessEvent;
 import com.refordom.app.config.exception.AppContextException;
 import com.refordom.app.config.handler.AppFailureHandler;
+import com.refordom.app.config.handler.AppNullFailureHandler;
+import com.refordom.app.config.handler.AppNullSuccessHandler;
 import com.refordom.app.config.handler.AppSuccessHandler;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
@@ -32,9 +34,9 @@ public abstract class AbstractAppPrimaryFilter implements Filter, ApplicationEve
      */
     private boolean continueChainBeforeSuccessfulFilter = false;
 
-    private AppSuccessHandler successHandler;
+    private AppSuccessHandler successHandler = new AppNullSuccessHandler();
 
-    private AppFailureHandler failureHandler;
+    private AppFailureHandler failureHandler = new AppNullFailureHandler();
 
     private List<AppProvider> providers = Collections.emptyList();
 

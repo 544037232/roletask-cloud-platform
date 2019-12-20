@@ -6,4 +6,5 @@ package com.refordom.app.model;
  */
 public interface AppModel {
 
+    String getAppId();
 }
