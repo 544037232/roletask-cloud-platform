@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.refordom.app.model.AppModel;
 import com.refordom.app.model.dao.AppBusinessDao;
-import com.refordom.app.model.entity.AppAccount;
 import com.refordom.app.model.entity.AppBusiness;
 import com.refordom.app.model.service.AppBusinessService;
 import org.springframework.stereotype.Service;
