@@ -1,7 +1,7 @@
 package com.refordom.app.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.refordom.app.model.App;
+import com.refordom.app.model.AppBasic;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -18,7 +18,7 @@ import java.util.Date;
 @Data
 @ToString
 @TableName("app_running")
-public class AppRunning extends App {
+public class AppRunning extends AppBasic {
 
     /**
      * 过期时间，如果过期，则签名规则不可用于业务执行

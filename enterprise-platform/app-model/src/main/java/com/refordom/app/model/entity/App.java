@@ -2,41 +2,40 @@ package com.refordom.app.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.refordom.app.model.AppModel;
+import com.refordom.app.model.AppDetails;
+import com.refordom.app.model.enums.AppEnum;
 import com.refordom.common.data.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * 业务应用
- *
  * @author pricess.wang
- * @date 2019/12/10 11:03
+ * @date 2019/12/26 14:47
  */
 @EqualsAndHashCode(callSuper = true)
-@TableName("app_business")
+@TableName("app")
 @Data
 @ToString
-public class AppBusiness extends BaseModel<AppBusiness> implements AppModel {
+public class App extends BaseModel<App> implements AppDetails {
 
     @TableId
     private Long id;
 
     /**
-     * 应用唯一ID
+     * 应用ID
      */
     private String appId;
 
     /**
-     * 应用秘钥
+     * 应用密钥
      */
     private String appSecret;
 
     /**
-     * 应用关联key，用于关联外部标识
+     * 应用logo
      */
-    private String appKey;
+    private String logo;
 
     /**
      * 应用名称
@@ -44,13 +43,17 @@ public class AppBusiness extends BaseModel<AppBusiness> implements AppModel {
     private String appName;
 
     /**
-     * 应用描述
+     * 应用类型
      */
-    private String description;
+    private AppEnum appType;
 
     /**
-     * 应用所有者，如果是企业开发团队，则所属者就是团队账号名
+     * 应用说明
+     */
+    private String appExplain;
+
+    /**
+     * 应用所属
      */
     private String owner;
-
 }

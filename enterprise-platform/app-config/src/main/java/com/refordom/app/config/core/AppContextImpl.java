@@ -16,9 +16,7 @@
 
 package com.refordom.app.config.core;
 
-import com.refordom.app.config.AppDetails;
-import com.refordom.app.model.AppModel;
-import org.springframework.security.core.Authentication;
+import com.refordom.app.model.AppDetails;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,8 +37,6 @@ public class AppContextImpl implements AppContext {
     // ~ Instance fields
     // ================================================================================================
 
-    private AppModel appModel;
-
     private AppDetails appDetails;
 
     // ~ Methods
@@ -51,41 +47,27 @@ public class AppContextImpl implements AppContext {
         if (obj instanceof AppContextImpl) {
             AppContextImpl test = (AppContextImpl) obj;
 
-            if ((this.getAppModel() == null) && (test.getAppModel() == null)
-                    && (this.getAppDetails() == null) && (test.getAppDetails() == null)) {
+            if ((this.getAppDetails() == null) && (test.getAppDetails() == null)) {
                 return true;
             }
 
-			return (this.getAppModel() != null) && (test.getAppModel() != null)
-					&& this.getAppModel().equals(test.getAppModel())
-					&& (this.getAppDetails() != null) && (test.getAppDetails() != null)
-					&& this.getAppDetails().equals(test.getAppDetails());
+            return ((this.getAppDetails() != null) && (test.getAppDetails() != null)
+                    && this.getAppDetails().equals(test.getAppDetails()));
         }
 
         return false;
     }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(appModel, appDetails);
-	}
-
-	@Override
-	public String toString() {
-		return "AppContextImpl{" +
-				"appModel=" + appModel +
-				", appDetails=" + appDetails +
-				'}';
-	}
-
-	@Override
-    public AppModel getAppModel() {
-        return appModel;
+    @Override
+    public int hashCode() {
+        return Objects.hash(appDetails);
     }
 
     @Override
-    public void setAppModel(AppModel appModel) {
-        this.appModel = appModel;
+    public String toString() {
+        return "AppContextImpl{" +
+                ", appDetails=" + appDetails +
+                '}';
     }
 
     @Override

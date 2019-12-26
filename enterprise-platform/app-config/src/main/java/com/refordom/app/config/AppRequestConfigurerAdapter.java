@@ -2,7 +2,7 @@ package com.refordom.app.config;
 
 import com.refordom.app.config.core.AppAction;
 import com.refordom.app.config.core.AppRequest;
-import com.refordom.app.config.provisioning.AppModelManagerService;
+import com.refordom.app.model.AppDetailsManager;
 import com.refordom.common.builder.ObjectPostProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -14,7 +14,7 @@ import java.util.Map;
  * @author pricess.wang
  * @date 2019/12/13 18:23
  */
-public class AppRequestConfigurerAdapter implements AppConfigurer<AppRequest> {
+public class AppRequestConfigurerAdapter implements AppRequestConfigurer<AppRequest> {
 
     private AppAction appAction;
 
@@ -55,7 +55,7 @@ public class AppRequestConfigurerAdapter implements AppConfigurer<AppRequest> {
     private Map<Class<?>, Object> createSharedObjects() {
         Map<Class<?>, Object> sharedObjects = new HashMap<>();
         sharedObjects.put(ApplicationContext.class, context);
-        sharedObjects.put(AppModelManagerService.class, context.getBean(AppModelManagerService.class));
+        sharedObjects.put(AppDetailsManager.class, context.getBean(AppDetailsManager.class));
 //        sharedObjects.put(AppReleaseManager.class, context.getBean(AppReleaseManager.class));
 //        sharedObjects.put(AppRunningManager.class, context.getBean(AppRunningManager.class));
 //        sharedObjects.put(AppHistoryManager.class, context.getBean(AppHistoryManager.class));

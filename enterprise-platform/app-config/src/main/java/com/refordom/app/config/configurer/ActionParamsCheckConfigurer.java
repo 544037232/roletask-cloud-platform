@@ -1,9 +1,9 @@
 package com.refordom.app.config.configurer;
 
 import com.refordom.app.config.AppActionBuilder;
-import com.refordom.app.config.filter.AppModelContextFilter;
+import com.refordom.app.config.filter.AppDetailsFilter;
 import com.refordom.app.config.filter.ParamsEmptyCheckFilter;
-import com.refordom.app.config.provisioning.AppModelManagerService;
+import com.refordom.app.model.AppDetailsManager;
 
 /**
  * @author pricess.wang
@@ -17,7 +17,7 @@ public final class ActionParamsCheckConfigurer<H extends AppActionBuilder<H>>
     @Override
     public final void init(H builder) throws Exception {
         builder.addFilter(paramsEmptyCheckFilter)
-                .addFilter(new AppModelContextFilter(builder.getSharedObject(AppModelManagerService.class)));
+                .addFilter(new AppDetailsFilter(builder.getSharedObject(AppDetailsManager.class)));
         initDefaultParamsCheck();
     }
 

@@ -19,6 +19,11 @@ public enum AppEnum {
     BUSINESS,
 
     /**
+     * 报表应用
+     */
+    REPORT,
+
+    /**
      * 第三方应用
      */
     THIRD_PARTY;

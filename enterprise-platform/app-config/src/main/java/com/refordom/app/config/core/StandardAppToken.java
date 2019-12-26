@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
  * @author pricess.wang
  * @date 2019/12/18 10:54
  */
-public class StandardAppDetails extends AbstractAppDetails {
+public class StandardAppToken extends AbstractAppToken {
 
-    public StandardAppDetails(HttpServletRequest request) {
+    public StandardAppToken(HttpServletRequest request) {
         super(request);
     }
 

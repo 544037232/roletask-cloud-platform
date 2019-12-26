@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class App extends BaseModel<App> {
+public class AppBasic extends BaseModel<AppBasic> {
 
     @TableId
     private Long id;
@@ -83,9 +83,4 @@ public class App extends BaseModel<App> {
     @TableField(value = "app_type")
     private AppEnum appType;
 
-    /**
-     * 应用模型
-     */
-    @TableField(exist = false)
-    private AppModel appModel;
 }

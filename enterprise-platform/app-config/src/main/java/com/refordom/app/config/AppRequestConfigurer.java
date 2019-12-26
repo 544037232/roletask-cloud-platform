@@ -9,7 +9,7 @@ import javax.servlet.Filter;
  * @author pricess.wang
  * @date 2019/12/13 18:23
  */
-public interface AppConfigurer<T extends ObjectBuilder<Filter>> extends
+public interface AppRequestConfigurer<T extends ObjectBuilder<Filter>> extends
         ObjectConfigurer<Filter, T> {
 
 }

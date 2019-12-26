@@ -1,7 +1,7 @@
 package com.refordom.app.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.refordom.app.model.App;
+import com.refordom.app.model.AppBasic;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import lombok.ToString;
 @Data
 @ToString
 @TableName("app_install_history")
-public class AppInstallHistory extends App {
+public class AppInstallHistory extends AppBasic {
 
     /**
      * 历史版本是否启用用于版本回退，只有可回退的版本才可以在运行环境还原历史版本

@@ -1,6 +1,6 @@
 package com.refordom.app.config.handler;
 
-import com.refordom.app.config.AppDetails;
+import com.refordom.app.config.AppToken;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,5 +15,5 @@ import java.io.IOException;
  */
 public interface AppSuccessHandler {
 
-    void onSuccessContext(HttpServletRequest request, HttpServletResponse response, AppDetails appDetails) throws IOException, ServletException;
+    void onSuccessContext(HttpServletRequest request, HttpServletResponse response, AppToken appToken) throws IOException, ServletException;
 }

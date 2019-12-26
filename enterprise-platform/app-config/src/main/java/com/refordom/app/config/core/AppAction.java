@@ -7,7 +7,6 @@ import com.refordom.app.config.AppRequestMatcher;
 import com.refordom.app.config.configurer.ActionParamsCheckConfigurer;
 import com.refordom.app.config.filter.DefaultAppFilterChain;
 import com.refordom.app.config.filter.StandardAppPrimaryFilter;
-import com.refordom.app.config.provisioning.configurers.AppModelConfigurer;
 import com.refordom.common.builder.AbstractConfiguredObjectBuilder;
 import com.refordom.common.builder.ObjectBuilder;
 import com.refordom.common.builder.ObjectPostProcessor;

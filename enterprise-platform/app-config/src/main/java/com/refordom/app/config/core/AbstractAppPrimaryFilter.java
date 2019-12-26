@@ -1,6 +1,6 @@
 package com.refordom.app.config.core;
 
-import com.refordom.app.config.AppDetails;
+import com.refordom.app.config.AppToken;
 import com.refordom.app.config.AppProvider;
 import com.refordom.app.config.event.FilterSuccessEvent;
 import com.refordom.app.config.exception.AppContextException;
@@ -47,19 +47,19 @@ public abstract class AbstractAppPrimaryFilter implements Filter, ApplicationEve
 
         HttpServletResponse response = (HttpServletResponse) rep;
 
-        AppDetails appDetails;
+        AppToken appToken;
 
         try {
-            appDetails = onContext(request, response);
+            appToken = onContext(request, response);
 
             for (AppProvider provider : providers) {
 
-                if (provider.supports(appDetails.getClass())) {
-                    provider.provider(appDetails);
+                if (provider.supports(appToken.getClass())) {
+                    provider.provider(appToken);
                 }
             }
 
-            if (appDetails == null) {
+            if (appToken == null) {
                 return;
             }
         } catch (AppContextException failed) {
@@ -71,23 +71,23 @@ public abstract class AbstractAppPrimaryFilter implements Filter, ApplicationEve
             chain.doFilter(request, response);
         }
 
-        successfulAuthentication(request, response, chain, appDetails);
+        successfulAuthentication(request, response, chain, appToken);
     }
 
-    private void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, AppDetails appDetails) throws IOException, ServletException {
+    private void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, AppToken appToken) throws IOException, ServletException {
 
         if (eventPublisher != null) {
-            eventPublisher.publishEvent(new FilterSuccessEvent(appDetails));
+            eventPublisher.publishEvent(new FilterSuccessEvent(appToken));
         }
 
-        successHandler.onSuccessContext(request, response, appDetails);
+        successHandler.onSuccessContext(request, response, appToken);
     }
 
     private void unsuccessfulFilter(HttpServletRequest request, HttpServletResponse response, AppContextException failed) throws IOException, ServletException {
         failureHandler.onFailureContext(request, response, failed);
     }
 
-    protected abstract AppDetails onContext(HttpServletRequest request, HttpServletResponse response);
+    protected abstract AppToken onContext(HttpServletRequest request, HttpServletResponse response);
 
     public void setContinueChainBeforeSuccessfulFilter(boolean continueChainBeforeSuccessfulFilter) {
         this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;

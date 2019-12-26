@@ -3,8 +3,8 @@ package com.refordom.app.config.filter;
 import com.refordom.app.config.constant.AppConstant;
 import com.refordom.app.config.core.AppContextHolder;
 import com.refordom.app.config.exception.DeprecatedException;
-import com.refordom.app.model.AppModel;
-import com.refordom.app.config.provisioning.AppModelManagerService;
+import com.refordom.app.model.AppDetails;
+import com.refordom.app.model.AppDetailsManager;
 import com.refordom.app.model.enums.AppEnum;
 
 import javax.servlet.*;
@@ -14,11 +14,11 @@ import java.io.IOException;
  * @author pricess.wang
  * @date 2019/12/19 15:47
  */
-public class AppModelContextFilter implements Filter {
+public class AppDetailsFilter implements Filter {
 
-    private AppModelManagerService appModelManager;
+    private AppDetailsManager appModelManager;
 
-    public AppModelContextFilter(AppModelManagerService appModelManager) {
+    public AppDetailsFilter(AppDetailsManager appModelManager) {
         this.appModelManager = appModelManager;
     }
 
@@ -33,9 +33,9 @@ public class AppModelContextFilter implements Filter {
             throw new DeprecatedException("不支持的应用类型");
         }
         // 获取模型，并设置到上下文
-        AppModel appModel = appModelManager.getModel(appId, appType);
+        AppDetails appDetails = appModelManager.getApp(appId);
 
-        AppContextHolder.getContext().setAppModel(appModel);
+        AppContextHolder.getContext().setAppDetails(appDetails);
 
         chain.doFilter(request, response);
     }

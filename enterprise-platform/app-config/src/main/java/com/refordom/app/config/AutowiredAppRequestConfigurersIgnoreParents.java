@@ -27,9 +27,9 @@ final class AutowiredAppRequestConfigurersIgnoreParents {
     @SuppressWarnings({"rawtypes", "unchecked"})
     public List<ObjectConfigurer<Filter, AppRequest>> getAppRequestConfigurers() {
         List<ObjectConfigurer<Filter, AppRequest>> requestAppConfigurers = new ArrayList<>();
-        Map<String, AppConfigurer> beansOfType = beanFactory
-                .getBeansOfType(AppConfigurer.class);
-        for (Map.Entry<String, AppConfigurer> entry : beansOfType.entrySet()) {
+        Map<String, AppRequestConfigurer> beansOfType = beanFactory
+                .getBeansOfType(AppRequestConfigurer.class);
+        for (Map.Entry<String, AppRequestConfigurer> entry : beansOfType.entrySet()) {
             requestAppConfigurers.add(entry.getValue());
         }
         return requestAppConfigurers;

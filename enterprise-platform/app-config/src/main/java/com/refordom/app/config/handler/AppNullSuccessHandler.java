@@ -1,6 +1,6 @@
 package com.refordom.app.config.handler;
 
-import com.refordom.app.config.AppDetails;
+import com.refordom.app.config.AppToken;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +16,7 @@ import java.io.IOException;
 public class AppNullSuccessHandler implements AppSuccessHandler{
 
     @Override
-    public void onSuccessContext(HttpServletRequest request, HttpServletResponse response, AppDetails appDetails) throws IOException, ServletException {
+    public void onSuccessContext(HttpServletRequest request, HttpServletResponse response, AppToken appToken) throws IOException, ServletException {
 
     }
 }

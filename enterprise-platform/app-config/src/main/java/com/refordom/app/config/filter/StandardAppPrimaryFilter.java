@@ -1,8 +1,8 @@
 package com.refordom.app.config.filter;
 
-import com.refordom.app.config.AppDetails;
+import com.refordom.app.config.AppToken;
+import com.refordom.app.config.core.StandardAppToken;
 import com.refordom.app.config.core.AbstractAppPrimaryFilter;
-import com.refordom.app.config.core.StandardAppDetails;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class StandardAppPrimaryFilter extends AbstractAppPrimaryFilter {
 
     @Override
-    protected AppDetails onContext(HttpServletRequest request, HttpServletResponse response) {
-        return new StandardAppDetails(request);
+    protected AppToken onContext(HttpServletRequest request, HttpServletResponse response) {
+        return new StandardAppToken(request);
     }
 
 }

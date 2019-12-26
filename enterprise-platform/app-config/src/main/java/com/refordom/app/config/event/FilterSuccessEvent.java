@@ -1,6 +1,6 @@
 package com.refordom.app.config.event;
 
-import com.refordom.app.config.AppDetails;
+import com.refordom.app.config.AppToken;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -13,7 +13,7 @@ public class FilterSuccessEvent extends ApplicationEvent {
      *
      * @param appDetails the object on which the event initially occurred (never {@code null})
      */
-    public FilterSuccessEvent(AppDetails appDetails) {
+    public FilterSuccessEvent(AppToken appDetails) {
         super(appDetails);
     }
 }
