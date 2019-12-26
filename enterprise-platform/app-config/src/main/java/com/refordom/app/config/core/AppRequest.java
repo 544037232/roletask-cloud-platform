@@ -47,7 +47,7 @@ public class AppRequest extends AbstractConfiguredObjectBuilder<Filter, AppReque
         if (debugEnabled) {
             logger.warn("\n\n"
                     + "********************************************************************\n"
-                    + "**********        App Action debugging is enabled.       *************\n"
+                    + "**********        App Action debugging is enabled.     *************\n"
                     + "**********    This may include sensitive information.  *************\n"
                     + "**********      Do not use in a production system!     *************\n"
                     + "********************************************************************\n\n");
