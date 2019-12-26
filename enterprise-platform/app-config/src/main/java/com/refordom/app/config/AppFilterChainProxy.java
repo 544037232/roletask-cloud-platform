@@ -71,13 +71,12 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
                                   FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest) req;
-        List<Filter> filters = getFilters(request);
 
-        if (filters == null || filters.size() == 0) {
+        FilterChainDelegator filterChainDelegator = getFilters(request);
+
+        if (filterChainDelegator == null) {
             if (log.isDebugEnabled()) {
-                log.debug(RequestUtils.buildRequestUrl(request)
-                        + (filters == null ? " has no matching filters"
-                        : " has an empty filter list"));
+                log.debug(RequestUtils.buildRequestUrl(request) + ("has no matching filters"));
             }
 
             chain.doFilter(request, response);
@@ -85,7 +84,7 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
             return;
         }
 
-        VirtualFilterChain vfc = new VirtualFilterChain(chain, filters);
+        VirtualFilterChain vfc = new VirtualFilterChain(chain, filterChainDelegator);
         vfc.doFilter(request, response);
     }
 
@@ -95,10 +94,10 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
      * @param request the request to match
      * @return an ordered array of Filters defining the filter chain
      */
-    private List<Filter> getFilters(HttpServletRequest request) {
+    private FilterChainDelegator getFilters(HttpServletRequest request) {
         for (AppFilterChain chain : filterChains) {
             if (chain.matches(request)) {
-                return chain.getFilters();
+                return new FilterChainDelegator(chain.getFilters(), chain.isContinueChainBeforeSuccessfulFilter());
             }
         }
 
@@ -132,23 +131,36 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
                 "]";
     }
 
-    // ~ Inner Classes
-    // ==================================================================================================
+    private static class FilterChainDelegator {
 
-    /**
-     * Internal {@code FilterChain} implementation that is used to pass a request through
-     * the additional internal list of filters which match the request.
-     */
+        private final List<Filter> filters;
+
+        private final boolean continueChainBeforeSuccessfulFilter;
+
+        private FilterChainDelegator(List<Filter> filters, boolean continueChainBeforeSuccessfulFilter) {
+            this.filters = filters;
+            this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;
+        }
+
+        public List<Filter> getFilters() {
+            return filters;
+        }
+
+        public boolean isContinueChainBeforeSuccessfulFilter() {
+            return continueChainBeforeSuccessfulFilter;
+        }
+    }
+
     private static class VirtualFilterChain implements FilterChain {
         private final FilterChain originalChain;
-        private final List<Filter> additionalFilters;
         private final int size;
+        private final FilterChainDelegator filterChainDelegator;
         private int currentPosition = 0;
 
-        private VirtualFilterChain(FilterChain chain, List<Filter> additionalFilters) {
+        private VirtualFilterChain(FilterChain chain, FilterChainDelegator filterChainDelegator) {
             this.originalChain = chain;
-            this.additionalFilters = additionalFilters;
-            this.size = additionalFilters.size();
+            this.filterChainDelegator = filterChainDelegator;
+            this.size = filterChainDelegator.getFilters().size();
         }
 
         @Override
@@ -157,11 +169,15 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
 
             if (currentPosition == size) {
 
+                if (!filterChainDelegator.isContinueChainBeforeSuccessfulFilter()) {
+                    return;
+                }
                 originalChain.doFilter(req, response);
+
             } else {
                 currentPosition++;
 
-                Filter nextFilter = additionalFilters.get(currentPosition - 1);
+                Filter nextFilter = filterChainDelegator.getFilters().get(currentPosition - 1);
 
                 if (log.isDebugEnabled()) {
                     HttpServletRequest request = (HttpServletRequest) req;

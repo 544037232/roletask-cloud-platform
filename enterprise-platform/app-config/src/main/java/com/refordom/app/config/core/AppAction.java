@@ -32,6 +32,8 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
 
     private AbstractAppPrimaryFilter primaryFilter = new StandardAppPrimaryFilter();
 
+    private boolean continueChainBeforeSuccessfulFilter = false;
+
     @SuppressWarnings("unchecked")
     public AppAction(ObjectPostProcessor<Object> objectPostProcessor, Map<Class<?>, Object> sharedObjects) {
         super(objectPostProcessor);
@@ -52,7 +54,7 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
         filters.add(primaryFilter);
         primaryFilter.setProviders(providers);
 
-        return new DefaultAppFilterChain(requestMatcher, filters);
+        return new DefaultAppFilterChain(continueChainBeforeSuccessfulFilter,requestMatcher, filters);
     }
 
     public AppAction actionRequestMatcher(String action) {
@@ -64,6 +66,10 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
     public AppAction addProvider(AppProvider appProvider) {
         this.providers.add(appProvider);
         return this;
+    }
+
+    public void setContinueChainBeforeSuccessfulFilter(boolean continueChainBeforeSuccessfulFilter) {
+        this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;
     }
 
     @Override

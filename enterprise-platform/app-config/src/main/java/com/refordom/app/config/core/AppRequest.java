@@ -34,8 +34,7 @@ public class AppRequest extends AbstractConfiguredObjectBuilder<Filter, AppReque
     protected Filter performBuild() throws Exception {
         int chainSize = appFilterChainBuilders.size();
 
-        List<AppFilterChain> securityFilterChains = new ArrayList<>(
-                chainSize);
+        List<AppFilterChain> securityFilterChains = new ArrayList<>(chainSize);
 
         for (ObjectBuilder<? extends AppFilterChain> appFilterChainBuilder : appFilterChainBuilders) {
             securityFilterChains.add(appFilterChainBuilder.build());

@@ -29,11 +29,6 @@ public abstract class AbstractAppPrimaryFilter implements Filter, ApplicationEve
 
     private ApplicationEventPublisher eventPublisher;
 
-    /**
-     * 过滤器执行成功后继续执行过滤器
-     */
-    private boolean continueChainBeforeSuccessfulFilter = false;
-
     private AppSuccessHandler successHandler = new AppNullSuccessHandler();
 
     private AppFailureHandler failureHandler = new AppNullFailureHandler();
@@ -67,11 +62,9 @@ public abstract class AbstractAppPrimaryFilter implements Filter, ApplicationEve
             return;
         }
 
-        if (continueChainBeforeSuccessfulFilter) {
-            chain.doFilter(request, response);
-        }
-
         successfulAuthentication(request, response, chain, appToken);
+
+        chain.doFilter(request, response);
     }
 
     private void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, AppToken appToken) throws IOException, ServletException {
@@ -88,10 +81,6 @@ public abstract class AbstractAppPrimaryFilter implements Filter, ApplicationEve
     }
 
     protected abstract AppToken onContext(HttpServletRequest request, HttpServletResponse response);
-
-    public void setContinueChainBeforeSuccessfulFilter(boolean continueChainBeforeSuccessfulFilter) {
-        this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;
-    }
 
     public void setSuccessHandler(AppSuccessHandler successHandler) {
         this.successHandler = successHandler;

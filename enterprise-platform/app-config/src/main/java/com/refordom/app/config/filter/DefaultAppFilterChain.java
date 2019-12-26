@@ -23,14 +23,20 @@ public class DefaultAppFilterChain implements AppFilterChain {
 
     private final List<Filter> filters;
 
-    public DefaultAppFilterChain(AppRequestMatcher requestMatcher, Filter... filters) {
-        this(requestMatcher, Arrays.asList(filters));
+    /**
+     * 过滤器执行成功后继续执行过滤器
+     */
+    private boolean continueChainBeforeSuccessfulFilter;
+
+    public DefaultAppFilterChain(boolean continueChainBeforeSuccessfulFilter, AppRequestMatcher requestMatcher, Filter... filters) {
+        this(continueChainBeforeSuccessfulFilter, requestMatcher, Arrays.asList(filters));
     }
 
-    public DefaultAppFilterChain(AppRequestMatcher requestMatcher, List<Filter> filters) {
+    public DefaultAppFilterChain(boolean continueChainBeforeSuccessfulFilter, AppRequestMatcher requestMatcher, List<Filter> filters) {
         logger.info("Creating filter chain: " + requestMatcher + ", " + filters);
         this.requestMatcher = requestMatcher;
         this.filters = new ArrayList<>(filters);
+        this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;
     }
 
     public AppRequestMatcher getRequestMatcher() {
@@ -43,6 +49,11 @@ public class DefaultAppFilterChain implements AppFilterChain {
 
     public boolean matches(HttpServletRequest request) {
         return requestMatcher.matches(request);
+    }
+
+    @Override
+    public boolean isContinueChainBeforeSuccessfulFilter() {
+        return continueChainBeforeSuccessfulFilter;
     }
 
     @Override

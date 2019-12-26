@@ -13,4 +13,6 @@ public interface AppFilterChain {
     boolean matches(HttpServletRequest request);
 
     List<Filter> getFilters();
+
+    boolean isContinueChainBeforeSuccessfulFilter();
 }
