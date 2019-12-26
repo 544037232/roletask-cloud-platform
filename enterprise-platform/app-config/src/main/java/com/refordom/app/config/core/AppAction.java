@@ -68,7 +68,7 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
         return this;
     }
 
-    public void setContinueChainBeforeSuccessfulFilter(boolean continueChainBeforeSuccessfulFilter) {
+    public void continueChainBeforeSuccessfulFilter(boolean continueChainBeforeSuccessfulFilter) {
         this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;
     }
 
