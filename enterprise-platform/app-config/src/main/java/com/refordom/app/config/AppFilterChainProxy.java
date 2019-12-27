@@ -17,11 +17,6 @@ import java.util.List;
  */
 @Slf4j
 public class AppFilterChainProxy implements Filter, InitializingBean {
-    // ~ Static fields/initializers
-    // =====================================================================================
-
-    // ~ Instance fields
-    // ================================================================================================
 
     private final static String FILTER_APPLIED = AppFilterChainProxy.class.getName().concat(
             ".APPLIED");
@@ -88,12 +83,6 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
         vfc.doFilter(request, response);
     }
 
-    /**
-     * Returns the first filter chain matching the supplied URL.
-     *
-     * @param request the request to match
-     * @return an ordered array of Filters defining the filter chain
-     */
     private FilterChainDelegator getFilters(HttpServletRequest request) {
         for (AppFilterChain chain : filterChains) {
             if (chain.matches(request)) {
@@ -104,22 +93,11 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
         return null;
     }
 
-    /**
-     * @return the list of {@code SecurityFilterChain}s which will be matched against and
-     * applied to incoming requests.
-     */
     public List<AppFilterChain> getFilterChains() {
         return filterChains;
     }
 
-    /**
-     * Used (internally) to specify a validation strategy for the filters in each
-     * configured chain.
-     *
-     * @param filterChainValidator the validator instance which will be invoked on during
-     *                             initialization to check the {@code FilterChainProxy} instance.
-     */
-    public void setFilterChainValidator(AppFilterChainProxy.FilterChainValidator filterChainValidator) {
+    public void setFilterChainValidator(FilterChainValidator filterChainValidator) {
         this.filterChainValidator = filterChainValidator;
     }
 
