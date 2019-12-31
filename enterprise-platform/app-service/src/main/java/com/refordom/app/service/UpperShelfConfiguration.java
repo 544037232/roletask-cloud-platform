@@ -4,7 +4,6 @@ import com.refordom.app.config.AppRequestConfigurerAdapter;
 import com.refordom.app.config.core.AppAction;
 import com.refordom.app.service.constant.ActionConstant;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.AntPathMatcher;
 
 /**
  * @author pricess.wang
@@ -20,9 +19,4 @@ public class UpperShelfConfiguration extends AppRequestConfigurerAdapter {
                 .paramsCheck();
     }
 
-    public static void main(String[] args) {
-        AntPathMatcher antPathMatcher = new AntPathMatcher();
-
-        System.err.println(antPathMatcher.match("/app/store/*","/app/store/upperShelf"));
-    }
 }
