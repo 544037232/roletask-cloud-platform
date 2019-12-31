@@ -1,6 +1,6 @@
 package com.refordom.app.config;
 
-import com.refordom.app.model.AppDetails;
+import com.refordom.app.core.AppDetails;
 
 /**
  * @author pricess.wang

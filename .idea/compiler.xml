@@ -23,6 +23,7 @@
         <module name="app-developer" />
         <module name="app-config" />
         <module name="enterprise-platform-server" />
+        <module name="app-core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -1,7 +1,7 @@
 package com.refordom.app.config;
 
-import com.refordom.app.config.core.AppContextHolder;
 import com.refordom.app.config.util.RequestUtils;
+import com.refordom.app.core.AppContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 

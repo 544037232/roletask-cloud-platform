@@ -1,4 +1,4 @@
-package com.refordom.app.model.enums;
+package com.refordom.app.core;
 
 /**
  * 应用类型枚举，需要对应用进行管理，可在此处扩展

@@ -2,7 +2,7 @@ package com.refordom.app.model.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.refordom.app.model.AppDetails;
+import com.refordom.app.core.AppDetails;
 import com.refordom.app.model.dao.AppDao;
 import com.refordom.app.model.entity.App;
 import com.refordom.app.model.service.AppService;

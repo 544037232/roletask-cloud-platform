@@ -1,7 +1,7 @@
 package com.refordom.app.config.provisioning;
 
 import com.refordom.app.config.manager.ModelManagerBuilder;
-import com.refordom.app.model.AppDetails;
+import com.refordom.app.core.AppDetails;
 import com.refordom.app.model.AppDetailsManagerService;
 
 import java.util.Map;

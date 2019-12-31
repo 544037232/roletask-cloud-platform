@@ -14,6 +14,8 @@
     <version>1.0.0.0</version>
 
     <modules>
+        <!-- 应用核心模块 -->
+        <module>app-core</module>
         <!-- 应用模型，包含客户应用环境，业务应用，科目应用 -->
         <module>app-model</module>
         <!-- 应用商店 -->

@@ -16,5 +16,10 @@
             <groupId>com.refordom</groupId>
             <artifactId>cloud-common-data-security</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.refordom</groupId>
+            <artifactId>app-core</artifactId>
+            <version>${roletask.version}</version>
+        </dependency>
     </dependencies>
 </project>

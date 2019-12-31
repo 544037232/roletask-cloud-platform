@@ -2,8 +2,8 @@ package com.refordom.app.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.refordom.app.model.AppDetails;
-import com.refordom.app.model.enums.AppEnum;
+import com.refordom.app.core.AppDetails;
+import com.refordom.app.core.AppEnum;
 import com.refordom.common.data.BaseModel;
 import lombok.Builder;
 import lombok.Data;

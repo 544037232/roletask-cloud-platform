@@ -1,8 +1,10 @@
-package com.refordom.app.config.core;
+package com.refordom.app.core;
 
 import org.springframework.util.Assert;
 
 /**
+ * 本地线程上下文执行策略
+ *
  * @author pricess.wang
  * @date 2019/12/19 15:28
  */

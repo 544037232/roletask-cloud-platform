@@ -1,7 +1,7 @@
 package com.refordom.app.config;
 
-import com.refordom.app.model.AppDetails;
-import com.refordom.app.model.enums.AppEnum;
+import com.refordom.app.core.AppDetails;
+import com.refordom.app.core.AppEnum;
 
 /**
  * @author pricess.wang

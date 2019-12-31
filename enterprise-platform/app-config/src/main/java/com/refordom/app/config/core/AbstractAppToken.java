@@ -1,10 +1,11 @@
 package com.refordom.app.config.core;
 
 import com.refordom.app.config.AppToken;
-import com.refordom.app.model.AppDetails;
+import com.refordom.app.core.AppContextHolder;
+import com.refordom.app.core.AppDetails;
 import com.refordom.app.config.constant.AppConstant;
 import com.refordom.app.config.exception.AppContextException;
-import com.refordom.app.model.enums.AppEnum;
+import com.refordom.app.core.AppEnum;
 
 import javax.servlet.http.HttpServletRequest;
 

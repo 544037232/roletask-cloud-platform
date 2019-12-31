@@ -1,5 +1,7 @@
 package com.refordom.app.model;
 
+import com.refordom.app.core.AppDetails;
+
 import java.io.Serializable;
 
 /**

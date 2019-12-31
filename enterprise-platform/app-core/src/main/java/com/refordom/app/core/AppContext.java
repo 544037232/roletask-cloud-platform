@@ -1,10 +1,10 @@
-package com.refordom.app.config.core;
-
-import com.refordom.app.model.AppDetails;
+package com.refordom.app.core;
 
 import java.io.Serializable;
 
 /**
+ * 应用上下文，获取应用详情，为上下文设定应用详情，在请求执行完成后自动清空
+ *
  * @author pricess.wang
  * @date 2019/12/19 15:24
  */

@@ -2,7 +2,7 @@ package com.refordom.app.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.refordom.app.model.enums.AppEnum;
+import com.refordom.app.core.AppEnum;
 import com.refordom.common.data.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

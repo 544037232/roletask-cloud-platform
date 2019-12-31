@@ -1,10 +1,15 @@
-package com.refordom.app.config.core;
+package com.refordom.app.core;
 
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Constructor;
 
+/**
+ * 应用上下文执行器，默认使用threadLocal
+ * @author pricess.wang
+ * @date 2019/12/31
+ */
 public class AppContextHolder {
 
 	public static final String MODE_THREADLOCAL = "MODE_THREADLOCAL";
