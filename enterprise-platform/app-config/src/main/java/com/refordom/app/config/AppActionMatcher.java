@@ -1,5 +1,7 @@
 package com.refordom.app.config;
 
+import com.refordom.app.config.constant.AppConstant;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -16,6 +18,11 @@ public final class AppActionMatcher implements AppRequestMatcher {
 
     @Override
     public boolean matches(HttpServletRequest request) {
-        return request.getRequestURI().toUpperCase().contains(action.toUpperCase());
+        return request.getRequestURI()
+                .equals(
+                        AppConstant.APP_URL_PATTERNS
+                                .replace("*","")
+                                .concat(action)
+                );
     }
 }
