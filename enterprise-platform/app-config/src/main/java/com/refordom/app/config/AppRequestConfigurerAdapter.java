@@ -2,7 +2,7 @@ package com.refordom.app.config;
 
 import com.refordom.app.config.core.AppAction;
 import com.refordom.app.config.core.AppRequest;
-import com.refordom.app.model.AppDetailsManager;
+import com.refordom.app.config.manager.AppManager;
 import com.refordom.common.builder.ObjectPostProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -19,6 +19,8 @@ public class AppRequestConfigurerAdapter implements AppRequestConfigurer<AppRequ
     private AppAction appAction;
 
     private ApplicationContext context;
+
+    private AppManager appManager;
 
     private ObjectPostProcessor<Object> objectPostProcessor = new ObjectPostProcessor<Object>() {
         public <T> T postProcess(T object) {
@@ -42,7 +44,7 @@ public class AppRequestConfigurerAdapter implements AppRequestConfigurer<AppRequ
         }
         Map<Class<?>, Object> sharedObjects = createSharedObjects();
 
-        appAction = new AppAction(objectPostProcessor,sharedObjects);
+        appAction = new AppAction(objectPostProcessor, sharedObjects);
 
         appAction
                 .paramsCheck();
@@ -55,16 +57,14 @@ public class AppRequestConfigurerAdapter implements AppRequestConfigurer<AppRequ
     private Map<Class<?>, Object> createSharedObjects() {
         Map<Class<?>, Object> sharedObjects = new HashMap<>();
         sharedObjects.put(ApplicationContext.class, context);
-        sharedObjects.put(AppDetailsManager.class, context.getBean(AppDetailsManager.class));
-//        sharedObjects.put(AppReleaseManager.class, context.getBean(AppReleaseManager.class));
-//        sharedObjects.put(AppRunningManager.class, context.getBean(AppRunningManager.class));
-//        sharedObjects.put(AppHistoryManager.class, context.getBean(AppHistoryManager.class));
+        sharedObjects.put(AppManager.class, appManager);
         return sharedObjects;
     }
 
     @Autowired
-    public void setApplicationContext(ApplicationContext context) {
+    public void setApplicationContext(ApplicationContext context, AppManager appManager) {
         this.context = context;
+        this.appManager = appManager;
     }
 
     protected void configure(AppAction appAction) throws Exception {

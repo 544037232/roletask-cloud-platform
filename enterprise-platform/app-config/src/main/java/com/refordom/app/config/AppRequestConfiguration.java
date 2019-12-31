@@ -10,6 +10,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 
 import javax.servlet.Filter;
 import java.util.Collections;
@@ -22,6 +23,7 @@ import java.util.List;
  * @date 2019/12/13 18:20
  */
 @ComponentScan("com.refordom.app.*")
+@Import({AppConfiguration.class})
 public class AppRequestConfiguration {
 
     private AppRequest appRequest;

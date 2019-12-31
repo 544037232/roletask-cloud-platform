@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * 应用历史,记录应用发布和客户端下载运行的历史
+ * 应用历史,记录应用发布和的历史
  *
  * @author pricess.wang
  * @date 2019/12/10 19:35

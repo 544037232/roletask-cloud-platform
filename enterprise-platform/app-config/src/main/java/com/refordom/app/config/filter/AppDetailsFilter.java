@@ -3,8 +3,8 @@ package com.refordom.app.config.filter;
 import com.refordom.app.config.constant.AppConstant;
 import com.refordom.app.config.core.AppContextHolder;
 import com.refordom.app.config.exception.DeprecatedException;
+import com.refordom.app.config.manager.AppManager;
 import com.refordom.app.model.AppDetails;
-import com.refordom.app.model.AppDetailsManager;
 import com.refordom.app.model.enums.AppEnum;
 
 import javax.servlet.*;
@@ -16,10 +16,10 @@ import java.io.IOException;
  */
 public class AppDetailsFilter implements Filter {
 
-    private AppDetailsManager appModelManager;
+    private AppManager appManager;
 
-    public AppDetailsFilter(AppDetailsManager appModelManager) {
-        this.appModelManager = appModelManager;
+    public AppDetailsFilter(AppManager appManager) {
+        this.appManager = appManager;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class AppDetailsFilter implements Filter {
             throw new DeprecatedException("不支持的应用类型");
         }
         // 获取模型，并设置到上下文
-        AppDetails appDetails = appModelManager.getApp(appId);
+        AppDetails appDetails = appManager.getAppDetailsManagerService().getApp(appId);
 
         AppContextHolder.getContext().setAppDetails(appDetails);
 

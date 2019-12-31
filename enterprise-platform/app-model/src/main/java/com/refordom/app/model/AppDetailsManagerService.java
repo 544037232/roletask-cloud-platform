@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author pricess.wang
  * @date 2019/12/19 19:06
  */
-public interface AppDetailsManager extends Serializable {
+public interface AppDetailsManagerService extends Serializable {
 
     /**
      * 根据应用ID和应用类型获取应用模型

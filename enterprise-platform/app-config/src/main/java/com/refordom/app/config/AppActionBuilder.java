@@ -1,6 +1,5 @@
 package com.refordom.app.config;
 
-import com.refordom.app.config.core.AbstractAppPrimaryFilter;
 import com.refordom.app.config.filter.DefaultAppFilterChain;
 import com.refordom.common.builder.ObjectBuilder;
 import com.refordom.common.builder.ObjectConfigurer;

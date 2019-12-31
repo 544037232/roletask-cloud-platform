@@ -3,7 +3,7 @@ package com.refordom.app.config.configurer;
 import com.refordom.app.config.AppActionBuilder;
 import com.refordom.app.config.filter.AppDetailsFilter;
 import com.refordom.app.config.filter.ParamsEmptyCheckFilter;
-import com.refordom.app.model.AppDetailsManager;
+import com.refordom.app.config.manager.AppManager;
 
 /**
  * @author pricess.wang
@@ -17,7 +17,7 @@ public final class ActionParamsCheckConfigurer<H extends AppActionBuilder<H>>
     @Override
     public final void init(H builder) throws Exception {
         builder.addFilter(paramsEmptyCheckFilter)
-                .addFilter(new AppDetailsFilter(builder.getSharedObject(AppDetailsManager.class)));
+                .addFilter(new AppDetailsFilter(builder.getSharedObject(AppManager.class)));
         initDefaultParamsCheck();
     }
 

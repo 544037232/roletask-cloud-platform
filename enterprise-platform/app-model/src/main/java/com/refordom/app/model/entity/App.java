@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.refordom.app.model.AppDetails;
 import com.refordom.app.model.enums.AppEnum;
 import com.refordom.common.data.BaseModel;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -17,6 +18,7 @@ import lombok.ToString;
 @TableName("app")
 @Data
 @ToString
+@Builder
 public class App extends BaseModel<App> implements AppDetails {
 
     @TableId
