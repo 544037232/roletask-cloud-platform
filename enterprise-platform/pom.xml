@@ -26,5 +26,7 @@
         <module>app-api</module>
         <!-- 应用接口配置 -->
         <module>app-config</module>
+        <!-- 应用服务接口  -->
+        <module>app-service</module>
     </modules>
 </project>

@@ -1,9 +1,9 @@
 package com.refordom.app.config.core;
 
 import com.refordom.app.config.AppToken;
+import com.refordom.app.core.constant.ParamConstant;
 import com.refordom.app.core.AppContextHolder;
 import com.refordom.app.core.AppDetails;
-import com.refordom.app.config.constant.AppConstant;
 import com.refordom.app.config.exception.AppContextException;
 import com.refordom.app.core.AppEnum;
 
@@ -28,13 +28,13 @@ public abstract class AbstractAppToken implements AppToken {
     }
 
     private String cutToAppType(HttpServletRequest request) {
-        String appType = request.getParameter(AppConstant.PARAM_APP_TYPE);
+        String appType = request.getParameter(ParamConstant.PARAM_APP_TYPE);
 
         return appType.toUpperCase();
     }
 
     private String cutToToken(HttpServletRequest request) {
-        String token = request.getHeader(AppConstant.PARAM_ACCESS_TOKEN);
+        String token = request.getHeader(ParamConstant.PARAM_ACCESS_TOKEN);
 
         if (!token.startsWith("bearer ")) {
             throw new AppContextException("");

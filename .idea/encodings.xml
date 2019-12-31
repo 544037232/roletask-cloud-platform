@@ -41,6 +41,8 @@
     <file url="file://$PROJECT_DIR$/enterprise-platform/app-developer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/enterprise-platform/app-model/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/enterprise-platform/app-model/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/enterprise-platform/app-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/enterprise-platform/app-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/enterprise-platform/app-store/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/enterprise-platform/app-store/src/main/resources" charset="UTF-8" />
   </component>

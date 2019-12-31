@@ -24,12 +24,7 @@
 
         <dependency>
             <groupId>com.refordom</groupId>
-            <artifactId>app-model</artifactId>
-            <version>${roletask.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.refordom</groupId>
-            <artifactId>app-config</artifactId>
+            <artifactId>app-service</artifactId>
             <version>${roletask.version}</version>
         </dependency>
 

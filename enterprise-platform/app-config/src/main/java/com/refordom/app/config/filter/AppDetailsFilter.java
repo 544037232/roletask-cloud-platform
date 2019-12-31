@@ -1,6 +1,6 @@
 package com.refordom.app.config.filter;
 
-import com.refordom.app.config.constant.AppConstant;
+import com.refordom.app.core.constant.ParamConstant;
 import com.refordom.app.config.exception.DeprecatedException;
 import com.refordom.app.config.manager.AppManager;
 import com.refordom.app.core.AppContextHolder;
@@ -25,9 +25,9 @@ public class AppDetailsFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        String appId = request.getParameter(AppConstant.PARAM_APP_ID);
+        String appId = request.getParameter(ParamConstant.PARAM_APP_ID);
 
-        AppEnum appType = AppEnum.valuesOf(request.getParameter(AppConstant.PARAM_APP_TYPE).toUpperCase());
+        AppEnum appType = AppEnum.valuesOfBean(request.getParameter(ParamConstant.PARAM_APP_TYPE).toUpperCase());
 
         if (appType == null) {
             throw new DeprecatedException("不支持的应用类型");

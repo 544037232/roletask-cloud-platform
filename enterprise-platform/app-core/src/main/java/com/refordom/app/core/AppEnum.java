@@ -28,9 +28,9 @@ public enum AppEnum {
      */
     THIRD_PARTY;
 
-    public static AppEnum valuesOf(String name) {
+    public static AppEnum valuesOfBean(String name) {
         for (AppEnum appEnum : AppEnum.values()) {
-            if (appEnum.name().equals(name)) {
+            if (appEnum.name().equalsIgnoreCase(name)) {
                 return appEnum;
             }
         }
