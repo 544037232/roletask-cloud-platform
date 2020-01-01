@@ -2,6 +2,7 @@ package com.refordom.app.config;
 
 import com.refordom.app.core.AppDetails;
 import com.refordom.app.core.AppEnum;
+import com.refordom.app.core.validator.ParamBean;
 
 /**
  * @author pricess.wang
@@ -14,4 +15,6 @@ public interface AppToken {
     String getAccessToken();
 
     AppEnum getAppType();
+
+    ParamBean getParamBean();
 }

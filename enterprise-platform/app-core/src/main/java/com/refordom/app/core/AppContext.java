@@ -1,5 +1,7 @@
 package com.refordom.app.core;
 
+import com.refordom.app.core.validator.ParamBean;
+
 import java.io.Serializable;
 
 /**
@@ -13,4 +15,8 @@ public interface AppContext extends Serializable {
     AppDetails getAppDetails();
 
     void setAppDetails(AppDetails appDetails);
+
+    ParamBean getParamBean();
+
+    void setParamBean(ParamBean paramBean);
 }

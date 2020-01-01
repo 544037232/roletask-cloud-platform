@@ -1,9 +1,7 @@
 package com.refordom.app.config.filter;
 
-import com.refordom.app.core.validator.ActionParamParser;
-import com.refordom.app.core.validator.ActionValidator;
-import com.refordom.app.core.validator.DefaultActionValidator;
-import com.refordom.app.core.validator.ValidatorResult;
+import com.refordom.app.core.AppContextHolder;
+import com.refordom.app.core.validator.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -30,7 +28,9 @@ public class ParamsCheckFilter extends GenericFilterBean {
 
         HttpServletRequest request = (HttpServletRequest) req;
 
-        ValidatorResult validatorResult = actionValidator.validate(actionParamParser.build(request));
+        ParamBean paramBean = actionParamParser.build(request);
+
+        ValidatorResult validatorResult = actionValidator.validate(paramBean);
 
         if (validatorResult != null) {
             HttpServletResponse response = (HttpServletResponse) rep;
@@ -39,6 +39,9 @@ public class ParamsCheckFilter extends GenericFilterBean {
             response.getWriter().write(validatorResult.getErrorMsg());
             return;
         }
+
+        AppContextHolder.getContext().setParamBean(paramBean);
+
         chain.doFilter(req, rep);
     }
 

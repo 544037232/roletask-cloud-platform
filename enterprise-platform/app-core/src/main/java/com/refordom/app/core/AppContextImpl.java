@@ -1,5 +1,7 @@
 package com.refordom.app.core;
 
+import com.refordom.app.core.validator.ParamBean;
+
 import java.util.Objects;
 
 public class AppContextImpl implements AppContext {
@@ -10,6 +12,8 @@ public class AppContextImpl implements AppContext {
     // ================================================================================================
 
     private AppDetails appDetails;
+
+    private ParamBean paramBean;
 
     // ~ Methods
     // ========================================================================================================
@@ -50,5 +54,15 @@ public class AppContextImpl implements AppContext {
     @Override
     public void setAppDetails(AppDetails appDetails) {
         this.appDetails = appDetails;
+    }
+
+    @Override
+    public ParamBean getParamBean() {
+        return paramBean;
+    }
+
+    @Override
+    public void setParamBean(ParamBean paramBean) {
+        this.paramBean = paramBean;
     }
 }

@@ -2,6 +2,7 @@ package com.refordom.app.config.core;
 
 import com.refordom.app.config.*;
 import com.refordom.app.config.configurer.ActionParamsCheckConfigurer;
+import com.refordom.app.config.exception.DeprecatedException;
 import com.refordom.app.config.filter.DefaultAppFilterChain;
 import com.refordom.app.config.filter.StandardAppPrimaryFilter;
 import com.refordom.common.builder.AbstractConfiguredObjectBuilder;
@@ -77,10 +78,9 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
     @Override
     public AppAction addFilter(Filter filter) {
         if (filter instanceof AbstractAppPrimaryFilter) {
-            this.primaryFilter = (AbstractAppPrimaryFilter) filter;
-        } else {
-            this.filters.add(filter);
+            throw new DeprecatedException("this primary is readonly");
         }
+        this.filters.add(filter);
         return this;
     }
 }

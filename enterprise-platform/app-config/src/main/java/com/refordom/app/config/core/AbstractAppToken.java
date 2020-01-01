@@ -6,6 +6,7 @@ import com.refordom.app.core.AppContextHolder;
 import com.refordom.app.core.AppDetails;
 import com.refordom.app.config.exception.AppContextException;
 import com.refordom.app.core.AppEnum;
+import com.refordom.app.core.validator.ParamBean;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,10 +22,13 @@ public abstract class AbstractAppToken implements AppToken {
 
     private AppEnum appType;
 
+    private ParamBean paramBean;
+
     public AbstractAppToken(HttpServletRequest request) {
         this.accessToken = cutToToken(request);
         this.appType = AppEnum.valueOf(cutToAppType(request));
         this.appDetails = AppContextHolder.getContext().getAppDetails();
+        this.paramBean = AppContextHolder.getContext().getParamBean();
     }
 
     private String cutToAppType(HttpServletRequest request) {
@@ -40,6 +44,11 @@ public abstract class AbstractAppToken implements AppToken {
             throw new AppContextException("");
         }
         return token.substring(7);
+    }
+
+    @Override
+    public ParamBean getParamBean() {
+        return paramBean;
     }
 
     @Override
