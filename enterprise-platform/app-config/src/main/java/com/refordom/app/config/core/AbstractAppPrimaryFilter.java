@@ -1,7 +1,7 @@
 package com.refordom.app.config.core;
 
+import com.refordom.app.config.AppServiceProvider;
 import com.refordom.app.config.AppToken;
-import com.refordom.app.config.AppProvider;
 import com.refordom.app.config.event.FilterSuccessEvent;
 import com.refordom.app.config.exception.AppContextException;
 import com.refordom.app.config.handler.AppFailureHandler;
@@ -33,7 +33,7 @@ public abstract class AbstractAppPrimaryFilter implements Filter, ApplicationEve
 
     private AppFailureHandler failureHandler = new AppNullFailureHandler();
 
-    private List<AppProvider> providers = Collections.emptyList();
+    private List<AppServiceProvider> serviceProviders = Collections.emptyList();
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse rep, FilterChain chain) throws IOException, ServletException {
@@ -47,7 +47,7 @@ public abstract class AbstractAppPrimaryFilter implements Filter, ApplicationEve
         try {
             appToken = onContext(request, response);
 
-            for (AppProvider provider : providers) {
+            for (AppServiceProvider provider : serviceProviders) {
 
                 if (provider.supports(appToken.getClass())) {
                     provider.provider(appToken);
@@ -90,8 +90,8 @@ public abstract class AbstractAppPrimaryFilter implements Filter, ApplicationEve
         this.failureHandler = failureHandler;
     }
 
-    public void setProviders(List<AppProvider> providers) {
-        this.providers = providers;
+    public void setProviders(List<AppServiceProvider> serviceProviders) {
+        this.serviceProviders = serviceProviders;
     }
 
     @Override

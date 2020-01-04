@@ -1,10 +1,11 @@
 package com.refordom.app.core.validator;
 
 import com.refordom.app.core.AppEnum;
+import com.refordom.app.core.constant.ParamConstant;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -14,7 +15,6 @@ import javax.validation.constraints.NotNull;
  */
 @ToString
 @Getter
-@Setter
 public class DefaultParamBean implements ParamBean {
 
     @NotBlank
@@ -22,5 +22,14 @@ public class DefaultParamBean implements ParamBean {
 
     @NotNull
     private AppEnum appType;
+
+    public DefaultParamBean(HttpServletRequest request) {
+        String appId = request.getParameter(ParamConstant.PARAM_APP_ID);
+
+        String appType = request.getParameter(ParamConstant.PARAM_APP_TYPE);
+
+        this.appId = appId;
+        this.appType = AppEnum.valuesOfBean(appType);
+    }
 
 }

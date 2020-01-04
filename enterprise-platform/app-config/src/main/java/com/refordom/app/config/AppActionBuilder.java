@@ -25,5 +25,11 @@ public interface AppActionBuilder<H extends AppActionBuilder<H>> extends
 
     H addFilter(Filter filter);
 
-    H addProvider(AppProvider appProvider);
+    H addFilterAfter(Filter filter, Class<? extends Filter> afterFilter);
+
+    H addFilterBefore(Filter filter, Class<? extends Filter> beforeFilter);
+
+    H addServiceProvider(AppServiceProvider appProvider);
+
+    H addStoreProvider(AppStoreProvider appProvider);
 }

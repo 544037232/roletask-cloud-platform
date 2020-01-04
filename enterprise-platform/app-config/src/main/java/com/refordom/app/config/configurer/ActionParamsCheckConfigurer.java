@@ -11,21 +11,21 @@ import com.refordom.app.core.validator.DefaultActionParamParser;
  * @author pricess.wang
  * @date 2019/12/13 18:50
  */
-public final class ActionParamsCheckConfigurer<H extends AppActionBuilder<H>>
-        extends AbstractAppActionConfigurer<ActionParamsCheckConfigurer<H>, H> {
+public final class ActionParamsCheckConfigurer<B extends AppActionBuilder<B>>
+        extends AbstractAppActionConfigurer<ActionParamsCheckConfigurer<B>, B> {
 
     private final ParamsCheckFilter paramsCheckFilter = new ParamsCheckFilter();
 
     private ActionParamParser actionParamParser = new DefaultActionParamParser();
 
     @Override
-    public final void init(H builder) throws Exception {
+    public final void init(B builder) throws Exception {
         builder.addFilter(paramsCheckFilter)
                 .addFilter(new AppDetailsFilter(builder.getSharedObject(AppManager.class)));
     }
 
     @Override
-    public void configure(H builder) throws Exception {
+    public void configure(B builder) throws Exception {
         paramsCheckFilter.setActionParamParser(actionParamParser);
     }
 
@@ -38,7 +38,8 @@ public final class ActionParamsCheckConfigurer<H extends AppActionBuilder<H>>
      *
      * @param actionParamParser 解析器
      */
-    public void actionParamParser(ActionParamParser actionParamParser) {
+    public ActionParamsCheckConfigurer<B> actionParamParser(ActionParamParser actionParamParser) {
         this.actionParamParser = actionParamParser;
+        return this;
     }
 }

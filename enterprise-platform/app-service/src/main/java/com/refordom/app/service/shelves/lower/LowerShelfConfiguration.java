@@ -1,4 +1,4 @@
-package com.refordom.app.service;
+package com.refordom.app.service.shelves.lower;
 
 import com.refordom.app.config.AppRequestConfigurerAdapter;
 import com.refordom.app.config.core.AppAction;
@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Configuration;
  * @date 2019/12/31 17:24
  */
 @Configuration
-public class UpperShelfConfiguration extends AppRequestConfigurerAdapter {
+public class LowerShelfConfiguration extends AppRequestConfigurerAdapter {
 
     @Override
     protected void configure(AppAction appAction) throws Exception {
         appAction
-                .actionRequestMatcher(ActionConstant.UPPER_SHELF)
+                .actionRequestMatcher(ActionConstant.LOWER_SHELF)
                 .paramsCheck();
     }
 

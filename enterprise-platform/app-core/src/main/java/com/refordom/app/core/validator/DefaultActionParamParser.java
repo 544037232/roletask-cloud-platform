@@ -1,8 +1,5 @@
 package com.refordom.app.core.validator;
 
-import com.refordom.app.core.AppEnum;
-import com.refordom.app.core.constant.ParamConstant;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -16,15 +13,6 @@ public class DefaultActionParamParser implements ActionParamParser {
 
     @Override
     public ParamBean build(HttpServletRequest request) {
-        DefaultParamBean defaultParamBean = new DefaultParamBean();
-
-        String appId = request.getParameter(ParamConstant.PARAM_APP_ID);
-
-        String appType = request.getParameter(ParamConstant.PARAM_APP_TYPE);
-
-        defaultParamBean.setAppId(appId);
-        defaultParamBean.setAppType(AppEnum.valuesOfBean(appType));
-
-        return defaultParamBean;
+        return new DefaultParamBean(request);
     }
 }

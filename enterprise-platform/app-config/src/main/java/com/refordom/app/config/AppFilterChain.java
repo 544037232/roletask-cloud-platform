@@ -15,4 +15,7 @@ public interface AppFilterChain {
     List<Filter> getFilters();
 
     boolean isContinueChainBeforeSuccessfulFilter();
+
+    List<AppStoreProvider> getStoreProviders();
+
 }

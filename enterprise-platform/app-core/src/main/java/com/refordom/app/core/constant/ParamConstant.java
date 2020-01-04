@@ -22,4 +22,9 @@ public interface ParamConstant {
      * 应用类型参数
      */
     String PARAM_APP_TYPE = "app_type";
+
+    /**
+     * 应用单价
+     */
+    String PARAM_APP_PRICE = "price";
 }

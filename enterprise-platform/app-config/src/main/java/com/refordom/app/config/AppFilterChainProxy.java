@@ -86,7 +86,9 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
     private FilterChainDelegator getFilters(HttpServletRequest request) {
         for (AppFilterChain chain : filterChains) {
             if (chain.matches(request)) {
-                return new FilterChainDelegator(chain.getFilters(), chain.isContinueChainBeforeSuccessfulFilter());
+                return new FilterChainDelegator(chain.getFilters(),
+                        chain.getStoreProviders(),
+                        chain.isContinueChainBeforeSuccessfulFilter());
             }
         }
 
@@ -115,13 +117,22 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
 
         private final boolean continueChainBeforeSuccessfulFilter;
 
-        private FilterChainDelegator(List<Filter> filters, boolean continueChainBeforeSuccessfulFilter) {
+        private final List<AppStoreProvider> storeProviders;
+
+        private FilterChainDelegator(List<Filter> filters,
+                                     List<AppStoreProvider> storeProviders,
+                                     boolean continueChainBeforeSuccessfulFilter) {
             this.filters = filters;
+            this.storeProviders = storeProviders;
             this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;
         }
 
         public List<Filter> getFilters() {
             return filters;
+        }
+
+        public List<AppStoreProvider> getStoreProviders() {
+            return storeProviders;
         }
 
         public boolean isContinueChainBeforeSuccessfulFilter() {
@@ -146,6 +157,12 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
                 throws IOException, ServletException {
 
             if (currentPosition == size) {
+
+                for (AppStoreProvider appStoreProvider : filterChainDelegator.getStoreProviders()) {
+                    if (appStoreProvider.supports(null)){
+                        appStoreProvider.provider(null);
+                    }
+                }
 
                 if (!filterChainDelegator.isContinueChainBeforeSuccessfulFilter()) {
                     return;

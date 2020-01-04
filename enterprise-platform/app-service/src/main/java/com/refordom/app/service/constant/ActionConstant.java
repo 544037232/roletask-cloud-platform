@@ -12,4 +12,9 @@ public interface ActionConstant {
      * 上架
      */
     String UPPER_SHELF = "upperShelf";
+
+    /**
+     * 下架
+     */
+    String LOWER_SHELF = "lowerShelf";
 }

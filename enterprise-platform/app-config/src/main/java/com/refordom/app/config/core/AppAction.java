@@ -2,7 +2,6 @@ package com.refordom.app.config.core;
 
 import com.refordom.app.config.*;
 import com.refordom.app.config.configurer.ActionParamsCheckConfigurer;
-import com.refordom.app.config.exception.DeprecatedException;
 import com.refordom.app.config.filter.DefaultAppFilterChain;
 import com.refordom.app.config.filter.StandardAppPrimaryFilter;
 import com.refordom.common.builder.AbstractConfiguredObjectBuilder;
@@ -27,11 +26,15 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
 
     private List<Filter> filters = new ArrayList<>();
 
-    private List<AppProvider> providers = new ArrayList<>();
+    private List<AppServiceProvider> serviceProviders = new ArrayList<>();
+
+    private List<AppStoreProvider> storeProviders = new ArrayList<>();
 
     private AbstractAppPrimaryFilter primaryFilter = new StandardAppPrimaryFilter();
 
     private boolean continueChainBeforeSuccessfulFilter = false;
+
+    private FilterComparator comparator = new FilterComparator();
 
     @SuppressWarnings("unchecked")
     public AppAction(ObjectPostProcessor<Object> objectPostProcessor, Map<Class<?>, Object> sharedObjects) {
@@ -55,9 +58,15 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
             log.warn("this appAction requestMatcher is null matched");
         }
         filters.add(primaryFilter);
-        primaryFilter.setProviders(providers);
+        primaryFilter.setProviders(serviceProviders);
 
-        return new DefaultAppFilterChain(continueChainBeforeSuccessfulFilter, requestMatcher, filters);
+        filters.sort(comparator);
+
+        return new DefaultAppFilterChain(
+                continueChainBeforeSuccessfulFilter,
+                storeProviders,
+                requestMatcher,
+                filters);
     }
 
     public AppAction actionRequestMatcher(String action) {
@@ -66,8 +75,14 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
     }
 
     @Override
-    public AppAction addProvider(AppProvider appProvider) {
-        this.providers.add(appProvider);
+    public AppAction addServiceProvider(AppServiceProvider appProvider) {
+        this.serviceProviders.add(appProvider);
+        return this;
+    }
+
+    @Override
+    public AppAction addStoreProvider(AppStoreProvider appStoreProvider) {
+        this.storeProviders.add(appStoreProvider);
         return this;
     }
 
@@ -78,9 +93,22 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
     @Override
     public AppAction addFilter(Filter filter) {
         if (filter instanceof AbstractAppPrimaryFilter) {
-            throw new DeprecatedException("this primary is readonly");
+            this.primaryFilter = (AbstractAppPrimaryFilter) filter;
+        } else {
+            this.filters.add(filter);
         }
-        this.filters.add(filter);
         return this;
+    }
+
+    @Override
+    public AppAction addFilterAfter(Filter filter, Class<? extends Filter> afterFilter) {
+        comparator.registerAfter(filter.getClass(), afterFilter);
+        return addFilter(filter);
+    }
+
+    @Override
+    public AppAction addFilterBefore(Filter filter, Class<? extends Filter> beforeFilter) {
+        comparator.registerBefore(filter.getClass(), beforeFilter);
+        return addFilter(filter);
     }
 }
