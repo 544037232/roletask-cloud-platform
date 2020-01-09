@@ -35,6 +35,14 @@ public class AppDetailsFilter implements Filter {
         // 获取模型，并设置到上下文
         AppDetails appDetails = appManager.getAppDetailsManagerService().getApp(appId);
 
+        if (appDetails == null) {
+            throw new DeprecatedException("未获取到相关应用");
+        }
+
+        if (!appDetails.getAppType().equals(appType)) {
+            throw new DeprecatedException("获取到的应用与所需的应用类型不一致");
+        }
+
         AppContextHolder.getContext().setAppDetails(appDetails);
 
         chain.doFilter(request, response);

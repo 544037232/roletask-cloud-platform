@@ -14,7 +14,5 @@ public interface AppToken {
 
     String getAccessToken();
 
-    AppEnum getAppType();
-
     ParamBean getParamBean();
 }
