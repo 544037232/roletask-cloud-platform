@@ -14,31 +14,77 @@ import java.util.Map;
  *
  * @author pricess.wang
  * @date 2020/1/2 18:47
- *
  */
 final class FilterComparator implements Comparator<Filter>, Serializable {
 
-    private static final int INITIAL_ORDER = 1;
-
+    private static final int INITIAL_ORDER = 100;
+    private static final int ORDER_STEP = 100;
     private final Map<String, Integer> filterToOrder = new HashMap<>();
 
-    private Integer stepSize;
-
     public FilterComparator() {
-        Step order = new Step(INITIAL_ORDER);
+        Step order = new Step(INITIAL_ORDER, ORDER_STEP);
 
         put(ParamsCheckFilter.class, order.next());
         put(AppDetailsFilter.class, order.next());
         put(AbstractAppPrimaryFilter.class, order.next());
-
-        this.stepSize = filterToOrder.size();
     }
 
     @Override
-    public int compare(Filter o1, Filter o2) {
-        Integer left = getOrder(o1.getClass());
-        Integer right = getOrder(o2.getClass());
+    public int compare(Filter lhs, Filter rhs) {
+        Integer left = getOrder(lhs.getClass());
+        Integer right = getOrder(rhs.getClass());
         return left - right;
+    }
+
+    /**
+     * filter在afterFilter之后
+     *
+     * @param filter      当前需要增加的过滤器
+     * @param afterFilter 比较的过滤器
+     */
+    public void registerAfter(Class<? extends Filter> filter, Class<? extends Filter> afterFilter) {
+        Integer position = getOrder(afterFilter);
+
+        if (position == null) {
+            throw new IllegalArgumentException(
+                    "Cannot register after unregistered Filter " + afterFilter);
+        }
+
+        put(filter, position + 1);
+    }
+
+    /**
+     * filter在beforeFilter之前
+     *
+     * @param filter       当前需要增加的过滤器
+     * @param beforeFilter 比较的过滤器
+     */
+    public void registerBefore(Class<? extends Filter> filter, Class<? extends Filter> beforeFilter) {
+        Integer position = getOrder(beforeFilter);
+
+        if (position == null) {
+            throw new IllegalArgumentException(
+                    "Cannot register after unregistered Filter " + beforeFilter);
+        }
+
+        put(filter, position - 1);
+    }
+
+    /**
+     * filter与atFilter同一个顺序执行
+     *
+     * @param filter   当前需要增加的过滤器
+     * @param atFilter 比较的过滤器
+     */
+    public void registerAt(Class<? extends Filter> filter, Class<? extends Filter> atFilter) {
+
+        Integer position = getOrder(atFilter);
+        if (position == null) {
+            throw new IllegalArgumentException(
+                    "Cannot register after unregistered Filter " + atFilter);
+        }
+
+        put(filter, position);
     }
 
     private void put(Class<? extends Filter> filter, int position) {
@@ -46,51 +92,44 @@ final class FilterComparator implements Comparator<Filter>, Serializable {
         filterToOrder.put(className, position);
     }
 
-    private Integer getOrder(Class<? extends Filter> clazz) {
-        Class<?> delegator = clazz;
-
-        while (delegator != null) {
-            Integer result = filterToOrder.get(delegator.getName());
+    private Integer getOrder(Class<?> clazz) {
+        while (clazz != null) {
+            Integer result = filterToOrder.get(clazz.getName());
             if (result != null) {
                 return result;
             }
-            delegator = delegator.getSuperclass();
+            clazz = clazz.getSuperclass();
         }
-
-        return reOrder(clazz);
+        return null;
     }
 
-    public void registerAfter(Class<? extends Filter> filterClass, Class<? extends Filter> afterFilter) {
-
+    /**
+     * 是否已注册到filter链中
+     *
+     * @param filter 当前需要增加的过滤器
+     * @return boolean
+     */
+    public boolean isRegistered(Class<? extends Filter> filter) {
+        return getOrder(filter) != null;
     }
 
-    public void registerBefore(Class<? extends Filter> filterClass, Class<? extends Filter> beforeFilter) {
-
-    }
-
-    private Integer reOrder(Class<? extends Filter> filterClass) {
-
-        for (int i = 0; i < stepSize; i++) {
-            for (Map.Entry<String, Integer> entry : filterToOrder.entrySet()) {
-
-            }
-        }
-        return 0;
-    }
 
     private static class Step {
 
         private int value;
+        private final int stepSize;
 
-        Step(int initialValue) {
+        Step(int initialValue, int stepSize) {
             this.value = initialValue;
+            this.stepSize = stepSize;
         }
 
         int next() {
             int value = this.value;
-            this.value++;
+            this.value += this.stepSize;
             return value;
         }
 
     }
+
 }

@@ -92,6 +92,14 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
 
     @Override
     public AppAction addFilter(Filter filter) {
+        Class<? extends Filter> filterClass = filter.getClass();
+        if (!comparator.isRegistered(filterClass) && !(filter instanceof AbstractAppPrimaryFilter)) {
+            throw new IllegalArgumentException(
+                    "The Filter class "
+                            + filterClass.getName()
+                            + " does not have a registered order and cannot be added without a specified order. Consider using addFilterBefore or addFilterAfter instead.");
+        }
+
         if (filter instanceof AbstractAppPrimaryFilter) {
             this.primaryFilter = (AbstractAppPrimaryFilter) filter;
         } else {
