@@ -17,6 +17,7 @@ public class UpperShelfConfiguration extends AppRequestConfigurerAdapter {
     @Override
     protected void configure(AppAction appAction) throws Exception {
         appAction
+                .actionName("上架")
                 .actionRequestMatcher(ActionConstant.UPPER_SHELF)
                 .paramsCheck()
                 .actionParamParser(new UpperShelfActionParamParser())

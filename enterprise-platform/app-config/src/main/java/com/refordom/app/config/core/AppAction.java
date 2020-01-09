@@ -22,6 +22,8 @@ import java.util.Map;
 public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterChain, AppAction>
         implements ObjectBuilder<DefaultAppFilterChain>, AppActionBuilder<AppAction> {
 
+    private String actionName;
+
     private AppRequestMatcher requestMatcher = new NullActionMatched();
 
     private List<Filter> filters = new ArrayList<>();
@@ -63,6 +65,7 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
         filters.sort(comparator);
 
         return new DefaultAppFilterChain(
+                actionName,
                 continueChainBeforeSuccessfulFilter,
                 storeProviders,
                 requestMatcher,
@@ -70,6 +73,9 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
     }
 
     public AppAction actionRequestMatcher(String action) {
+        if (actionName == null) {
+            this.actionName = action;
+        }
         this.requestMatcher = new AppActionMatcher(action);
         return this;
     }
@@ -86,8 +92,14 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
         return this;
     }
 
-    public void continueChainBeforeSuccessfulFilter(boolean continueChainBeforeSuccessfulFilter) {
+    public AppAction actionName(String actionName) {
+        this.actionName = actionName;
+        return this;
+    }
+
+    public AppAction continueChainBeforeSuccessfulFilter(boolean continueChainBeforeSuccessfulFilter) {
         this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;
+        return this;
     }
 
     @Override

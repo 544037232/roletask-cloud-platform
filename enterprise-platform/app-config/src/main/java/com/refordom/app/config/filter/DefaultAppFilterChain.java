@@ -3,8 +3,6 @@ package com.refordom.app.config.filter;
 import com.refordom.app.config.AppFilterChain;
 import com.refordom.app.config.AppRequestMatcher;
 import com.refordom.app.config.AppStoreProvider;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +16,6 @@ import java.util.List;
  */
 public class DefaultAppFilterChain implements AppFilterChain {
 
-    private static final Log logger = LogFactory.getLog(DefaultAppFilterChain.class);
-
     private final AppRequestMatcher requestMatcher;
 
     private final List<Filter> filters;
@@ -31,17 +27,21 @@ public class DefaultAppFilterChain implements AppFilterChain {
 
     private final List<AppStoreProvider> storeProviders;
 
-    public DefaultAppFilterChain(boolean continueChainBeforeSuccessfulFilter,
+    private final String actionName;
+
+    public DefaultAppFilterChain(String actionName,
+                                 boolean continueChainBeforeSuccessfulFilter,
                                  List<AppStoreProvider> storeProviders,
                                  AppRequestMatcher requestMatcher, Filter... filters) {
-        this(continueChainBeforeSuccessfulFilter, storeProviders, requestMatcher, Arrays.asList(filters));
+        this(actionName, continueChainBeforeSuccessfulFilter, storeProviders, requestMatcher, Arrays.asList(filters));
     }
 
-    public DefaultAppFilterChain(boolean continueChainBeforeSuccessfulFilter,
+    public DefaultAppFilterChain(String actionName,
+                                 boolean continueChainBeforeSuccessfulFilter,
                                  List<AppStoreProvider> storeProviders,
                                  AppRequestMatcher requestMatcher,
                                  List<Filter> filters) {
-        logger.info("Creating filter chain: " + requestMatcher + ", " + filters);
+        this.actionName = actionName;
         this.storeProviders = storeProviders;
         this.requestMatcher = requestMatcher;
         this.filters = new ArrayList<>(filters);
@@ -58,6 +58,10 @@ public class DefaultAppFilterChain implements AppFilterChain {
 
     public boolean matches(HttpServletRequest request) {
         return requestMatcher.matches(request);
+    }
+
+    public String getActionName() {
+        return actionName;
     }
 
     @Override

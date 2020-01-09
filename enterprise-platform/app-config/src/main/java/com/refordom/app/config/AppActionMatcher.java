@@ -16,7 +16,7 @@ public final class AppActionMatcher implements AppRequestMatcher {
         this.action = action;
     }
 
-    private static final String APP_URL = AppConstant.APP_URL_PATTERNS.replace("*","");
+    private final String APP_URL = AppConstant.APP_URL_PATTERNS.replace("*","");
 
     @Override
     public boolean matches(HttpServletRequest request) {
