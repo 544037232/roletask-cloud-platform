@@ -23,7 +23,8 @@ public class UpperShelfConfiguration extends AppRequestConfigurerAdapter {
                 .actionParamParser(new UpperShelfActionParamParser())
                 .and()
                 .addFilterBefore(new UpperShelfServiceFilter(appAction.getSharedObject(AppManager.class)),
-                        AbstractAppPrimaryFilter.class);
+                        AbstractAppPrimaryFilter.class)
+                .addStoreProvider(new UpperShelfStoreProvider(appAction.getSharedObject(AppManager.class)));
     }
 
 }

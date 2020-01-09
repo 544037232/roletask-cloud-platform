@@ -40,17 +40,17 @@ public class AppDebugFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) srvltRequest;
         HttpServletResponse response = (HttpServletResponse) srvltResponse;
 
-        List<Filter> filters = getFilters(request);
-        logger.info("Request received for " + request.getMethod() + " '"
+        AppFilterChain appFilterChain = getFilters(request);
+
+        logger.info("\nRequest received for " + request.getMethod() + " '"
                 + RequestUtils.buildRequestUrl(request) + "': \n\n"
                 + "servletPath:" + request.getServletPath() + "\n" + "pathInfo:"
                 + request.getPathInfo() + "\n" + "headers: \n" + formatHeaders(request)
-                + "\n\n" + formatFilters(filters));
+                + "\n\n" + formatChains(appFilterChain));
 
         if (request.getAttribute(ALREADY_FILTERED_ATTR_NAME) == null) {
             invokeWithWrappedRequest(request, response, filterChain);
-        }
-        else {
+        } else {
             fcp.doFilter(request, response, filterChain);
         }
     }
@@ -63,16 +63,16 @@ public class AppDebugFilter implements Filter {
         request = new DebugRequestWrapper(request);
         try {
             fcp.doFilter(request, response, filterChain);
-        }
-        finally {
+        } finally {
             request.removeAttribute(ALREADY_FILTERED_ATTR_NAME);
         }
     }
 
-    String formatHeaders(HttpServletRequest request) {
+    private String formatHeaders(HttpServletRequest request) {
         StringBuilder sb = new StringBuilder();
         Enumeration<String> eHeaderNames = request.getHeaderNames();
         while (eHeaderNames.hasMoreElements()) {
+            sb.append(" ");
             String headerName = eHeaderNames.nextElement();
             sb.append(headerName);
             sb.append(": ");
@@ -88,19 +88,28 @@ public class AppDebugFilter implements Filter {
         return sb.toString();
     }
 
-    String formatFilters(List<Filter> filters) {
+    private String formatChains(AppFilterChain appFilterChain) {
         StringBuilder sb = new StringBuilder();
-        sb.append("App filter chain: ");
-        if (filters == null) {
+        sb.append("App chain: ");
+        if (appFilterChain == null) {
             sb.append("no match");
+        } else {
+            sb.append("{\n filter chain: ").append(chainAppend(appFilterChain.getFilters())).append("\n");
+            sb.append("\n store provider chain: ").append(chainAppend(appFilterChain.getStoreProviders())).append("\n");
         }
-        else if (filters.isEmpty()) {
+        sb.append("}");
+        return sb.toString();
+    }
+
+    private <T> String chainAppend(List<T> list) {
+        StringBuilder sb = new StringBuilder();
+
+        if (list == null || list.isEmpty()) {
             sb.append("[] empty (bypassed by app='none') ");
-        }
-        else {
+        } else {
             sb.append("[\n");
-            for (Filter f : filters) {
-                sb.append("  ").append(f.getClass().getSimpleName()).append("\n");
+            for (T t : list) {
+                sb.append("   ").append(t.getClass().getSimpleName()).append("\n");
             }
             sb.append("]");
         }
@@ -108,10 +117,10 @@ public class AppDebugFilter implements Filter {
         return sb.toString();
     }
 
-    private List<Filter> getFilters(HttpServletRequest request) {
+    private AppFilterChain getFilters(HttpServletRequest request) {
         for (AppFilterChain chain : fcp.getFilterChains()) {
             if (chain.matches(request)) {
-                return chain.getFilters();
+                return chain;
             }
         }
 
