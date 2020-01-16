@@ -23,11 +23,11 @@ public class AppDistroServiceImpl extends ServiceImpl<AppDistroDao, AppDistro> i
     @Override
     public void updateDistroAppByAppId(AppDistro appDistro) {
         boolean updateFlag = this.update(appDistro, Wrappers.<AppDistro>update().lambda()
-                .eq(AppDistro::getShelves, false)
+                .eq(AppDistro::getShelves, !appDistro.getShelves())
                 .eq(AppDistro::getAppId, appDistro.getAppId()));
 
         if (!updateFlag) {
-            throw new ConcurrentException("应用已经上架");
+            throw new ConcurrentException(appDistro.getShelves() ? "应用已经上架" : "应用已经下架");
         }
     }
 

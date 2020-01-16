@@ -8,6 +8,8 @@ import com.refordom.app.service.constant.ActionConstant;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 应用上架
+ *
  * @author pricess.wang
  * @date 2019/12/31 17:24
  */
@@ -20,7 +22,7 @@ public class UpperShelfConfiguration extends AppRequestConfigurerAdapter {
                 .actionName("上架")
                 .actionRequestMatcher(ActionConstant.UPPER_SHELF)
                 .paramsCheck()
-                .actionParamParser(new UpperShelfActionParamParser())
+                .actionParamParser(new UpperShelfParamParser())
                 .and()
                 .addFilterBefore(new UpperShelfServiceFilter(appAction.getSharedObject(AppManager.class)),
                         AbstractAppPrimaryFilter.class)

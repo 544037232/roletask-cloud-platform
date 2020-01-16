@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author pricess.wang
  * @date 2019/12/31 19:44
  */
-public class UpperShelfActionParamParser implements ActionParamParser {
+public class UpperShelfParamParser implements ActionParamParser {
 
     @Override
     public ParamBean build(HttpServletRequest request) {

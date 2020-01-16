@@ -17,4 +17,9 @@ public interface ActionConstant {
      * 下架
      */
     String LOWER_SHELF = "lowerShelf";
+
+    /**
+     * 下载
+     */
+    String DOWNLOAD = "download";
 }

@@ -27,4 +27,9 @@ public interface ParamConstant {
      * 应用单价
      */
     String PARAM_APP_PRICE = "price";
+
+    /**
+     * 应用版本号
+     */
+    String PARAM_VERSION = "version";
 }
