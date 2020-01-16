@@ -4,6 +4,8 @@ import com.refordom.app.config.manager.AppManager;
 import com.refordom.app.model.*;
 
 /**
+ * 应用接口管理器，维护应用处理的各个业务接口
+ *
  * @author pricess.wang
  * @date 2019/12/26 19:12
  */

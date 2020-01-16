@@ -3,6 +3,7 @@ package com.refordom.app.core;
 import com.refordom.app.core.validator.ParamBean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 应用上下文，获取应用详情，为上下文设定应用详情，在请求执行完成后自动清空
@@ -19,4 +20,8 @@ public interface AppContext extends Serializable {
     ParamBean getParamBean();
 
     void setParamBean(ParamBean paramBean);
+
+    <T> void addResult(T result);
+
+    <T> List<T> getResult();
 }

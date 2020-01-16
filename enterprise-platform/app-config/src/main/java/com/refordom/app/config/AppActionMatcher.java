@@ -5,6 +5,8 @@ import com.refordom.app.config.constant.AppConstant;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 请求校验器
+ *
  * @author pricess.wang
  * @date 2019/12/13 18:37
  */
@@ -16,7 +18,7 @@ public final class AppActionMatcher implements AppRequestMatcher {
         this.action = action;
     }
 
-    private final String APP_URL = AppConstant.APP_URL_PATTERNS.replace("*","");
+    private final String APP_URL = AppConstant.APP_URL_PATTERNS.replace("*", "");
 
     @Override
     public boolean matches(HttpServletRequest request) {

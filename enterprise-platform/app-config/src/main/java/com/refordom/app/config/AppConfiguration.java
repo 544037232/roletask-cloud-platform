@@ -18,15 +18,15 @@ public class AppConfiguration {
 
         appManagerBuilder
                 .appDetail().jdbc()
-            .and()
+                .and()
                 .distro().jdbc()
-            .and()
+                .and()
                 .running().jdbc()
-            .and()
+                .and()
                 .history().jdbc()
-            .and()
+                .and()
                 .installHistory().jdbc()
-            .and()
+                .and()
                 .madeDistro().jdbc();
 
         return appManagerBuilder.build();

@@ -7,6 +7,8 @@ import com.refordom.common.builder.ObjectConfigurer;
 import javax.servlet.Filter;
 
 /**
+ * 应用请求构建接口
+ *
  * @author pricess.wang
  * @date 2019/12/13 18:48
  */

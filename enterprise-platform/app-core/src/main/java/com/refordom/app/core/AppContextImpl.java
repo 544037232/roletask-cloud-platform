@@ -2,6 +2,8 @@ package com.refordom.app.core;
 
 import com.refordom.app.core.validator.ParamBean;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class AppContextImpl implements AppContext {
@@ -14,6 +16,8 @@ public class AppContextImpl implements AppContext {
     private AppDetails appDetails;
 
     private ParamBean paramBean;
+
+    private List<Object> results = new ArrayList<>();
 
     // ~ Methods
     // ========================================================================================================
@@ -64,5 +68,16 @@ public class AppContextImpl implements AppContext {
     @Override
     public void setParamBean(ParamBean paramBean) {
         this.paramBean = paramBean;
+    }
+
+    @Override
+    public <T> void addResult(T result) {
+        results.add(result);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> List<T> getResult() {
+        return (List<T>) results;
     }
 }

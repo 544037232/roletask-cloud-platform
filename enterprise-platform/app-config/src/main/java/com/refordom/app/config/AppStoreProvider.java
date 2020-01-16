@@ -8,7 +8,7 @@ package com.refordom.app.config;
  */
 public interface AppStoreProvider {
 
-    AppToken provider(AppToken appToken);
+    <T> void provider(T result);
 
-    boolean supports(Class<?> context);
+    boolean supports(Class<?> rst);
 }

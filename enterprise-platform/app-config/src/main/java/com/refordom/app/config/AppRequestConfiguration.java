@@ -11,8 +11,11 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.servlet.Filter;
+import javax.sql.DataSource;
 import java.util.Collections;
 import java.util.List;
 
@@ -60,6 +63,11 @@ public class AppRequestConfiguration {
             appRequest.apply(objectConfigurer);
         }
         this.requestAppStoreConfigurers = requestConfigurers;
+    }
+
+    @Bean(name = AppConstant.APP_TRANSACTION_MANAGER)
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean

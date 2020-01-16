@@ -16,4 +16,8 @@ public interface AppConstant {
      */
     String APP_URL_PATTERNS = "/app/store/*";
 
+    /**
+     * 应用事务管理器
+     */
+    String APP_TRANSACTION_MANAGER = "appTransactionManager";
 }

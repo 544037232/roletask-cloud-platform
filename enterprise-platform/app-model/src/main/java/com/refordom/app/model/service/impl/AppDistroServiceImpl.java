@@ -2,6 +2,7 @@ package com.refordom.app.model.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.refordom.app.model.exception.ConcurrentException;
 import com.refordom.app.model.service.AppDistroService;
 import com.refordom.app.model.dao.AppDistroDao;
 import com.refordom.app.model.entity.AppDistro;
@@ -21,7 +22,13 @@ public class AppDistroServiceImpl extends ServiceImpl<AppDistroDao, AppDistro> i
 
     @Override
     public void updateDistroAppByAppId(AppDistro appDistro) {
-        this.update(appDistro, Wrappers.<AppDistro>update().lambda().eq(AppDistro::getAppId, appDistro.getAppId()));
+        boolean updateFlag = this.update(appDistro, Wrappers.<AppDistro>update().lambda()
+                .eq(AppDistro::getShelves, false)
+                .eq(AppDistro::getAppId, appDistro.getAppId()));
+
+        if (!updateFlag) {
+            throw new ConcurrentException("应用已经上架");
+        }
     }
 
     @Override

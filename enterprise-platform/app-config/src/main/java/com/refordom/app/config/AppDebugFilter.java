@@ -14,6 +14,8 @@ import java.util.Enumeration;
 import java.util.List;
 
 /**
+ * 应用过滤器debug，用于测试调试用，可查看具体执行的filter和顺序已经provider
+ *
  * @author pricess.wang
  * @date 2019/12/13 18:30
  */

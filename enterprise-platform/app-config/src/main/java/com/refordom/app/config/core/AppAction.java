@@ -8,6 +8,7 @@ import com.refordom.common.builder.AbstractConfiguredObjectBuilder;
 import com.refordom.common.builder.ObjectBuilder;
 import com.refordom.common.builder.ObjectPostProcessor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.servlet.Filter;
 import java.util.ArrayList;
@@ -67,6 +68,7 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
         return new DefaultAppFilterChain(
                 actionName,
                 continueChainBeforeSuccessfulFilter,
+                this.getSharedObject(PlatformTransactionManager.class),
                 storeProviders,
                 requestMatcher,
                 filters);

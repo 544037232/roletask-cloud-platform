@@ -1,7 +1,6 @@
 package com.refordom.app.service.shelves.upper;
 
 import com.refordom.app.config.AppStoreProvider;
-import com.refordom.app.config.AppToken;
 import com.refordom.app.config.manager.AppManager;
 import com.refordom.app.model.entity.AppDistro;
 
@@ -18,15 +17,15 @@ public class UpperShelfStoreProvider implements AppStoreProvider {
     }
 
     @Override
-    public AppToken provider(AppToken appToken) {
-        AppDistro appDistro = (AppDistro) appToken;
+    public <T> void provider(T result) {
+        AppDistro appDistro = (AppDistro) result;
         appDistro.setShelves(true);
         appManager.getAppDistroManagerService().updateDistroAppByAppId(appDistro);
-        return appToken;
     }
 
     @Override
-    public boolean supports(Class<?> context) {
-        return true;
+    public boolean supports(Class<?> rst) {
+        return AppDistro.class.isAssignableFrom(rst);
     }
+
 }

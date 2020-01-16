@@ -34,6 +34,9 @@ public class UpperShelfServiceFilter extends GenericFilter {
         if (appDistro.getShelves()) {
             throw new AppContextException("应用已经上架");
         }
+
+        AppContextHolder.getContext().addResult(appDistro);
+
         chain.doFilter(request, response);
     }
 }

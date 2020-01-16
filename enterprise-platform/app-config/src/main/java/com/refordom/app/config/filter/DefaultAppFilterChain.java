@@ -3,6 +3,7 @@ package com.refordom.app.config.filter;
 import com.refordom.app.config.AppFilterChain;
 import com.refordom.app.config.AppRequestMatcher;
 import com.refordom.app.config.AppStoreProvider;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
@@ -29,19 +30,24 @@ public class DefaultAppFilterChain implements AppFilterChain {
 
     private final String actionName;
 
+    private final PlatformTransactionManager transactionManager;
+
     public DefaultAppFilterChain(String actionName,
                                  boolean continueChainBeforeSuccessfulFilter,
+                                 PlatformTransactionManager transactionManager,
                                  List<AppStoreProvider> storeProviders,
                                  AppRequestMatcher requestMatcher, Filter... filters) {
-        this(actionName, continueChainBeforeSuccessfulFilter, storeProviders, requestMatcher, Arrays.asList(filters));
+        this(actionName, continueChainBeforeSuccessfulFilter, transactionManager, storeProviders, requestMatcher, Arrays.asList(filters));
     }
 
     public DefaultAppFilterChain(String actionName,
                                  boolean continueChainBeforeSuccessfulFilter,
+                                 PlatformTransactionManager transactionManager,
                                  List<AppStoreProvider> storeProviders,
                                  AppRequestMatcher requestMatcher,
                                  List<Filter> filters) {
         this.actionName = actionName;
+        this.transactionManager = transactionManager;
         this.storeProviders = storeProviders;
         this.requestMatcher = requestMatcher;
         this.filters = new ArrayList<>(filters);
@@ -72,6 +78,11 @@ public class DefaultAppFilterChain implements AppFilterChain {
     @Override
     public List<AppStoreProvider> getStoreProviders() {
         return storeProviders;
+    }
+
+    @Override
+    public PlatformTransactionManager getTransactionManager() {
+        return transactionManager;
     }
 
     @Override

@@ -4,6 +4,9 @@ import com.refordom.app.config.util.RequestUtils;
 import com.refordom.app.core.AppContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +15,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * 应用执行代理
+ *
  * @author pricess.wang
  * @date 2019/12/12 17:02
  */
@@ -24,6 +29,9 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
     private final List<AppFilterChain> filterChains;
 
     private FilterChainValidator filterChainValidator = new NullFilterChainValidator();
+
+    //设置事务的传播机制
+    private DefaultTransactionDefinition transDefinition = new DefaultTransactionDefinition(DefaultTransactionDefinition.PROPAGATION_REQUIRES_NEW);
 
     // ~ Methods
     // ========================================================================================================
@@ -79,16 +87,14 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
             return;
         }
 
-        VirtualFilterChain vfc = new VirtualFilterChain(chain, filterChainDelegator);
+        VirtualFilterChain vfc = new VirtualFilterChain(chain, filterChainDelegator, transDefinition);
         vfc.doFilter(request, response);
     }
 
     private FilterChainDelegator getFilters(HttpServletRequest request) {
         for (AppFilterChain chain : filterChains) {
             if (chain.matches(request)) {
-                return new FilterChainDelegator(chain.getFilters(),
-                        chain.getStoreProviders(),
-                        chain.isContinueChainBeforeSuccessfulFilter());
+                return new FilterChainDelegator(chain);
             }
         }
 
@@ -119,12 +125,17 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
 
         private final List<AppStoreProvider> storeProviders;
 
-        private FilterChainDelegator(List<Filter> filters,
-                                     List<AppStoreProvider> storeProviders,
-                                     boolean continueChainBeforeSuccessfulFilter) {
-            this.filters = filters;
-            this.storeProviders = storeProviders;
-            this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;
+        private final PlatformTransactionManager transactionManager;
+
+        private FilterChainDelegator(AppFilterChain appFilterChain) {
+            this.filters = appFilterChain.getFilters();
+            this.storeProviders = appFilterChain.getStoreProviders();
+            this.continueChainBeforeSuccessfulFilter = appFilterChain.isContinueChainBeforeSuccessfulFilter();
+            this.transactionManager = appFilterChain.getTransactionManager();
+        }
+
+        public PlatformTransactionManager getTransactionManager() {
+            return transactionManager;
         }
 
         public List<Filter> getFilters() {
@@ -146,10 +157,13 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
         private final FilterChainDelegator filterChainDelegator;
         private int currentPosition = 0;
 
-        private VirtualFilterChain(FilterChain chain, FilterChainDelegator filterChainDelegator) {
+        private DefaultTransactionDefinition transDefinition;
+
+        private VirtualFilterChain(FilterChain chain, FilterChainDelegator filterChainDelegator, DefaultTransactionDefinition transDefinition) {
             this.originalChain = chain;
             this.filterChainDelegator = filterChainDelegator;
             this.size = filterChainDelegator.getFilters().size();
+            this.transDefinition = transDefinition;
         }
 
         @Override
@@ -158,10 +172,22 @@ public class AppFilterChainProxy implements Filter, InitializingBean {
 
             if (currentPosition == size) {
 
-                for (AppStoreProvider appStoreProvider : filterChainDelegator.getStoreProviders()) {
-                    if (appStoreProvider.supports(null)){
-                        appStoreProvider.provider(null);
+                TransactionStatus transStatus = filterChainDelegator.getTransactionManager().getTransaction(transDefinition);
+
+                try {
+                    for (AppStoreProvider appStoreProvider : filterChainDelegator.getStoreProviders()) {
+
+                        AppContextHolder.getContext().getResult().stream()
+                                .filter(t -> appStoreProvider.supports(t.getClass()))
+                                .forEach(appStoreProvider::provider);
                     }
+
+                    filterChainDelegator.getTransactionManager().commit(transStatus);
+
+                } catch (Exception e) {
+
+                    filterChainDelegator.getTransactionManager().rollback(transStatus);
+                    throw e;
                 }
 
                 if (!filterChainDelegator.isContinueChainBeforeSuccessfulFilter()) {
