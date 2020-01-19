@@ -1,8 +1,6 @@
 package com.refordom.app.config;
 
-import org.springframework.transaction.PlatformTransactionManager;
-
-import javax.servlet.Filter;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -12,15 +10,13 @@ import java.util.List;
  * @author pricess.wang
  * @date 2019/12/12 16:58
  */
-public interface AppFilterChain {
+public interface AppFilterChain extends Filter {
 
     boolean matches(HttpServletRequest request);
 
     List<Filter> getFilters();
 
-    boolean isContinueChainBeforeSuccessfulFilter();
+    List<AppServiceProvider> getServiceProviders();
 
     List<AppStoreProvider> getStoreProviders();
-
-    PlatformTransactionManager getTransactionManager();
 }

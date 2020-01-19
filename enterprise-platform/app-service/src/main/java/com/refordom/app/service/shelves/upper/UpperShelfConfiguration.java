@@ -1,8 +1,8 @@
 package com.refordom.app.service.shelves.upper;
 
 import com.refordom.app.config.AppRequestConfigurerAdapter;
-import com.refordom.app.config.core.AbstractAppPrimaryFilter;
 import com.refordom.app.config.core.AppAction;
+import com.refordom.app.config.filter.AppDetailsFilter;
 import com.refordom.app.config.manager.AppManager;
 import com.refordom.app.service.constant.ActionConstant;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +24,7 @@ public class UpperShelfConfiguration extends AppRequestConfigurerAdapter {
                 .paramsCheck()
                 .actionParamParser(new UpperShelfParamParser())
                 .and()
-                .addFilterBefore(new UpperShelfServiceFilter(appAction.getSharedObject(AppManager.class)),
-                        AbstractAppPrimaryFilter.class)
+                .addFilterAfter(new UpperShelfServiceFilter(appAction.getSharedObject(AppManager.class)), AppDetailsFilter.class)
                 .addStoreProvider(new UpperShelfStoreProvider(appAction.getSharedObject(AppManager.class)));
     }
 

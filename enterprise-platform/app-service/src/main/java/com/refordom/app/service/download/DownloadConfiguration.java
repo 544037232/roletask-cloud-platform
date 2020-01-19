@@ -1,7 +1,6 @@
 package com.refordom.app.service.download;
 
 import com.refordom.app.config.AppRequestConfigurerAdapter;
-import com.refordom.app.config.core.AbstractAppPrimaryFilter;
 import com.refordom.app.config.core.AppAction;
 import com.refordom.app.config.filter.ParamsCheckFilter;
 import com.refordom.app.config.manager.AppManager;
@@ -25,8 +24,8 @@ public class DownloadConfiguration extends AppRequestConfigurerAdapter {
                 .paramsCheck()
                 .actionParamParser(new DownloadParamParser())
                 .and()
-                .addFilterAfter(new DownloadRunningCheckFilter(appAction.getSharedObject(AppManager.class)), AbstractAppPrimaryFilter.class)
-                .addFilterBefore(new TokenParserFilter(), ParamsCheckFilter.class);
+                .addFilterBefore(new TokenParserFilter(), ParamsCheckFilter.class)
+                .addFilterAfter(new DownloadRunningCheckFilter(appAction.getSharedObject(AppManager.class)), TokenParserFilter.class);
     }
 
 }

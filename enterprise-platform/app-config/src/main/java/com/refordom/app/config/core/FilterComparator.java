@@ -26,7 +26,6 @@ final class FilterComparator implements Comparator<Filter>, Serializable {
 
         put(ParamsCheckFilter.class, order.next());
         put(AppDetailsFilter.class, order.next());
-        put(AbstractAppPrimaryFilter.class, order.next());
     }
 
     @Override
@@ -112,7 +111,6 @@ final class FilterComparator implements Comparator<Filter>, Serializable {
     public boolean isRegistered(Class<? extends Filter> filter) {
         return getOrder(filter) != null;
     }
-
 
     private static class Step {
 
