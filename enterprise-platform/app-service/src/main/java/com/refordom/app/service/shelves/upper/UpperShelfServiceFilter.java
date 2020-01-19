@@ -1,18 +1,19 @@
 package com.refordom.app.service.shelves.upper;
 
 import com.refordom.app.config.exception.AppContextException;
+import com.refordom.app.config.filter.AbstractFilter;
 import com.refordom.app.config.manager.AppManager;
 import com.refordom.app.core.AppContextHolder;
 import com.refordom.app.model.entity.AppDistro;
 
-import javax.servlet.*;
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author pricess.wang
  * @date 2020/1/2 16:00
  */
-public class UpperShelfServiceFilter extends GenericFilter {
+public class UpperShelfServiceFilter extends AbstractFilter {
 
     private final AppManager appManager;
 
@@ -21,8 +22,7 @@ public class UpperShelfServiceFilter extends GenericFilter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
+    protected void doFilter(HttpServletRequest request, HttpServletResponse response) {
         UpperShelfParam param = (UpperShelfParam) AppContextHolder.getContext().getParamBean();
 
         AppDistro appDistro = appManager.getAppDistroManagerService().getDistroApp(param.getAppId());
@@ -36,7 +36,5 @@ public class UpperShelfServiceFilter extends GenericFilter {
         }
 
         AppContextHolder.getContext().addResult(appDistro);
-
-        chain.doFilter(request, response);
     }
 }
