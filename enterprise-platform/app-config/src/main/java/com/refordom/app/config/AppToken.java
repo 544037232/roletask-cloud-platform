@@ -1,8 +1,6 @@
 package com.refordom.app.config;
 
-import com.refordom.app.core.AppDetails;
 import com.refordom.app.core.AppEnum;
-import com.refordom.app.core.validator.ParamBean;
 
 /**
  * 应用处理回话，一般用作过滤器链的上下文处理
@@ -12,9 +10,7 @@ import com.refordom.app.core.validator.ParamBean;
  */
 public interface AppToken {
 
-    AppDetails getAppDetails();
+    String getAppId();
 
-    String getAccessToken();
-
-    ParamBean getParamBean();
+    AppEnum getAppType();
 }

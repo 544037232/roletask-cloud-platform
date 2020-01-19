@@ -3,11 +3,17 @@ package com.refordom.app.config.core;
 import com.refordom.app.config.*;
 import com.refordom.app.config.configurer.ActionParamsCheckConfigurer;
 import com.refordom.app.config.filter.DefaultAppFilterChain;
+import com.refordom.app.config.handler.AppFailureHandler;
+import com.refordom.app.config.handler.AppNullFailureHandler;
+import com.refordom.app.config.handler.AppNullSuccessHandler;
+import com.refordom.app.config.handler.AppSuccessHandler;
 import com.refordom.common.builder.AbstractConfiguredObjectBuilder;
 import com.refordom.common.builder.ObjectBuilder;
 import com.refordom.common.builder.ObjectPostProcessor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.Filter;
 import java.util.ArrayList;
@@ -36,6 +42,12 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
 
     private FilterComparator comparator = new FilterComparator();
 
+    private AppSuccessHandler successHandler = new AppNullSuccessHandler();
+
+    private AppFailureHandler failureHandler = new AppNullFailureHandler();
+
+    private ApplicationEventPublisher applicationEventPublisher;
+
     @SuppressWarnings("unchecked")
     public AppAction(ObjectPostProcessor<Object> objectPostProcessor, Map<Class<?>, Object> sharedObjects) {
         super(objectPostProcessor);
@@ -60,7 +72,7 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
 
         filters.sort(comparator);
 
-        return new DefaultAppFilterChain(
+        DefaultAppFilterChain appFilterChain = new DefaultAppFilterChain(
                 actionName,
                 continueChainBeforeSuccessfulFilter,
                 this.getSharedObject(PlatformTransactionManager.class),
@@ -68,9 +80,19 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
                 serviceProviders,
                 requestMatcher,
                 filters);
+
+        appFilterChain.setSuccessHandler(successHandler);
+        appFilterChain.setFailureHandler(failureHandler);
+        appFilterChain.setApplicationEventPublisher(applicationEventPublisher);
+
+        return appFilterChain;
     }
 
     public AppAction actionRequestMatcher(String action) {
+        if (StringUtils.isEmpty(action)) {
+            throw new IllegalArgumentException("the action can not be null");
+        }
+
         if (actionName == null) {
             this.actionName = action;
         }
@@ -81,6 +103,16 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
     @Override
     public AppAction addServiceProvider(AppServiceProvider appProvider) {
         this.serviceProviders.add(appProvider);
+        return this;
+    }
+
+    public AppAction successHandler(AppSuccessHandler successHandler) {
+        this.successHandler = successHandler;
+        return this;
+    }
+
+    public AppAction failureHandler(AppFailureHandler failureHandler) {
+        this.failureHandler = failureHandler;
         return this;
     }
 
@@ -97,6 +129,11 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
 
     public AppAction continueChainBeforeSuccessfulFilter(boolean continueChainBeforeSuccessfulFilter) {
         this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;
+        return this;
+    }
+
+    public AppAction applicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        this.applicationEventPublisher = applicationEventPublisher;
         return this;
     }
 

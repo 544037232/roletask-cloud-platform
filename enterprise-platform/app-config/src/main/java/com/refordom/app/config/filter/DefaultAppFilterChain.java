@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -53,20 +52,11 @@ public class DefaultAppFilterChain implements AppFilterChain, ApplicationEventPu
 
     private ApplicationEventPublisher eventPublisher;
 
-    private AppSuccessHandler successHandler = new AppNullSuccessHandler();
+    private AppSuccessHandler successHandler;
 
-    private AppFailureHandler failureHandler = new AppNullFailureHandler();
+    private AppFailureHandler failureHandler;
 
     private final List<AppServiceProvider> serviceProviders;
-
-    public DefaultAppFilterChain(String actionName,
-                                 boolean continueChainBeforeSuccessfulFilter,
-                                 PlatformTransactionManager transactionManager,
-                                 List<AppStoreProvider> storeProviders,
-                                 List<AppServiceProvider> serviceProviders,
-                                 AppRequestMatcher requestMatcher, Filter... filters) {
-        this(actionName, continueChainBeforeSuccessfulFilter, transactionManager, storeProviders, serviceProviders, requestMatcher, Arrays.asList(filters));
-    }
 
     public DefaultAppFilterChain(String actionName,
                                  boolean continueChainBeforeSuccessfulFilter,
