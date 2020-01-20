@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -25,7 +24,6 @@ import java.util.List;
  * @author pricess.wang
  * @date 2019/12/13 18:20
  */
-@ComponentScan("com.refordom.app.*")
 @Import({AppConfiguration.class})
 public class AppRequestConfiguration {
 
