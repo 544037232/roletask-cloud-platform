@@ -4,8 +4,6 @@ import com.refordom.app.config.*;
 import com.refordom.app.config.event.FilterSuccessEvent;
 import com.refordom.app.config.exception.AppContextException;
 import com.refordom.app.config.handler.AppFailureHandler;
-import com.refordom.app.config.handler.AppNullFailureHandler;
-import com.refordom.app.config.handler.AppNullSuccessHandler;
 import com.refordom.app.config.handler.AppSuccessHandler;
 import com.refordom.app.config.util.RequestUtils;
 import com.refordom.app.core.AppContextHolder;
