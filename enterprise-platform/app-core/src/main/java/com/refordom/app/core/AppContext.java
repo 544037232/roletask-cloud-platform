@@ -21,6 +21,10 @@ public interface AppContext extends Serializable {
 
     void setParamBean(ParamBean paramBean);
 
+    void setProcessObj(Object key, Object val);
+
+    Object getProcessObj(Object key);
+
     <T> void addResult(T result);
 
     <T> List<T> getResult();

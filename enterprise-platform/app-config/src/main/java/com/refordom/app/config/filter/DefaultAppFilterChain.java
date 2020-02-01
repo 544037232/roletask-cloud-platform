@@ -56,6 +56,8 @@ public class DefaultAppFilterChain implements AppFilterChain, ApplicationEventPu
 
     private final List<AppServiceProvider> serviceProviders;
 
+    private Class<? extends AppToken> resultTokenClass;
+
     public DefaultAppFilterChain(String actionName,
                                  boolean continueChainBeforeSuccessfulFilter,
                                  PlatformTransactionManager transactionManager,
@@ -93,27 +95,39 @@ public class DefaultAppFilterChain implements AppFilterChain, ApplicationEventPu
 
         VirtualFilterChain virtualFilterChain = new VirtualFilterChain(chain, filters, continueChainBeforeSuccessfulFilter);
 
+        AppToken appToken = null;
+
         try {
 
             virtualFilterChain.doFilter(request, response);
 
-            for (AppServiceProvider provider : serviceProviders) {
+            if (resultTokenClass != null){
 
-                if (provider.supports(provider.getClass())) {
-                    provider.provider(null);
+                appToken = resultTokenClass.newInstance();
+
+                for (AppServiceProvider provider : serviceProviders) {
+
+                    if (provider.supports(appToken.getClass())) {
+                        provider.provider(appToken);
+                    }
                 }
             }
 
             if (!storeProviders.isEmpty()) {
                 doTransaction();
             }
-
         } catch (AppContextException failed) {
             unsuccessfulFilter(request, response, failed);
             return;
+        } catch (IllegalAccessException | InstantiationException e) {
+            systemErrorException(request,response,e);
         }
 
-        successfulAuthentication(request, response, chain, null);
+        successfulAuthentication(request, response, chain, appToken);
+    }
+
+    private void systemErrorException(HttpServletRequest request, HttpServletResponse response, ReflectiveOperationException e) throws IOException, ServletException {
+        unsuccessfulFilter(request, response, new AppContextException(e.getMessage()));
     }
 
     private void doTransaction() {
@@ -138,6 +152,10 @@ public class DefaultAppFilterChain implements AppFilterChain, ApplicationEventPu
     @Override
     public List<AppServiceProvider> getServiceProviders() {
         return serviceProviders;
+    }
+
+    public void setResultTokenClass(Class<? extends AppToken> resultTokenClass) {
+        this.resultTokenClass = resultTokenClass;
     }
 
     public String getActionName() {

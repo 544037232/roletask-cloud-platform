@@ -5,6 +5,7 @@ import com.refordom.app.config.core.AppAction;
 import com.refordom.app.config.filter.AppDetailsFilter;
 import com.refordom.app.config.manager.AppManager;
 import com.refordom.app.service.constant.ActionConstant;
+import com.refordom.app.service.filter.AppDistroFilter;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -21,7 +22,8 @@ public class LowerShelfConfiguration extends AppRequestConfigurerAdapter {
         appAction
                 .actionName("下架")
                 .actionRequestMatcher(ActionConstant.LOWER_SHELF)
-                .addFilterAfter(new LowerShelfServiceFilter(appAction.getSharedObject(AppManager.class)), AppDetailsFilter.class)
+                .addFilterAfter(new AppDistroFilter(appAction.getSharedObject(AppManager.class)),AppDetailsFilter.class)
+                .addFilterAfter(new LowerShelfServiceFilter(), AppDistroFilter.class)
                 .addStoreProvider(new LowerShelfStoreProvider(appAction.getSharedObject(AppManager.class)));
     }
 

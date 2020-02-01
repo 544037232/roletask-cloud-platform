@@ -4,7 +4,9 @@ import com.refordom.app.core.validator.ParamBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class AppContextImpl implements AppContext {
 
@@ -18,6 +20,8 @@ public class AppContextImpl implements AppContext {
     private ParamBean paramBean;
 
     private List<Object> results = new ArrayList<>();
+
+    private Map<Object,Object> process = new ConcurrentHashMap<>();
 
     // ~ Methods
     // ========================================================================================================
@@ -68,6 +72,16 @@ public class AppContextImpl implements AppContext {
     @Override
     public void setParamBean(ParamBean paramBean) {
         this.paramBean = paramBean;
+    }
+
+    @Override
+    public void setProcessObj(Object key, Object val) {
+        process.put(key,val);
+    }
+
+    @Override
+    public Object getProcessObj(Object key) {
+        return process.get(key);
     }
 
     @Override

@@ -10,7 +10,7 @@ spring:
         dashboard: 127.0.0.1:8008
     nacos:
       discovery:
-        server-addr: ${NACOS-HOST:127.0.0.1}:${NACOS-PORT:8849}
+        server-addr: ${NACOS-HOST:192.168.3.72}:${NACOS-PORT:8849}
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml

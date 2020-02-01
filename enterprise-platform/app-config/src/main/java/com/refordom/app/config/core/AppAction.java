@@ -48,6 +48,8 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
 
     private ApplicationEventPublisher applicationEventPublisher;
 
+    private Class<? extends AppToken> resultTokenClass;
+
     @SuppressWarnings("unchecked")
     public AppAction(ObjectPostProcessor<Object> objectPostProcessor, Map<Class<?>, Object> sharedObjects) {
         super(objectPostProcessor);
@@ -83,6 +85,7 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
 
         appFilterChain.setSuccessHandler(successHandler);
         appFilterChain.setFailureHandler(failureHandler);
+        appFilterChain.setResultTokenClass(resultTokenClass);
         appFilterChain.setApplicationEventPublisher(applicationEventPublisher);
 
         return appFilterChain;
@@ -119,6 +122,11 @@ public class AppAction extends AbstractConfiguredObjectBuilder<DefaultAppFilterC
     @Override
     public AppAction addStoreProvider(AppStoreProvider appStoreProvider) {
         this.storeProviders.add(appStoreProvider);
+        return this;
+    }
+
+    public AppAction resultToken(Class<? extends AppToken> tokenClass) {
+        this.resultTokenClass = tokenClass;
         return this;
     }
 
