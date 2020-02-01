@@ -18,8 +18,8 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ToString
-@TableName("app_ambient_licence")
-public class AppAmbientLicence extends BaseModel<AppAmbientLicence> {
+@TableName("app_environment_licence")
+public class AppEnvironmentLicence extends BaseModel<AppEnvironmentLicence> {
 
     @TableId
     private Long id;

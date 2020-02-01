@@ -14,10 +14,10 @@ import lombok.ToString;
  * @date 2019/12/9 16:13
  */
 @EqualsAndHashCode(callSuper = true)
-@TableName("app_ambient")
+@TableName("app_environment")
 @Data
 @ToString
-public class AppAmbient extends BaseModel<AppAmbient> {
+public class AppEnvironment extends BaseModel<AppEnvironment> {
 
     @TableId
     private Long id;
