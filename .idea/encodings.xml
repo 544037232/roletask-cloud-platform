@@ -6,6 +6,8 @@
     <file url="file://$PROJECT_DIR$/cloud-auth-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-auth-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-action-builder/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-action-builder/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-bom" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-builder/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-builder/src/main/resources" charset="UTF-8" />

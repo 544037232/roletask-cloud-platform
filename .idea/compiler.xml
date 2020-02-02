@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cloud-common-security" />
+        <module name="cloud-common-action-builder" />
         <module name="app-model" />
         <module name="app-service" />
         <module name="cloud-gateway-server" />

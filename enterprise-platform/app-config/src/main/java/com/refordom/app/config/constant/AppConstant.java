@@ -7,17 +7,8 @@ package com.refordom.app.config.constant;
 public interface AppConstant {
 
     /**
-     * 应用过滤器链bean注册名称
-     */
-    String APP_FILTER_CHAIN_NAME = "appFilterChain";
-
-    /**
      * 应用过滤器链请求地址通配符
      */
-    String APP_URL_PATTERNS = "/app/store/*";
+    String APP_URL_PATTERNS = "/app/*";
 
-    /**
-     * 应用事务管理器
-     */
-    String APP_TRANSACTION_MANAGER = "appTransactionManager";
 }

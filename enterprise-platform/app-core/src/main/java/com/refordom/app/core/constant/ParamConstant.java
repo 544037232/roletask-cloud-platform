@@ -32,4 +32,14 @@ public interface ParamConstant {
      * 应用版本号
      */
     String PARAM_VERSION = "version";
+
+    /**
+     * 客户端名称
+     */
+    String PARAM_CLIENT_NAME = "client_name";
+
+    /**
+     * 客户端应用环境域名
+     */
+    String PARAM_DOMAIN = "domain";
 }

@@ -1,11 +1,11 @@
 package com.refordom.app.config.filter;
 
 import com.refordom.app.core.constant.ParamConstant;
-import com.refordom.app.config.exception.DeprecatedException;
-import com.refordom.app.config.manager.AppManager;
-import com.refordom.app.core.AppContextHolder;
 import com.refordom.app.core.AppDetails;
 import com.refordom.app.core.AppEnum;
+import com.refordom.app.model.AppDetailsManagerService;
+import com.refordom.common.action.builder.context.ActionContextHolder;
+import com.refordom.common.action.builder.exception.DeprecatedException;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -16,10 +16,10 @@ import java.io.IOException;
  */
 public class AppDetailsFilter implements Filter {
 
-    private AppManager appManager;
+    private AppDetailsManagerService appDetailsManagerService;
 
-    public AppDetailsFilter(AppManager appManager) {
-        this.appManager = appManager;
+    public AppDetailsFilter(AppDetailsManagerService appDetailsManagerService) {
+        this.appDetailsManagerService = appDetailsManagerService;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class AppDetailsFilter implements Filter {
             throw new DeprecatedException("不支持的应用类型");
         }
         // 获取模型，并设置到上下文
-        AppDetails appDetails = appManager.getAppDetailsManagerService().getApp(appId);
+        AppDetails appDetails = appDetailsManagerService.getApp(appId);
 
         if (appDetails == null) {
             throw new DeprecatedException("未获取到相关应用");
@@ -43,7 +43,7 @@ public class AppDetailsFilter implements Filter {
             throw new DeprecatedException("获取到的应用与所需的应用类型不一致");
         }
 
-        AppContextHolder.getContext().setAppDetails(appDetails);
+        ActionContextHolder.getContext().setProcessObj(AppDetails.class, appDetails);
 
         chain.doFilter(request, response);
     }

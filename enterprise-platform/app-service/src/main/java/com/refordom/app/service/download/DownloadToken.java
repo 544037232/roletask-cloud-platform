@@ -1,7 +1,7 @@
 package com.refordom.app.service.download;
 
-import com.refordom.app.config.AppToken;
 import com.refordom.app.core.AppEnum;
+import com.refordom.common.action.builder.ResultToken;
 import lombok.Data;
 
 /**
@@ -11,7 +11,7 @@ import lombok.Data;
  * @date 2020/1/31 18:07
  */
 @Data
-public class DownloadToken implements AppToken {
+public class DownloadToken implements ResultToken {
 
     // 应用ID
     private String appId;

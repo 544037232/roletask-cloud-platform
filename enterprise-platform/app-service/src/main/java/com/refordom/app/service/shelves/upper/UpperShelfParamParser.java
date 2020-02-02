@@ -1,7 +1,7 @@
 package com.refordom.app.service.shelves.upper;
 
-import com.refordom.app.core.validator.ActionParamParser;
-import com.refordom.app.core.validator.ParamBean;
+import com.refordom.common.action.builder.validator.ActionParamParser;
+import com.refordom.common.action.builder.validator.ParamBean;
 
 import javax.servlet.http.HttpServletRequest;
 

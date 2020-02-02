@@ -1,7 +1,7 @@
 package com.refordom.app.service.download;
 
+import com.refordom.app.config.DefaultParamBean;
 import com.refordom.app.core.constant.ParamConstant;
-import com.refordom.app.core.validator.DefaultParamBean;
 import lombok.Getter;
 
 import javax.servlet.http.HttpServletRequest;

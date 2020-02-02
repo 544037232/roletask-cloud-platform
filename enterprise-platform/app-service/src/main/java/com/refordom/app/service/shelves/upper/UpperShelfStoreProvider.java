@@ -1,26 +1,26 @@
 package com.refordom.app.service.shelves.upper;
 
-import com.refordom.app.config.AppStoreProvider;
-import com.refordom.app.config.manager.AppManager;
+import com.refordom.app.model.AppDistroManagerService;
 import com.refordom.app.model.entity.AppDistro;
+import com.refordom.common.action.builder.ActionStoreProvider;
 
 /**
  * @author pricess.wang
  * @date 2020/1/9 11:08
  */
-public class UpperShelfStoreProvider implements AppStoreProvider {
+public class UpperShelfStoreProvider implements ActionStoreProvider {
 
-    private final AppManager appManager;
+    private final AppDistroManagerService appDistroManagerService;
 
-    public UpperShelfStoreProvider(AppManager appManager) {
-        this.appManager = appManager;
+    public UpperShelfStoreProvider(AppDistroManagerService appDistroManagerService) {
+        this.appDistroManagerService = appDistroManagerService;
     }
 
     @Override
     public <T> void provider(T result) {
         AppDistro appDistro = (AppDistro) result;
         appDistro.setShelves(true);
-        appManager.getAppDistroManagerService().updateDistroAppByAppId(appDistro);
+        appDistroManagerService.updateDistroAppByAppId(appDistro);
     }
 
     @Override

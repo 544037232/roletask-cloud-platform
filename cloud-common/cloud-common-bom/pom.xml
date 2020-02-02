@@ -23,9 +23,9 @@
         <!-- 阿里连接池 -->
         <druid.version>1.1.21</druid.version>
         <!-- 工具类 -->
-        <hutool.version>5.0.6</hutool.version>
+        <hutool.version>5.0.7</hutool.version>
         <!-- 第三方登陆集成平台 -->
-        <third.oauth.version>1.13.1</third.oauth.version>
+        <third.oauth.version>1.13.2</third.oauth.version>
         <!-- jwt -->
         <jwt.version>0.9.1</jwt.version>
         <!-- 阿里fastjson -->

@@ -1,7 +1,7 @@
 package com.refordom.app.service.shelves.upper;
 
+import com.refordom.app.config.DefaultParamBean;
 import com.refordom.app.core.constant.ParamConstant;
-import com.refordom.app.core.validator.DefaultParamBean;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Range;
 

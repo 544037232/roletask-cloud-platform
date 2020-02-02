@@ -11,15 +11,20 @@ public interface ActionConstant {
     /**
      * 上架
      */
-    String UPPER_SHELF = "upperShelf";
+    String UPPER_SHELF = "/app/store/upperShelf";
 
     /**
      * 下架
      */
-    String LOWER_SHELF = "lowerShelf";
+    String LOWER_SHELF = "/app/store/lowerShelf";
 
     /**
      * 下载
      */
-    String DOWNLOAD = "download";
+    String DOWNLOAD = "/app/store/download";
+
+    /**
+     * 应用环境增删改查
+     */
+    String ENVIRONMENT_CRUD = "/app/client/environment";
 }

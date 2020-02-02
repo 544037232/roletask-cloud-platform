@@ -70,8 +70,10 @@ public class AuthRequestFactory {
                 return new AuthAlipayRequest(config, authStateCache);
             case QQ:
                 return new AuthQqRequest(config, authStateCache);
-            case WECHAT:
-                return new AuthWeChatRequest(config, authStateCache);
+            case WECHAT_OPEN:
+                return new AuthWeChatOpenRequest(config, authStateCache);
+            case WECHAT_MP:
+                return new AuthWeChatMpRequest(config, authStateCache);
             case TAOBAO:
                 return new AuthTaobaoRequest(config, authStateCache);
             case GOOGLE:
@@ -121,7 +123,9 @@ public class AuthRequestFactory {
             source.put("oschina",AuthDefaultSource.OSCHINA);
             source.put("alipay",AuthDefaultSource.ALIPAY);
             source.put("qq",AuthDefaultSource.QQ);
-            source.put("wechat",AuthDefaultSource.WECHAT);
+
+            source.put("wechat_mp",AuthDefaultSource.WECHAT_MP);
+            source.put("wechat_open",AuthDefaultSource.WECHAT_OPEN);
             source.put("taobao",AuthDefaultSource.TAOBAO);
             source.put("google",AuthDefaultSource.GOOGLE);
             source.put("facebook",AuthDefaultSource.FACEBOOK);
