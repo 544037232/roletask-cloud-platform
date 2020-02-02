@@ -17,4 +17,18 @@ public class EnvironmentParamParser implements ActionParamParser {
     public ParamBean build(HttpServletRequest request) {
         return new EnvironmentParam(request);
     }
+
+    public static class EnvironmentParamUpdateParser extends EnvironmentParamParser {
+        @Override
+        public ParamBean build(HttpServletRequest request) {
+            return new EnvironmentParam.EnvironmentUpdateParam(request);
+        }
+    }
+
+    public static class EnvironmentParamDeleteParser extends EnvironmentParamParser {
+        @Override
+        public ParamBean build(HttpServletRequest request) {
+            return new EnvironmentParam.EnvironmentDeleteParam(request);
+        }
+    }
 }

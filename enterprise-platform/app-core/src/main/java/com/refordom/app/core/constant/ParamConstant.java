@@ -39,7 +39,14 @@ public interface ParamConstant {
     String PARAM_CLIENT_NAME = "client_name";
 
     /**
+     * 客户端ID
+     */
+    String PARAM_CLIENT_ID = "client_id";
+
+    /**
      * 客户端应用环境域名
      */
     String PARAM_DOMAIN = "domain";
+
+
 }

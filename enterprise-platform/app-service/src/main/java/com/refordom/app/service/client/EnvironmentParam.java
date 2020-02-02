@@ -27,4 +27,26 @@ public class EnvironmentParam implements ParamBean {
         this.domain = request.getParameter(ParamConstant.PARAM_DOMAIN);
     }
 
+    @Getter
+    public static class EnvironmentUpdateParam extends EnvironmentParam{
+
+        @NotBlank
+        private String clientId;
+
+        public EnvironmentUpdateParam(HttpServletRequest request) {
+            super(request);
+            this.clientId = request.getParameter(ParamConstant.PARAM_CLIENT_ID);
+        }
+    }
+
+    @Getter
+    public static class EnvironmentDeleteParam implements ParamBean{
+
+        @NotBlank
+        private String clientId;
+
+        public EnvironmentDeleteParam(HttpServletRequest request) {
+            this.clientId = request.getParameter(ParamConstant.PARAM_CLIENT_ID);
+        }
+    }
 }
