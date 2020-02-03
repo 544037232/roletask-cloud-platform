@@ -1,7 +1,7 @@
 package com.refordom.app.service.client;
 
 import com.refordom.app.core.constant.ParamConstant;
-import com.refordom.common.action.builder.validator.ParamBean;
+import com.refordom.common.action.builder.validator.ParamAdapter;
 import lombok.Getter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
  * @date 2020/2/1 15:47
  */
 @Getter
-public class EnvironmentParam implements ParamBean {
+public class EnvironmentParamAdapter implements ParamAdapter {
 
     @NotBlank
     private String clientName;
@@ -22,30 +22,30 @@ public class EnvironmentParam implements ParamBean {
     @NotBlank
     private String domain;
 
-    public EnvironmentParam(HttpServletRequest request) {
+    public EnvironmentParamAdapter(HttpServletRequest request) {
         this.clientName = request.getParameter(ParamConstant.PARAM_CLIENT_NAME);
         this.domain = request.getParameter(ParamConstant.PARAM_DOMAIN);
     }
 
     @Getter
-    public static class EnvironmentUpdateParam extends EnvironmentParam{
+    public static class EnvironmentUpdateParamAdapter extends EnvironmentParamAdapter{
 
         @NotBlank
         private String clientId;
 
-        public EnvironmentUpdateParam(HttpServletRequest request) {
+        public EnvironmentUpdateParamAdapter(HttpServletRequest request) {
             super(request);
             this.clientId = request.getParameter(ParamConstant.PARAM_CLIENT_ID);
         }
     }
 
     @Getter
-    public static class EnvironmentDeleteParam implements ParamBean{
+    public static class EnvironmentDeleteParamAdapter implements ParamAdapter {
 
         @NotBlank
         private String clientId;
 
-        public EnvironmentDeleteParam(HttpServletRequest request) {
+        public EnvironmentDeleteParamAdapter(HttpServletRequest request) {
             this.clientId = request.getParameter(ParamConstant.PARAM_CLIENT_ID);
         }
     }

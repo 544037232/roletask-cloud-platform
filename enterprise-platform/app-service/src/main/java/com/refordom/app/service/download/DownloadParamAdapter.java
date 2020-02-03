@@ -1,6 +1,6 @@
 package com.refordom.app.service.download;
 
-import com.refordom.app.config.DefaultParamBean;
+import com.refordom.app.config.DefaultParamAdapter;
 import com.refordom.app.core.constant.ParamConstant;
 import lombok.Getter;
 
@@ -12,12 +12,12 @@ import javax.validation.constraints.NotBlank;
  * @date 2020/1/16 18:00
  */
 @Getter
-public class DownloadParam extends DefaultParamBean {
+public class DownloadParamAdapter extends DefaultParamAdapter {
 
     @NotBlank
     private String version;
 
-    public DownloadParam(HttpServletRequest request) {
+    public DownloadParamAdapter(HttpServletRequest request) {
         super(request);
         this.version = request.getParameter(ParamConstant.PARAM_VERSION);
     }

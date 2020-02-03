@@ -1,7 +1,7 @@
 package com.refordom.app.service.client;
 
 import com.refordom.common.action.builder.validator.ActionParamParser;
-import com.refordom.common.action.builder.validator.ParamBean;
+import com.refordom.common.action.builder.validator.ParamAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,21 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 public class EnvironmentParamParser implements ActionParamParser {
 
     @Override
-    public ParamBean build(HttpServletRequest request) {
-        return new EnvironmentParam(request);
+    public ParamAdapter build(HttpServletRequest request) {
+        return new EnvironmentParamAdapter(request);
     }
 
     public static class EnvironmentParamUpdateParser extends EnvironmentParamParser {
         @Override
-        public ParamBean build(HttpServletRequest request) {
-            return new EnvironmentParam.EnvironmentUpdateParam(request);
+        public ParamAdapter build(HttpServletRequest request) {
+            return new EnvironmentParamAdapter.EnvironmentUpdateParamAdapter(request);
         }
     }
 
     public static class EnvironmentParamDeleteParser extends EnvironmentParamParser {
         @Override
-        public ParamBean build(HttpServletRequest request) {
-            return new EnvironmentParam.EnvironmentDeleteParam(request);
+        public ParamAdapter build(HttpServletRequest request) {
+            return new EnvironmentParamAdapter.EnvironmentDeleteParamAdapter(request);
         }
     }
 }

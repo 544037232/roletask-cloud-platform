@@ -27,7 +27,7 @@ public class EnvironmentDeleteFilter extends AbstractFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response) {
 
-        EnvironmentParam.EnvironmentDeleteParam environmentParam = (EnvironmentParam.EnvironmentDeleteParam) ActionContextHolder.getContext().getParamBean();
+        EnvironmentParamAdapter.EnvironmentDeleteParamAdapter environmentParam = (EnvironmentParamAdapter.EnvironmentDeleteParamAdapter) ActionContextHolder.getContext().getParamAdapter();
 
         QueryWrapper<AppEnvironment> queryWrapper = new QueryWrapper<>();
 

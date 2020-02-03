@@ -30,5 +30,5 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface ActionParamParser {
 
-    ParamBean build(HttpServletRequest request);
+    ParamAdapter build(HttpServletRequest request);
 }

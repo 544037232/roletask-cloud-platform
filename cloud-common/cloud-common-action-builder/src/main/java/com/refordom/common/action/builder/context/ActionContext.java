@@ -1,6 +1,6 @@
 package com.refordom.common.action.builder.context;
 
-import com.refordom.common.action.builder.validator.ParamBean;
+import com.refordom.common.action.builder.validator.ParamAdapter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface ActionContext extends Serializable {
 
-    ParamBean getParamBean();
+    ParamAdapter getParamAdapter();
 
-    void setParamBean(ParamBean paramBean);
+    void setParamAdapter(ParamAdapter paramBean);
 
     void setProcessObj(Object key, Object val);
 

@@ -18,7 +18,7 @@ public class EnvironmentUpdateFilter extends AbstractFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response) {
 
-        EnvironmentParam.EnvironmentUpdateParam environmentParam = (EnvironmentParam.EnvironmentUpdateParam) ActionContextHolder.getContext().getParamBean();
+        EnvironmentParamAdapter.EnvironmentUpdateParamAdapter environmentParam = (EnvironmentParamAdapter.EnvironmentUpdateParamAdapter) ActionContextHolder.getContext().getParamAdapter();
 
         AppEnvironment appEnvironment = new AppEnvironment();
         appEnvironment.setClientName(environmentParam.getClientName());

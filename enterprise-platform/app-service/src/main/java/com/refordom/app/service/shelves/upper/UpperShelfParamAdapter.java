@@ -1,6 +1,6 @@
 package com.refordom.app.service.shelves.upper;
 
-import com.refordom.app.config.DefaultParamBean;
+import com.refordom.app.config.DefaultParamAdapter;
 import com.refordom.app.core.constant.ParamConstant;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Range;
@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2020/1/2 15:44
  */
 @Getter
-public class UpperShelfParam extends DefaultParamBean {
+public class UpperShelfParamAdapter extends DefaultParamAdapter {
 
     @Range(min = 0, max = 10)
     private String price;
 
-    public UpperShelfParam(HttpServletRequest request) {
+    public UpperShelfParamAdapter(HttpServletRequest request) {
         super(request);
 
         String price = request.getParameter(ParamConstant.PARAM_APP_PRICE);

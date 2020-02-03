@@ -1,6 +1,6 @@
 package com.refordom.common.action.builder.context;
 
-import com.refordom.common.action.builder.validator.ParamBean;
+import com.refordom.common.action.builder.validator.ParamAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class ActionContextImpl implements ActionContext {
     // ~ Instance fields
     // ================================================================================================
 
-    private ParamBean paramBean;
+    private ParamAdapter paramAdapter;
 
     private List<Object> results = new ArrayList<>();
 
@@ -24,13 +24,13 @@ public class ActionContextImpl implements ActionContext {
     // ========================================================================================================
 
     @Override
-    public ParamBean getParamBean() {
-        return paramBean;
+    public ParamAdapter getParamAdapter() {
+        return paramAdapter;
     }
 
     @Override
-    public void setParamBean(ParamBean paramBean) {
-        this.paramBean = paramBean;
+    public void setParamAdapter(ParamAdapter paramAdapter) {
+        this.paramAdapter = paramAdapter;
     }
 
     @Override
