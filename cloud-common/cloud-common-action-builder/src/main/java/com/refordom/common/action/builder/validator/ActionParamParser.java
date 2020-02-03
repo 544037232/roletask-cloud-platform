@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 请求参数解析器，用于对请求的参数进行校验，基于spring-boot-starter-validation框架实现
- * 实现ParamBean接口或继承默认的DefaultParamBean类，再在属性中添加注解，设定规则，即可进行统一校验
+ * 实现ParamAdapter接口或继承默认的DefaultParamAdapter类，再在属性中添加注解，设定规则，即可进行统一校验
  * 具体注解如下(详细使用方式可参照官方文档):
  *
  * @ Null 限制只能为null
