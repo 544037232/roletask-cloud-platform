@@ -29,9 +29,9 @@ public class ParamsCheckFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) req;
 
-        ParamBean paramBean = actionParamParser.build(request);
+        ParamAdapter paramAdapter = actionParamParser.build(request);
 
-        ValidatorResult validatorResult = actionValidator.validate(paramBean);
+        ValidatorResult validatorResult = actionValidator.validate(paramAdapter);
 
         if (validatorResult != null) {
             HttpServletResponse response = (HttpServletResponse) rep;
@@ -41,7 +41,7 @@ public class ParamsCheckFilter implements Filter {
             return;
         }
 
-        ActionContextHolder.getContext().setParamBean(paramBean);
+        ActionContextHolder.getContext().setParamAdapter(paramAdapter);
 
         chain.doFilter(req, rep);
     }
