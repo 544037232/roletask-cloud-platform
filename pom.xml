@@ -35,7 +35,6 @@
         <module>cloud-gateway-server</module>
         <!-- 企业管理平台 -->
         <module>enterprise-platform</module>
-        <module>cloud-common/cloud-common-action-builder</module>
     </modules>
     <dependencies>
         <dependency>
