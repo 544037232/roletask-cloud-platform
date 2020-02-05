@@ -59,12 +59,12 @@ public class DefaultActionFilterChain implements ActionFilterChain, ApplicationE
     private Class<? extends ResultToken> resultTokenClass;
 
     public DefaultActionFilterChain(String actionName,
-                                 boolean continueChainBeforeSuccessfulFilter,
-                                 PlatformTransactionManager transactionManager,
-                                 List<ActionStoreProvider> storeProviders,
-                                 List<ActionServiceProvider> serviceProviders,
-                                 ActionRequestMatcher requestMatcher,
-                                 List<Filter> filters) {
+                                    boolean continueChainBeforeSuccessfulFilter,
+                                    PlatformTransactionManager transactionManager,
+                                    List<ActionStoreProvider> storeProviders,
+                                    List<ActionServiceProvider> serviceProviders,
+                                    ActionRequestMatcher requestMatcher,
+                                    List<Filter> filters) {
         this.actionName = actionName;
         this.transactionManager = transactionManager;
         this.storeProviders = storeProviders;
@@ -101,7 +101,7 @@ public class DefaultActionFilterChain implements ActionFilterChain, ApplicationE
 
             virtualFilterChain.doFilter(request, response);
 
-            if (resultTokenClass != null){
+            if (resultTokenClass != null) {
 
                 resultToken = resultTokenClass.newInstance();
 
@@ -120,7 +120,7 @@ public class DefaultActionFilterChain implements ActionFilterChain, ApplicationE
             unsuccessfulFilter(request, response, failed);
             return;
         } catch (IllegalAccessException | InstantiationException e) {
-            systemErrorException(request,response,e);
+            systemErrorException(request, response, e);
         }
 
         successfulAuthentication(request, response, chain, resultToken);
@@ -168,11 +168,16 @@ public class DefaultActionFilterChain implements ActionFilterChain, ApplicationE
             eventPublisher.publishEvent(new FilterSuccessEvent(resultToken));
         }
 
-        successHandler.onSuccessContext(request, response, resultToken);
+        if (successHandler != null) {
+            successHandler.onSuccessContext(request, response, resultToken);
+        }
     }
 
     private void unsuccessfulFilter(HttpServletRequest request, HttpServletResponse response, AppContextException failed) throws IOException, ServletException {
-        failureHandler.onFailureContext(request, response, failed);
+
+        if (failureHandler != null) {
+            failureHandler.onFailureContext(request, response, failed);
+        }
     }
 
     public void setSuccessHandler(ActionSuccessHandler successHandler) {
