@@ -31,6 +31,10 @@ public class EnvironmentConfiguration {
                     .paramsCheck()
                     .actionParamParser(new EnvironmentParamParser())
                     .and()
+                    .distributedLock()
+                    .addConnections("192.168.3.72:2181,192.168.3.72:2182,192.168.3.72:2183")
+                    .lockPrefix("app-env")
+                    .and()
                     .addFilter(new EnvironmentCreateFilter(), 2)
                     .addStoreProvider(new CreateEnvironmentStoreProvider(appEnvironmentService));
         }
@@ -50,7 +54,7 @@ public class EnvironmentConfiguration {
                     .actionParamParser(new EnvironmentParamParser.EnvironmentParamUpdateParser())
                     .and()
                     .addFilter(new EnvironmentUpdateFilter(), 2)
-                    .addStoreProvider(new UpdateEnvironmentStoreProvider(appEnvironmentService));
+                    .addStoreProvider(new UpdateEnvironmentStoreProvider(appEnvironmentService))                                         ;
         }
     }
 

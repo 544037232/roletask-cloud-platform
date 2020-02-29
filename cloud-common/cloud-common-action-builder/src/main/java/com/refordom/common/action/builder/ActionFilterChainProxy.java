@@ -1,6 +1,7 @@
 package com.refordom.common.action.builder;
 
 import com.refordom.common.action.builder.context.ActionContextHolder;
+import com.refordom.common.action.builder.lock.ActionDistributedLockHolder;
 import com.refordom.common.action.builder.util.RequestUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -57,6 +58,7 @@ public class ActionFilterChainProxy implements Filter, InitializingBean {
                 doFilterInternal(request, response, chain);
             } finally {
                 ActionContextHolder.clearContext();
+                ActionDistributedLockHolder.clearContext();
                 request.removeAttribute(FILTER_APPLIED);
             }
         } else {

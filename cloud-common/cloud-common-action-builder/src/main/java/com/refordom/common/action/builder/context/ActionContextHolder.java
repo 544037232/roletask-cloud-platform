@@ -15,7 +15,7 @@ public class ActionContextHolder {
 	public static final String MODE_THREADLOCAL = "MODE_THREADLOCAL";
 	public static final String SYSTEM_PROPERTY = "roletask.action.strategy";
 	private static String strategyName = System.getProperty(SYSTEM_PROPERTY);
-	private static ActionContextHolderStrategy strategy;
+	private static ActionContextHolderStrategy<ActionContext> strategy;
 	private static int initializeCount = 0;
 
 	static {
@@ -48,7 +48,7 @@ public class ActionContextHolder {
 			try {
 				Class<?> clazz = Class.forName(strategyName);
 				Constructor<?> customStrategy = clazz.getConstructor();
-				strategy = (ActionContextHolderStrategy) customStrategy.newInstance();
+				strategy = (ActionContextHolderStrategy<ActionContext>) customStrategy.newInstance();
 			}
 			catch (Exception ex) {
 				ReflectionUtils.handleReflectionException(ex);
@@ -67,7 +67,7 @@ public class ActionContextHolder {
 		initialize();
 	}
 
-	public static ActionContextHolderStrategy getContextHolderStrategy() {
+	public static ActionContextHolderStrategy<ActionContext> getContextHolderStrategy() {
 		return strategy;
 	}
 

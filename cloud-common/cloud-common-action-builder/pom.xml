@@ -53,5 +53,11 @@
             <artifactId>curator-framework</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>

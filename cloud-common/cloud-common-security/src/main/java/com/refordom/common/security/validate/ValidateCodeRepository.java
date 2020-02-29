@@ -1,6 +1,5 @@
-package com.refordom.auth.validate;
+package com.refordom.common.security.validate;
 
-import com.refordom.auth.validate.code.ValidateCode;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**

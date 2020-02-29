@@ -1,6 +1,7 @@
 package com.refordom.auth.validate.code;
 
 import cn.hutool.captcha.CircleCaptcha;
+import com.refordom.common.security.validate.ValidateCode;
 
 import java.time.LocalDateTime;
 

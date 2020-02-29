@@ -6,13 +6,13 @@ package com.refordom.common.action.builder.context;
  * @author pricess.wang
  * @date 2019/12/19 15:25
  */
-public interface ActionContextHolderStrategy {
+public interface ActionContextHolderStrategy<T> {
 
     void clearContext();
 
-    ActionContext getContext();
+    T getContext();
 
-    void setContext(ActionContext context);
+    void setContext(T context);
 
-    ActionContext createEmptyContext();
+    T createEmptyContext();
 }

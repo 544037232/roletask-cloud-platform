@@ -8,7 +8,7 @@ import org.springframework.util.Assert;
  * @author pricess.wang
  * @date 2019/12/19 15:28
  */
-public class ThreadLocalActionContextHolderStrategy implements ActionContextHolderStrategy {
+public class ThreadLocalActionContextHolderStrategy implements ActionContextHolderStrategy<ActionContext> {
 
     private static final ThreadLocal<ActionContext> contextHolder = new ThreadLocal<>();
 

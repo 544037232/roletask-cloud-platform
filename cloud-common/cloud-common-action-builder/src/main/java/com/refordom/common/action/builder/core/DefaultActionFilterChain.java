@@ -19,9 +19,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * @author pricess.wang
@@ -30,7 +28,7 @@ import java.util.List;
 @Slf4j
 public class DefaultActionFilterChain implements ActionFilterChain, ApplicationEventPublisherAware {
 
-    private final ActionRequestMatcher requestMatcher;
+    private ActionRequestMatcher requestMatcher;
 
     private final List<Filter> filters;
 
@@ -39,11 +37,11 @@ public class DefaultActionFilterChain implements ActionFilterChain, ApplicationE
      */
     private boolean continueChainBeforeSuccessfulFilter;
 
-    private final List<ActionStoreProvider> storeProviders;
+    private List<ActionStoreProvider> storeProviders;
 
-    private final String actionName;
+    private String actionName;
 
-    private final PlatformTransactionManager transactionManager;
+    private PlatformTransactionManager transactionManager;
 
     //设置事务的传播机制
     private final DefaultTransactionDefinition transDefinition = new DefaultTransactionDefinition(DefaultTransactionDefinition.PROPAGATION_REQUIRES_NEW);
@@ -54,34 +52,24 @@ public class DefaultActionFilterChain implements ActionFilterChain, ApplicationE
 
     private ActionFailureHandler failureHandler;
 
-    private final List<ActionServiceProvider> serviceProviders;
+    private List<ActionServiceProvider> serviceProviders;
 
     private Class<? extends ResultToken> resultTokenClass;
 
-    public DefaultActionFilterChain(String actionName,
-                                    boolean continueChainBeforeSuccessfulFilter,
-                                    PlatformTransactionManager transactionManager,
-                                    List<ActionStoreProvider> storeProviders,
-                                    List<ActionServiceProvider> serviceProviders,
-                                    ActionRequestMatcher requestMatcher,
-                                    List<Filter> filters) {
-        this.actionName = actionName;
-        this.transactionManager = transactionManager;
-        this.storeProviders = storeProviders;
-        this.serviceProviders = serviceProviders;
-        this.requestMatcher = requestMatcher;
-        this.filters = new ArrayList<>(filters);
-        this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;
+    public DefaultActionFilterChain(List<Filter> filters) {
+        this.filters = filters;
     }
 
     public ActionRequestMatcher getRequestMatcher() {
         return requestMatcher;
     }
 
+    @Override
     public List<Filter> getFilters() {
         return filters;
     }
 
+    @Override
     public boolean matches(HttpServletRequest request) {
         return requestMatcher.matches(request);
     }
@@ -103,7 +91,7 @@ public class DefaultActionFilterChain implements ActionFilterChain, ApplicationE
 
             if (resultTokenClass != null) {
 
-                resultToken = resultTokenClass.newInstance();
+                resultToken = createResultTokenInstance();
 
                 for (ActionServiceProvider provider : serviceProviders) {
 
@@ -111,6 +99,7 @@ public class DefaultActionFilterChain implements ActionFilterChain, ApplicationE
                         provider.provider(resultToken);
                     }
                 }
+
             }
 
             if (!storeProviders.isEmpty()) {
@@ -119,33 +108,46 @@ public class DefaultActionFilterChain implements ActionFilterChain, ApplicationE
         } catch (AppContextException failed) {
             unsuccessfulFilter(request, response, failed);
             return;
-        } catch (IllegalAccessException | InstantiationException e) {
-            systemErrorException(request, response, e);
         }
 
         successfulAuthentication(request, response, chain, resultToken);
     }
 
-    private void systemErrorException(HttpServletRequest request, HttpServletResponse response, ReflectiveOperationException e) throws IOException, ServletException {
-        unsuccessfulFilter(request, response, new AppContextException(e.getMessage()));
+    private ResultToken createResultTokenInstance() {
+        try {
+            return resultTokenClass.newInstance();
+        } catch (Exception e) {
+            return new ResultToken() {};
+        }
     }
 
     private void doTransaction() {
+
+        if (transactionManager == null) {
+            store();
+            return;
+        }
+
         TransactionStatus transStatus = transactionManager.getTransaction(transDefinition);
 
         try {
-            for (ActionStoreProvider appStoreProvider : storeProviders) {
-
-                ActionContextHolder.getContext().getResult().stream()
-                        .filter(t -> appStoreProvider.supports(t.getClass()))
-                        .forEach(appStoreProvider::provider);
-            }
+            store();
 
             transactionManager.commit(transStatus);
         } catch (Exception e) {
 
             transactionManager.rollback(transStatus);
             throw e;
+        }
+    }
+
+    private void store() {
+
+        for (ActionStoreProvider appStoreProvider : storeProviders) {
+
+            ActionContextHolder.getContext().getResult().stream()
+                    .filter(t -> appStoreProvider.supports(t.getClass()))
+                    .forEach(appStoreProvider::provider);
         }
     }
 
@@ -186,6 +188,30 @@ public class DefaultActionFilterChain implements ActionFilterChain, ApplicationE
 
     public void setFailureHandler(ActionFailureHandler failureHandler) {
         this.failureHandler = failureHandler;
+    }
+
+    public void setContinueChainBeforeSuccessfulFilter(boolean continueChainBeforeSuccessfulFilter) {
+        this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;
+    }
+
+    public void setActionName(String actionName) {
+        this.actionName = actionName;
+    }
+
+    public void setRequestMatcher(ActionRequestMatcher requestMatcher) {
+        this.requestMatcher = requestMatcher;
+    }
+
+    public void setTransactionManager(PlatformTransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
+    }
+
+    public void setStoreProviders(List<ActionStoreProvider> storeProviders) {
+        this.storeProviders = storeProviders;
+    }
+
+    public void setServiceProviders(List<ActionServiceProvider> serviceProviders) {
+        this.serviceProviders = serviceProviders;
     }
 
     @Override

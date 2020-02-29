@@ -1,12 +1,8 @@
-package com.refordom.auth.validate.repository;
+package com.refordom.common.security.validate;
 
-import com.refordom.auth.validate.ValidateCodeRepository;
-import com.refordom.auth.validate.code.ValidateCode;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
-import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -14,11 +10,13 @@ import java.util.concurrent.TimeUnit;
  *
  * @author 王晟权
  */
-@Component
 public class RedisValidateCodeRepository<C extends ValidateCode> implements ValidateCodeRepository<C> {
 
-    @Resource
-    private RedisTemplate<Object, Object> redisTemplate;
+    private final RedisTemplate<Object, Object> redisTemplate;
+
+    public RedisValidateCodeRepository(RedisTemplate<Object, Object> redisTemplate){
+        this.redisTemplate = redisTemplate;
+    }
 
     @Override
     public void save(ServletWebRequest request,C code) {

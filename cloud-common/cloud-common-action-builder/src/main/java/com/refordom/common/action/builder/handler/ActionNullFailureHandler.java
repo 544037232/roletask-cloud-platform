@@ -17,6 +17,6 @@ public class ActionNullFailureHandler implements ActionFailureHandler {
 
     @Override
     public void onFailureContext(HttpServletRequest request, HttpServletResponse response, AppContextException contextException) throws IOException, ServletException {
-
+        response.getWriter().write(contextException.getMessage());
     }
 }

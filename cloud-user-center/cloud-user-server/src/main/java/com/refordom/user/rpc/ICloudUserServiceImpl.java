@@ -40,13 +40,13 @@ public class ICloudUserServiceImpl implements IUserService {
         CloudUser cloudUser = cloudUserService.getOne(Wrappers.<CloudUser>query()
                 .lambda().eq(CloudUser::getUsername, username));
 
-        List<UserIdentity> userIdentities = new ArrayList<>();
-
-        userIdentities.add(developer(username));
-        userIdentities.add(customerAdmin(username));
-        userIdentities.add(enterpriseMember(username));
-
-        cloudUser.setIdentities(userIdentities);
+//        List<UserIdentity> userIdentities = new ArrayList<>();
+//
+//        userIdentities.add(developer(username));
+//        userIdentities.add(customerAdmin(username));
+//        userIdentities.add(enterpriseMember(username));
+//
+//        cloudUser.setIdentities(userIdentities);
 
         return cloudUser.userInfoAdapter(cloudUser);
     }

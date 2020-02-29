@@ -1,4 +1,4 @@
-package com.refordom.auth.validate.code;
+package com.refordom.common.security.validate;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

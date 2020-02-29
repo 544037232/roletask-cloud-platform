@@ -18,7 +18,7 @@ spring:
 
   redis:
     database: 1
-    host : 192.168.3.201
+    host : 192.168.3.72
     port: 6379
     password: 123456
 dubbo:
@@ -38,4 +38,3 @@ auth:
         client-id: 101650278
         client-secret: 4c638b24ae48de5937b5968f5d330dbb
         redirect-uri: http://www.roletask.com/oauth/callback/qq
-

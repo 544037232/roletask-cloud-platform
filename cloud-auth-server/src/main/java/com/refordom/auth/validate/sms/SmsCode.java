@@ -1,6 +1,6 @@
 package com.refordom.auth.validate.sms;
 
-import com.refordom.auth.validate.code.ValidateCode;
+import com.refordom.common.security.validate.ValidateCode;
 
 import java.time.LocalDateTime;
 

@@ -6,6 +6,7 @@ import com.refordom.common.action.builder.handler.ActionFailureHandler;
 import com.refordom.common.action.builder.handler.ActionNullFailureHandler;
 import com.refordom.common.action.builder.handler.ActionNullSuccessHandler;
 import com.refordom.common.action.builder.handler.ActionSuccessHandler;
+import com.refordom.common.action.builder.lock.ActionDistributedLockConfigurer;
 import com.refordom.common.builder.AbstractConfiguredObjectBuilder;
 import com.refordom.common.builder.ObjectBuilder;
 import com.refordom.common.builder.ObjectPostProcessor;
@@ -65,6 +66,13 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<DefaultActionFi
         return getOrApply(new ActionParamsCheckConfigurer<>());
     }
 
+    /**
+     * 分布式锁
+     */
+    public ActionDistributedLockConfigurer<ServeAction> distributedLock() throws Exception {
+        return getOrApply(new ActionDistributedLockConfigurer<>());
+    }
+
     @Override
     protected DefaultActionFilterChain performBuild() throws Exception {
         if (requestMatcher instanceof NullActionMatched) {
@@ -73,15 +81,14 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<DefaultActionFi
 
         filters.sort(filterComparator);
 
-        DefaultActionFilterChain actionFilterChain = new DefaultActionFilterChain(
-                actionName,
-                continueChainBeforeSuccessfulFilter,
-                this.getSharedObject(PlatformTransactionManager.class),
-                storeProviders,
-                serviceProviders,
-                requestMatcher,
-                filters);
+        DefaultActionFilterChain actionFilterChain = new DefaultActionFilterChain(filters);
 
+        actionFilterChain.setActionName(actionName);
+        actionFilterChain.setTransactionManager(this.getSharedObject(PlatformTransactionManager.class));
+        actionFilterChain.setStoreProviders(storeProviders);
+        actionFilterChain.setServiceProviders(serviceProviders);
+        actionFilterChain.setRequestMatcher(requestMatcher);
+        actionFilterChain.setContinueChainBeforeSuccessfulFilter(continueChainBeforeSuccessfulFilter);
         actionFilterChain.setSuccessHandler(successHandler);
         actionFilterChain.setFailureHandler(failureHandler);
         actionFilterChain.setResultTokenClass(resultTokenClass);

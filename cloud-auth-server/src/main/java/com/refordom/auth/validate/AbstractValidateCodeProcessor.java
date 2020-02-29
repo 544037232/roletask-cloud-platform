@@ -1,8 +1,9 @@
 package com.refordom.auth.validate;
 
-import com.refordom.auth.validate.code.ValidateCode;
 import com.refordom.common.security.constant.SecurityConstants;
 import com.refordom.common.security.exception.ValidateCodeException;
+import com.refordom.common.security.validate.ValidateCode;
+import com.refordom.common.security.validate.ValidateCodeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;

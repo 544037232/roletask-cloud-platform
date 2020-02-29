@@ -1,10 +1,10 @@
 package com.refordom.app.service.client;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.refordom.app.model.entity.AppEnvironment;
 import com.refordom.app.model.service.AppEnvironmentService;
 import com.refordom.common.action.builder.ActionStoreProvider;
 import com.refordom.common.action.builder.exception.AppContextException;
-import org.springframework.dao.DuplicateKeyException;
 
 /**
  * <p></p>
@@ -24,12 +24,15 @@ public class CreateEnvironmentStoreProvider implements ActionStoreProvider {
     public <T> void provider(T result) {
         AppEnvironment appEnvironment = (AppEnvironment) result;
 
-        try {
+        AppEnvironment history = appEnvironmentService.getOne(Wrappers.<AppEnvironment>query()
+                .lambda()
+                .eq(AppEnvironment::getClientName, appEnvironment.getClientName()));
 
-            appEnvironmentService.save(appEnvironment);
-        } catch (DuplicateKeyException e) {
+        if (history != null) {
             throw new AppContextException("已经包含了 " + appEnvironment.getClientName() + " 的客户端名称");
         }
+
+        appEnvironmentService.save(appEnvironment);
     }
 
     @Override

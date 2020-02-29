@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -68,7 +67,7 @@ public class ActionConfiguration {
     }
 
     @Bean
-    public static AutowiredActionRequestConfigurersIgnoreParents autowiredRequestConfigurersIgnoreParents(
+    public AutowiredActionRequestConfigurersIgnoreParents autowiredRequestConfigurersIgnoreParents(
             ConfigurableListableBeanFactory beanFactory) {
         return new AutowiredActionRequestConfigurersIgnoreParents(beanFactory);
     }
