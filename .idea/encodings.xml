@@ -26,7 +26,6 @@
     <file url="file://$PROJECT_DIR$/cloud-gateway-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-gateway-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-user-center/cloud-user-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/cloud-user-center/cloud-user-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-user-center/cloud-user-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-user-center/cloud-user-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dev-platform" charset="UTF-8" />
@@ -35,7 +34,6 @@
     <file url="file://$PROJECT_DIR$/dev-platform/dev-app/dev-app-template/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/enterprise-platform" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/enterprise-platform/app-config/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/enterprise-platform/app-config/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/enterprise-platform/app-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/enterprise-platform/app-model/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/enterprise-platform/app-service/src/main/java" charset="UTF-8" />
