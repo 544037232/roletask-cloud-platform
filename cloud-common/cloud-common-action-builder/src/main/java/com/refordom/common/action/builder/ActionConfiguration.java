@@ -2,6 +2,8 @@ package com.refordom.common.action.builder;
 
 import com.refordom.common.action.builder.constant.ActionConstant;
 import com.refordom.common.action.builder.core.ServeRequest;
+import com.refordom.common.action.builder.global.ActionGlobalConfiguration;
+import com.refordom.common.action.builder.global.ActionManager;
 import com.refordom.common.builder.ObjectConfigurer;
 import com.refordom.common.builder.ObjectPostProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import java.util.List;
  * @date 2020/2/1 18:38
  */
 @Configuration
+@Import(ActionGlobalConfiguration.class)
 public class ActionConfiguration {
 
     private ServeRequest serveRequest;
@@ -43,7 +46,7 @@ public class ActionConfiguration {
         FilterRegistrationBean<Filter> registrationBean = new FilterRegistrationBean<>(serveRequest.build());
         registrationBean.setOrder(Integer.MAX_VALUE);
         registrationBean.setName(ActionConstant.ACTION_FILTER_CHAIN_NAME);
-        registrationBean.setUrlPatterns(serveRequest.getUrlPatterns());
+        registrationBean.setUrlPatterns(serveRequest.getActionManager().getUrlPatterns());
         return registrationBean;
     }
 

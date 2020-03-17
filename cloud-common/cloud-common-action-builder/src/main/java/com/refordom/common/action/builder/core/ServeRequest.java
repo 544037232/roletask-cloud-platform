@@ -3,6 +3,7 @@ package com.refordom.common.action.builder.core;
 import com.refordom.common.action.builder.ActionDebugFilter;
 import com.refordom.common.action.builder.ActionFilterChain;
 import com.refordom.common.action.builder.ActionFilterChainProxy;
+import com.refordom.common.action.builder.global.ActionManager;
 import com.refordom.common.builder.AbstractConfiguredObjectBuilder;
 import com.refordom.common.builder.ObjectBuilder;
 import com.refordom.common.builder.ObjectPostProcessor;
@@ -10,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.Filter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -21,11 +21,9 @@ import java.util.List;
 public class ServeRequest extends AbstractConfiguredObjectBuilder<Filter, ServeRequest> implements
         ObjectBuilder<Filter> {
 
-    private boolean debugEnabled = false;
-
     private final List<ObjectBuilder<? extends ActionFilterChain>> actionFilterChainBuilders = new ArrayList<>();
 
-    private Collection<String> urlPatterns = new ArrayList<>();
+    private ActionManager actionManager;
 
     public ServeRequest(ObjectPostProcessor<Object> objectPostProcessor) {
         super(objectPostProcessor);
@@ -45,7 +43,7 @@ public class ServeRequest extends AbstractConfiguredObjectBuilder<Filter, ServeR
         filterChainProxy.afterPropertiesSet();
 
         Filter result = filterChainProxy;
-        if (debugEnabled) {
+        if (actionManager.isDebugEnabled()) {
             log.warn("\n\n"
                     + "********************************************************************\n"
                     + "**********        App Action debugging is enabled.     *************\n"
@@ -64,17 +62,11 @@ public class ServeRequest extends AbstractConfiguredObjectBuilder<Filter, ServeR
         return this;
     }
 
-    public ServeRequest debug(boolean debugEnabled) {
-        this.debugEnabled = debugEnabled;
-        return this;
+    public void setActionManager(ActionManager actionManager) {
+        this.actionManager = actionManager;
     }
 
-    public ServeRequest addUrlPattern(String urlPattern) {
-        this.urlPatterns.add(urlPattern);
-        return this;
-    }
-
-    public Collection<String> getUrlPatterns() {
-        return urlPatterns;
+    public ActionManager getActionManager() {
+        return actionManager;
     }
 }

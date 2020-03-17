@@ -1,7 +1,6 @@
 package com.refordom.app.service.shelves.lower;
 
 import com.refordom.app.config.DefaultParamParser;
-import com.refordom.app.config.constant.AppConstant;
 import com.refordom.app.config.filter.AppDetailsFilter;
 import com.refordom.app.model.AppDetailsManagerService;
 import com.refordom.app.model.AppDistroManagerService;
@@ -9,7 +8,6 @@ import com.refordom.app.service.constant.ActionConstant;
 import com.refordom.app.service.filter.AppDistroFilter;
 import com.refordom.common.action.builder.ActionRequestConfigurerAdapter;
 import com.refordom.common.action.builder.core.ServeAction;
-import com.refordom.common.action.builder.core.ServeRequest;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Resource;
@@ -40,12 +38,5 @@ public class LowerShelfConfiguration extends ActionRequestConfigurerAdapter {
                 .addFilter(new AppDistroFilter(appDistroManagerService),3)
                 .addFilter(new LowerShelfServiceFilter(),4)
                 .addStoreProvider(new LowerShelfStoreProvider(appDistroManagerService));
-    }
-
-    @Override
-    public void configure(ServeRequest builder) throws Exception {
-        builder
-                .debug(true)
-                .addUrlPattern(AppConstant.APP_URL_PATTERNS);
     }
 }

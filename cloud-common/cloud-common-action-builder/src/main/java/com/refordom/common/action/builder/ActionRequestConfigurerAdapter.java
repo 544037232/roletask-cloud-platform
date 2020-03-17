@@ -3,6 +3,7 @@ package com.refordom.common.action.builder;
 import com.refordom.common.action.builder.constant.ActionConstant;
 import com.refordom.common.action.builder.core.ServeAction;
 import com.refordom.common.action.builder.core.ServeRequest;
+import com.refordom.common.action.builder.global.ActionGlobalConfiguration;
 import com.refordom.common.builder.ObjectPostProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -26,6 +27,8 @@ public class ActionRequestConfigurerAdapter implements RequestConfigurer<ServeRe
     // 事务管理器
     private PlatformTransactionManager transactionManager;
 
+    private ActionGlobalConfiguration actionGlobalConfiguration;
+
     private ObjectPostProcessor<Object> objectPostProcessor = new ObjectPostProcessor<Object>() {
         public <T> T postProcess(T object) {
             throw new IllegalStateException(
@@ -39,6 +42,8 @@ public class ActionRequestConfigurerAdapter implements RequestConfigurer<ServeRe
         ServeAction serveAction = getServeAction();
 
         builder.addFilterChainBuilder(serveAction);
+
+        builder.setActionManager(actionGlobalConfiguration.getActionManager());
     }
 
     private ServeAction getServeAction() throws Exception {
@@ -69,6 +74,12 @@ public class ActionRequestConfigurerAdapter implements RequestConfigurer<ServeRe
     public void setApplicationContext(ApplicationContext context) {
         this.context = context;
         this.transactionManager = (PlatformTransactionManager) context.getBean(ActionConstant.ACTION_TRANSACTION_MANAGER);
+    }
+
+    @Autowired
+    public void setAuthenticationConfiguration(
+            ActionGlobalConfiguration actionGlobalConfiguration) {
+        this.actionGlobalConfiguration = actionGlobalConfiguration;
     }
 
     protected void configure(ServeAction builder) throws Exception {
