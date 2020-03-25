@@ -10,6 +10,11 @@ public class GlobalAppConfiguration extends FutureConfigurerAdapter {
     @Override
     protected void configure(ActionFutureBuilder futureBuilder) throws Exception {
         futureBuilder.transaction()
-                .jdbc();
+                .jdbc()
+                .and()
+                .and()
+                .concurrentLock()
+                .zk()
+                .connectionStrings("192.168.3.72:2181,192.168.3.72:2182,192.168.3.72:2183");
     }
 }

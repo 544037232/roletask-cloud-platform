@@ -7,4 +7,5 @@ public interface FutureBuilder<H extends FutureBuilder<H>> extends
         ObjectBuilder<FutureManager> {
 
     H transactionManager(TransactionManager transactionManager);
+
 }

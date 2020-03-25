@@ -1,6 +1,7 @@
 package com.omc.builder.global.builder;
 
 import com.omc.builder.api.TransactionManager;
+import com.omc.builder.configurer.ConcurrentLockConfigurer;
 import com.omc.builder.configurer.TransactionManagerConfigurer;
 import com.omc.builder.global.future.FutureBuilder;
 import com.omc.builder.global.future.FutureManager;
@@ -24,7 +25,7 @@ public class ActionFutureBuilder extends AbstractConfiguredObjectBuilder<FutureM
 
     private final String path;
 
-    public ActionFutureBuilder(ObjectPostProcessor<Object> objectPostProcessor, ApplicationContext context,String path) {
+    public ActionFutureBuilder(ObjectPostProcessor<Object> objectPostProcessor, ApplicationContext context, String path) {
         super(objectPostProcessor);
         this.context = context;
         this.path = path;
@@ -49,6 +50,13 @@ public class ActionFutureBuilder extends AbstractConfiguredObjectBuilder<FutureM
      */
     public TransactionManagerConfigurer<ActionFutureBuilder> transaction() throws Exception {
         return getOrApply(new TransactionManagerConfigurer<>(context));
+    }
+
+    /**
+     * 并发锁，可使用zookeeper，redis，ReentrantLock等
+     */
+    public ConcurrentLockConfigurer<ActionFutureBuilder> concurrentLock() throws Exception {
+        return getOrApply(new ConcurrentLockConfigurer<>());
     }
 
 }

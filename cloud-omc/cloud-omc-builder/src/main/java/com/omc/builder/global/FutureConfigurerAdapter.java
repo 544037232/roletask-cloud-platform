@@ -34,6 +34,8 @@ public abstract class FutureConfigurerAdapter implements FutureConfigurer<Global
         }
         futureBuilder = new ActionFutureBuilder(objectPostProcessor,context,this.getClass().getResource("").getPath());
 
+        futureBuilder.concurrentLock();
+
         configure(futureBuilder);
 
         return futureBuilder;
