@@ -1,5 +1,6 @@
-package com.omc.builder.global.lock;
+package com.omc.builder.global.lock.zk;
 
+import com.omc.builder.global.lock.Lock;
 import org.apache.curator.framework.CuratorFramework;
 
 import java.util.concurrent.TimeUnit;

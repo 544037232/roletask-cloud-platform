@@ -2,8 +2,8 @@ package com.omc.builder.configurer;
 
 import com.omc.builder.global.future.FutureBuilder;
 import com.omc.builder.global.lock.LockBuilder;
-import com.omc.builder.global.lock.SegmentLockBuilder;
-import com.omc.builder.global.lock.ZKLockBuilder;
+import com.omc.builder.global.lock.segment.SegmentLockBuilder;
+import com.omc.builder.global.lock.zk.ZKLockBuilder;
 import com.omc.builder.util.LockUtils;
 
 public class ConcurrentLockConfigurer<B extends FutureBuilder<B>>

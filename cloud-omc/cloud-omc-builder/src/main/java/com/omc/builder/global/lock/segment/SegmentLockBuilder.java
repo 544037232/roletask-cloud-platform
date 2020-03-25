@@ -1,4 +1,7 @@
-package com.omc.builder.global.lock;
+package com.omc.builder.global.lock.segment;
+
+import com.omc.builder.global.lock.Lock;
+import com.omc.builder.global.lock.LockBuilder;
 
 public class SegmentLockBuilder implements LockBuilder {
 

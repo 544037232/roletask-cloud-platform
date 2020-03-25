@@ -1,7 +1,9 @@
-package com.omc.builder.global.lock;
+package com.omc.builder.global.lock.zk;
 
 import com.omc.builder.configurer.ConcurrentLockConfigurer;
 import com.omc.builder.global.future.FutureBuilder;
+import com.omc.builder.global.lock.Lock;
+import com.omc.builder.global.lock.LockBuilder;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
