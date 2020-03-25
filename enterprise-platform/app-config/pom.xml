@@ -14,8 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.refordom</groupId>
-            <artifactId>cloud-common-action-builder</artifactId>
-            <version>${roletask.version}</version>
+            <artifactId>cloud-omc-builder</artifactId>
         </dependency>
 
         <dependency>

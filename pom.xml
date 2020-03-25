@@ -35,6 +35,8 @@
         <module>cloud-gateway-server</module>
         <!-- 企业管理平台 -->
         <module>enterprise-platform</module>
+        <!-- object model chain -->
+        <module>cloud-omc</module>
     </modules>
     <dependencies>
         <dependency>

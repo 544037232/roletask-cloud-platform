@@ -1,7 +1,7 @@
 package com.refordom.app.service.shelves.upper;
 
-import com.refordom.common.action.builder.validator.ActionParamParser;
-import com.refordom.common.action.builder.validator.ParamAdapter;
+import com.omc.builder.validator.ParamAdapter;
+import com.omc.builder.validator.ParamParser;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author pricess.wang
  * @date 2019/12/31 19:44
  */
-public class UpperShelfParamParser implements ActionParamParser {
+public class UpperShelfParamParser implements ParamParser {
 
     @Override
     public ParamAdapter build(HttpServletRequest request) {

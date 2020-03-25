@@ -1,8 +1,8 @@
 package com.refordom.app.config;
 
+import com.omc.builder.validator.ParamAdapter;
 import com.refordom.app.core.AppEnum;
 import com.refordom.app.core.constant.ParamConstant;
-import com.refordom.common.action.builder.validator.ParamAdapter;
 import lombok.Getter;
 import lombok.ToString;
 

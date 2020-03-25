@@ -1,11 +1,11 @@
 package com.refordom.app.config.filter;
 
+import com.omc.builder.context.ActionContextHolder;
+import com.omc.builder.exception.DeprecatedException;
 import com.refordom.app.core.constant.ParamConstant;
 import com.refordom.app.core.AppDetails;
 import com.refordom.app.core.AppEnum;
 import com.refordom.app.model.AppDetailsManagerService;
-import com.refordom.common.action.builder.context.ActionContextHolder;
-import com.refordom.common.action.builder.exception.DeprecatedException;
 
 import javax.servlet.*;
 import java.io.IOException;

@@ -1,14 +1,11 @@
 package com.refordom.app.service.shelves.upper;
 
+import com.omc.builder.ResultToken;
+import com.omc.builder.api.StoreProvider;
 import com.refordom.app.model.AppDistroManagerService;
 import com.refordom.app.model.entity.AppDistro;
-import com.refordom.common.action.builder.ActionStoreProvider;
 
-/**
- * @author pricess.wang
- * @date 2020/1/9 11:08
- */
-public class UpperShelfStoreProvider implements ActionStoreProvider {
+public class UpperShelfStoreProvider implements StoreProvider {
 
     private final AppDistroManagerService appDistroManagerService;
 
@@ -17,7 +14,7 @@ public class UpperShelfStoreProvider implements ActionStoreProvider {
     }
 
     @Override
-    public <T> void provider(T result) {
+    public void provider(ResultToken result) {
         AppDistro appDistro = (AppDistro) result;
         appDistro.setShelves(true);
         appDistroManagerService.updateDistroAppByAppId(appDistro);

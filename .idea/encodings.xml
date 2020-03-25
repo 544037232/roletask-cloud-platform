@@ -6,11 +6,7 @@
     <file url="file://$PROJECT_DIR$/cloud-auth-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-auth-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-action-builder/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-action-builder/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-bom" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-builder/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-builder/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-core" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-common/cloud-common-core/src/main/resources" charset="UTF-8" />
@@ -25,6 +21,10 @@
     <file url="file://$PROJECT_DIR$/cloud-gateway-server" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-gateway-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-gateway-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-omc/cloud-omc-builder/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-omc/cloud-omc-builder/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-omc/cloud-omc-object/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-omc/cloud-omc-object/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-user-center/cloud-user-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-user-center/cloud-user-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-user-center/cloud-user-server/src/main/resources" charset="UTF-8" />

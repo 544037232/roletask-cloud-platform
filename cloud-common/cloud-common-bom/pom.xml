@@ -40,6 +40,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.refordom</groupId>
+                <artifactId>cloud-omc-builder</artifactId>
+                <version>${roletask.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.refordom</groupId>

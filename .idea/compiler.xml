@@ -2,12 +2,12 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cloud-common-security" />
-        <module name="cloud-common-action-builder" />
         <module name="app-model" />
         <module name="app-service" />
         <module name="cloud-gateway-server" />
@@ -19,16 +19,19 @@
         <module name="cloud-common-core" />
         <module name="dev-app-template" />
         <module name="cloud-common-data-security" />
-        <module name="cloud-common-builder" />
+        <module name="cloud-omc-builder" />
         <module name="app-store" />
         <module name="app-api" />
         <module name="app-developer" />
         <module name="app-config" />
         <module name="enterprise-platform-server" />
+        <module name="cloud-omc-object" />
         <module name="app-core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="cloud-common-action-builder" target="1.8" />
+      <module name="cloud-common-builder" target="1.8" />
       <module name="cloud-common-rpc-user" target="1.8" />
       <module name="cloud-server" target="1.8" />
       <module name="dev-user" target="1.8" />
