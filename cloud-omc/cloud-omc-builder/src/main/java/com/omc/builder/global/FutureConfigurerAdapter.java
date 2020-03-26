@@ -32,7 +32,10 @@ public abstract class FutureConfigurerAdapter implements FutureConfigurer<Global
         if (futureBuilder != null) {
             return futureBuilder;
         }
-        futureBuilder = new ActionFutureBuilder(objectPostProcessor,context,this.getClass().getResource("").getPath());
+
+        String path = this.getClass().getResource("").getPath();
+
+        futureBuilder = new ActionFutureBuilder(objectPostProcessor, context, path);
 
         futureBuilder.concurrentLock();
 
