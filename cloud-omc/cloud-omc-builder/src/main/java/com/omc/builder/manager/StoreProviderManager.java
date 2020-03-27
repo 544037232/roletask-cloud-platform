@@ -19,7 +19,7 @@ public class StoreProviderManager implements StoreManager {
     }
 
     @Override
-    public void attemptExecutor(ResultToken resultToken) {
+    public void attemptExecutor(final ResultToken resultToken) {
         transactionManager.openTransaction();
 
         try {
