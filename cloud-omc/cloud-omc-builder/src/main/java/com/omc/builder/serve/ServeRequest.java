@@ -2,6 +2,7 @@ package com.omc.builder.serve;
 
 import com.omc.builder.ProviderManagerProxy;
 import com.omc.builder.api.ProviderManager;
+import com.omc.builder.manager.ActionProviderManager;
 import com.omc.object.AbstractConfiguredObjectBuilder;
 import com.omc.object.ObjectBuilder;
 import com.omc.object.ObjectPostProcessor;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.Filter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -25,19 +27,20 @@ public class ServeRequest extends AbstractConfiguredObjectBuilder<Filter, ServeR
         super(objectPostProcessor);
     }
 
+    private Collection<String> urls = new ArrayList<>();
+
     @Override
     protected Filter performBuild() throws Exception {
 
         List<ProviderManager> providerManagers = new ArrayList<>(actionFilterChainBuilders.size());
 
         for (ObjectBuilder<? extends ProviderManager> providerManagerBuilder : actionFilterChainBuilders) {
-            providerManagers.add(providerManagerBuilder.build());
+            ProviderManager providerManager = providerManagerBuilder.build();
+            providerManagers.add(providerManager);
+            this.urls.add(providerManager.getActionMatcher().getUrl());
         }
 
-        ProviderManagerProxy filterChainProxy = new ProviderManagerProxy(providerManagers);
-
-
-        return filterChainProxy;
+        return new ProviderManagerProxy(providerManagers);
     }
 
 
@@ -47,4 +50,7 @@ public class ServeRequest extends AbstractConfiguredObjectBuilder<Filter, ServeR
         return this;
     }
 
+    public Collection<String> getUrls() {
+        return urls;
+    }
 }

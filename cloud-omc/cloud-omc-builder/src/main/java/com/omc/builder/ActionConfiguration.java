@@ -49,7 +49,7 @@ public class ActionConfiguration {
         FilterRegistrationBean<Filter> registrationBean = new FilterRegistrationBean<>(serveRequest.build());
         registrationBean.setOrder(Integer.MAX_VALUE);
         registrationBean.setName(ActionConstant.ACTION_FILTER_CHAIN_NAME);
-//        registrationBean.setUrlPatterns(globalActionManager.getAllUrlPatterns());
+        registrationBean.setUrlPatterns(serveRequest.getUrls());
         return registrationBean;
     }
 
