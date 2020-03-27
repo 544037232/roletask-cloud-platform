@@ -14,7 +14,7 @@ public class StoreProviderConfigurer<B extends ActionBuilder<B>>
 
     private LinkedList<StoreProvider> storeProviders = new LinkedList<>();
 
-    private TransactionManager transactionManager;
+    private TransactionManager transactionManager = new DefaultNoneTransactionManager();
 
     private final FutureManager futureManager;
 
@@ -24,9 +24,10 @@ public class StoreProviderConfigurer<B extends ActionBuilder<B>>
 
     @Override
     public void init(B builder) throws Exception {
-        if (futureManager == null) {
-            transactionManager = new DefaultNoneTransactionManager();
+        if (futureManager != null) {
+            transactionManager = futureManager.getTransactionManager();
         }
+
     }
 
     @Override
