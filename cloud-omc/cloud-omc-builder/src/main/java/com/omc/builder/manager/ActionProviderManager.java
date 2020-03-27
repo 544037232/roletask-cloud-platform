@@ -10,8 +10,6 @@ import com.omc.builder.filter.VirtualFilterChain;
 import com.omc.builder.handler.FailureHandler;
 import com.omc.builder.handler.SuccessHandler;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationEventPublisherAware;
-import org.springframework.lang.NonNull;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class ActionProviderManager implements ProviderManager, ApplicationEventPublisherAware {
+public class ActionProviderManager implements ProviderManager {
 
     private List<Filter> filters;
 
@@ -39,11 +37,6 @@ public class ActionProviderManager implements ProviderManager, ApplicationEventP
      * 过滤器执行成功后继续执行过滤器
      */
     private boolean continueChainBeforeSuccessfulFilter;
-
-    @Override
-    public void setApplicationEventPublisher(@NonNull ApplicationEventPublisher applicationEventPublisher) {
-        this.eventPublisher = applicationEventPublisher;
-    }
 
     public void setSuccessHandler(SuccessHandler successHandler) {
         this.successHandler = successHandler;
@@ -126,6 +119,10 @@ public class ActionProviderManager implements ProviderManager, ApplicationEventP
         if (failureHandler != null) {
             failureHandler.onFailureContext(request, response, failed);
         }
+    }
+
+    public void setEventPublisher(ApplicationEventPublisher eventPublisher) {
+        this.eventPublisher = eventPublisher;
     }
 
     public void setStoreManager(StoreManager storeManager) {

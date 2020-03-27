@@ -22,6 +22,7 @@ import com.omc.object.AbstractConfiguredObjectBuilder;
 import com.omc.object.ObjectBuilder;
 import com.omc.object.ObjectPostProcessor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 
 import javax.servlet.Filter;
 import java.util.ArrayList;
@@ -119,6 +120,12 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
         actionProviderManager.setContinueChainBeforeSuccessfulFilter(continueChainBeforeSuccessfulFilter);
         actionProviderManager.setServiceManager(serviceManager);
         actionProviderManager.setStoreManager(storeManager);
+
+        ApplicationEventPublisher eventPublisher = getSharedObject(ApplicationEventPublisher.class);
+        if (eventPublisher != null){
+            actionProviderManager.setEventPublisher(eventPublisher);
+        }
+
         return actionProviderManager;
     }
 
@@ -169,4 +176,5 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
         this.debugEnabled = debugEnabled;
         return this;
     }
+
 }
