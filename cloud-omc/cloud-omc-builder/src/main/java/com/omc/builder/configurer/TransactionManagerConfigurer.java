@@ -1,6 +1,6 @@
 package com.omc.builder.configurer;
 
-import com.omc.builder.global.future.FutureBuilder;
+import com.omc.builder.global.feature.FutureBuilder;
 import com.omc.builder.global.transaction.DefaultNoneTransactionManager;
 import com.omc.builder.global.transaction.JdbcTransactionManager;
 import org.springframework.context.ApplicationContext;

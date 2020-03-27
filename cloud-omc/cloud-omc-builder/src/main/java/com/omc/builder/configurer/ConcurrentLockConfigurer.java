@@ -1,6 +1,6 @@
 package com.omc.builder.configurer;
 
-import com.omc.builder.global.future.FutureBuilder;
+import com.omc.builder.global.feature.FutureBuilder;
 import com.omc.builder.global.lock.LockBuilder;
 import com.omc.builder.global.lock.segment.SegmentLockBuilder;
 import com.omc.builder.global.lock.zk.ZKLockBuilder;

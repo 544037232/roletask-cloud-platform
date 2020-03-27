@@ -12,7 +12,7 @@ import com.omc.builder.configurer.StoreProviderConfigurer;
 import com.omc.builder.filter.DebugFilter;
 import com.omc.builder.filter.FilterComparator;
 import com.omc.builder.global.GlobalManager;
-import com.omc.builder.global.future.FutureManager;
+import com.omc.builder.global.feature.FutureManager;
 import com.omc.builder.handler.FailureHandler;
 import com.omc.builder.handler.NullFailureHandler;
 import com.omc.builder.handler.NullSuccessHandler;

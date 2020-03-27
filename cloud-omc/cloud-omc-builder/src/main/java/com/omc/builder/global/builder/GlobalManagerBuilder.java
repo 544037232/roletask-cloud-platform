@@ -1,7 +1,7 @@
 package com.omc.builder.global.builder;
 
 import com.omc.builder.global.GlobalManager;
-import com.omc.builder.global.future.FutureManager;
+import com.omc.builder.global.feature.FutureManager;
 import com.omc.object.AbstractConfiguredObjectBuilder;
 import com.omc.object.ObjectBuilder;
 import com.omc.object.ObjectPostProcessor;
@@ -34,8 +34,8 @@ public class GlobalManagerBuilder extends AbstractConfiguredObjectBuilder<Global
         return globalManager;
     }
 
-    public GlobalManagerBuilder addFutureBuilder(ActionFutureBuilder actionFutureBuilder) {
-        this.futureManagerBuilders.add(actionFutureBuilder);
+    public GlobalManagerBuilder addFutureBuilder(ActionFeatureBuilder actionFeatureBuilder) {
+        this.futureManagerBuilders.add(actionFeatureBuilder);
         return this;
     }
 }

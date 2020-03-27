@@ -3,7 +3,7 @@ package com.omc.builder.configurer;
 import com.omc.builder.ActionBuilder;
 import com.omc.builder.api.StoreProvider;
 import com.omc.builder.api.TransactionManager;
-import com.omc.builder.global.future.FutureManager;
+import com.omc.builder.global.feature.FutureManager;
 import com.omc.builder.global.transaction.DefaultNoneTransactionManager;
 import com.omc.builder.manager.StoreProviderManager;
 

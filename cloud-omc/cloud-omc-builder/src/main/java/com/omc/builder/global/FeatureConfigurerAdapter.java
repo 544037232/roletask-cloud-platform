@@ -1,14 +1,14 @@
 package com.omc.builder.global;
 
-import com.omc.builder.global.builder.ActionFutureBuilder;
+import com.omc.builder.global.builder.ActionFeatureBuilder;
 import com.omc.builder.global.builder.GlobalManagerBuilder;
 import com.omc.object.ObjectPostProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-public abstract class FutureConfigurerAdapter implements FutureConfigurer<GlobalManagerBuilder> {
+public abstract class FeatureConfigurerAdapter implements FeatureConfigurer<GlobalManagerBuilder> {
 
-    private ActionFutureBuilder futureBuilder;
+    private ActionFeatureBuilder futureBuilder;
 
     private ApplicationContext context;
 
@@ -23,19 +23,19 @@ public abstract class FutureConfigurerAdapter implements FutureConfigurer<Global
     @Override
     public void init(GlobalManagerBuilder builder) throws Exception {
 
-        ActionFutureBuilder actionFutureBuilder = getFutureBuilder();
+        ActionFeatureBuilder actionFutureBuilder = getFutureBuilder();
 
         builder.addFutureBuilder(actionFutureBuilder);
     }
 
-    private ActionFutureBuilder getFutureBuilder() throws Exception {
+    private ActionFeatureBuilder getFutureBuilder() throws Exception {
         if (futureBuilder != null) {
             return futureBuilder;
         }
 
         String path = this.getClass().getResource("").getPath();
 
-        futureBuilder = new ActionFutureBuilder(objectPostProcessor, context, path);
+        futureBuilder = new ActionFeatureBuilder(objectPostProcessor, context, path);
 
         futureBuilder.concurrentLock();
 
@@ -44,7 +44,7 @@ public abstract class FutureConfigurerAdapter implements FutureConfigurer<Global
         return futureBuilder;
     }
 
-    protected void configure(ActionFutureBuilder futureBuilder) throws Exception {
+    protected void configure(ActionFeatureBuilder futureBuilder) throws Exception {
 
     }
 

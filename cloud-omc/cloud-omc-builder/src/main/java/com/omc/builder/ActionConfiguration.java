@@ -1,7 +1,7 @@
 package com.omc.builder;
 
 import com.omc.builder.constant.ActionConstant;
-import com.omc.builder.global.FutureManagerConfiguration;
+import com.omc.builder.global.FeatureManagerConfiguration;
 import com.omc.builder.serve.ServeRequest;
 import com.omc.object.ObjectConfigurer;
 import com.omc.object.ObjectPostProcessor;
@@ -21,7 +21,7 @@ import java.util.List;
  * @author pricess.wang
  * @date 2020/2/1 18:38
  */
-@Import(FutureManagerConfiguration.class)
+@Import(FeatureManagerConfiguration.class)
 public class ActionConfiguration {
 
     private ServeRequest serveRequest;

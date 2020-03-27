@@ -7,16 +7,16 @@ import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 
 import java.util.List;
 
-public class FutureManagerConfiguration {
+public class FeatureManagerConfiguration {
 
     @Bean
     public GlobalManager actionManagerBuilder(ObjectPostProcessor<Object> objectPostProcessor,
-                                              List<FutureConfigurerAdapter> configurers) throws Exception {
+                                              List<FeatureConfigurerAdapter> configurers) throws Exception {
         configurers.sort(AnnotationAwareOrderComparator.INSTANCE);
 
         GlobalManagerBuilder actionManagerBuilder = new GlobalManagerBuilder(objectPostProcessor);
 
-        for (FutureConfigurerAdapter globalAdapter : configurers) {
+        for (FeatureConfigurerAdapter globalAdapter : configurers) {
             actionManagerBuilder.apply(globalAdapter);
         }
 

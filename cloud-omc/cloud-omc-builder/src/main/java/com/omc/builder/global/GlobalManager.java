@@ -1,6 +1,6 @@
 package com.omc.builder.global;
 
-import com.omc.builder.global.future.FutureManager;
+import com.omc.builder.global.feature.FutureManager;
 
 import java.util.List;
 
