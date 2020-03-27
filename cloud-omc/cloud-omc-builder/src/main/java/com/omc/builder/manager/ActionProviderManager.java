@@ -94,7 +94,7 @@ public class ActionProviderManager implements ProviderManager, ApplicationEventP
                 return;
             }
 
-            resultToken = serviceManager.attemptExecutor();
+            resultToken = serviceManager.attemptExecutor(request,response);
 
             storeManager.attemptExecutor(resultToken);
 

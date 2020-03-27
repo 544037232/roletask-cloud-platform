@@ -41,7 +41,6 @@ public class UpperShelfConfiguration extends RequestConfigurerAdapter {
                 .debug(true)
                 .service()
                 .addServiceProvider(new UpperShelfServiceProvider())
-                .resultTokenType(UpperShelfResultToken.class)
                 .and()
                 .store()
                 .addStoreProvider(new UpperShelfStoreProvider(appDistroManagerService));
