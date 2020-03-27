@@ -87,9 +87,11 @@ public class ActionProviderManager implements ProviderManager {
                 return;
             }
 
-            resultToken = serviceManager.attemptExecutor(request,response);
+            resultToken = serviceManager.attemptExecutor(request, response);
 
-            storeManager.attemptExecutor(resultToken);
+            if (resultToken != null) {
+                storeManager.attemptExecutor(resultToken);
+            }
 
         } catch (Exception e) {
             unsuccessfulExecutor(request, response, e);
