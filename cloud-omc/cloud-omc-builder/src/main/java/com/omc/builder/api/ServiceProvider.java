@@ -4,7 +4,7 @@ import com.omc.builder.ResultToken;
 
 public interface ServiceProvider {
 
-    void provider(ResultToken instance);
+    ResultToken provider(ResultToken instance);
 
     boolean supports(Class<?> context);
 }

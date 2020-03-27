@@ -13,14 +13,14 @@ import com.refordom.app.model.entity.AppDistro;
 public class UpperShelfServiceProvider implements ServiceProvider {
 
     @Override
-    public void provider(ResultToken instance) {
+    public ResultToken provider(ResultToken instance) {
         AppDistro appDistro = (AppDistro) ActionContextHolder.getContext().getProcessObj(AppDistro.class);
 
         if (appDistro.getShelves()) {
             throw new AppContextException("应用已经上架");
         }
 
-        ActionContextHolder.getContext().addResult(appDistro);
+        return new UpperShelfResultToken(appDistro);
     }
 
     @Override

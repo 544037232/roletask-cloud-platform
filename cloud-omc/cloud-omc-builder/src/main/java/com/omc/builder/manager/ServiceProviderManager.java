@@ -23,12 +23,12 @@ public class ServiceProviderManager implements ServiceManager {
 
     @Override
     public ResultToken attemptExecutor(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        ResultToken result = resultProcessing.init(request,response);
+        ResultToken result = resultProcessing.init(request, response);
 
         for (ServiceProvider serviceProvider : serviceProviders) {
 
             if (serviceProvider.supports(serviceProvider.getClass())) {
-                serviceProvider.provider(result);
+                result = serviceProvider.provider(result);
             }
         }
 

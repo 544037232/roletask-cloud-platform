@@ -1,11 +1,17 @@
 package com.refordom.app.service.shelves.upper;
 
 import com.omc.builder.ResultToken;
-import lombok.Data;
+import com.refordom.app.model.entity.AppDistro;
 
-@Data
 public class UpperShelfResultToken implements ResultToken {
-    private String id;
 
-    private String appId;
+    private AppDistro appDistro;
+
+    public UpperShelfResultToken(AppDistro appDistro){
+        this.appDistro = appDistro;
+    }
+
+    public AppDistro getAppDistro() {
+        return appDistro;
+    }
 }
