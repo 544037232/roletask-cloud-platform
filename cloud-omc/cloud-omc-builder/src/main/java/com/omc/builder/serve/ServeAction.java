@@ -47,7 +47,7 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
 
     private FilterComparator filterComparator = new FilterComparator();
 
-    private boolean debugEnabled = false;
+    private boolean debugEnabled;
 
     private ActionMatcher actionMatcher;
 
@@ -71,6 +71,7 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
         for (FutureManager futureManager : globalManager.getFutureManagers()) {
             if (path.contains(futureManager.getPath())) {
                 this.futureManager = futureManager;
+                this.debugEnabled = futureManager.isDebugEnabled();
                 break;
             }
         }
@@ -109,7 +110,7 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
 
         if (debugEnabled) {
             addFilter(new DebugFilter(actionProviderManager), Integer.MIN_VALUE);
-            log.warn("********** action:" + actionMatcher.getActionName() + " debugging is enabled.***********\n ");
+            log.warn("********** action:" + actionMatcher.getActionName() + " debugging is enabled.***********");
         }
 
         filters.sort(filterComparator);

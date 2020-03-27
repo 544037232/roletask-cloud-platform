@@ -11,12 +11,22 @@ public class FutureManager {
 
     private String path;
 
+    private boolean debugEnabled;
+
     public void setTransactionManager(TransactionManager transactionManager) {
         this.transactionManager = transactionManager;
     }
 
     public TransactionManager getTransactionManager() {
         return transactionManager;
+    }
+
+    public void setDebugEnabled(boolean debugEnabled) {
+        this.debugEnabled = debugEnabled;
+    }
+
+    public boolean isDebugEnabled() {
+        return debugEnabled;
     }
 
     public String getPath() {

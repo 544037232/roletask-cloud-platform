@@ -9,7 +9,9 @@ public class GlobalAppConfiguration extends FutureConfigurerAdapter {
 
     @Override
     protected void configure(ActionFutureBuilder futureBuilder) throws Exception {
-        futureBuilder.transaction()
+        futureBuilder
+                .debug(true)
+                .transaction()
                 .jdbc()
                 .and()
                 .and()

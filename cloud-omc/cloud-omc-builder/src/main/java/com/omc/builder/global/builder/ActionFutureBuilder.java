@@ -25,6 +25,8 @@ public class ActionFutureBuilder extends AbstractConfiguredObjectBuilder<FutureM
 
     private final String path;
 
+    private boolean debugEnabled = false;
+
     public ActionFutureBuilder(ObjectPostProcessor<Object> objectPostProcessor, ApplicationContext context, String path) {
         super(objectPostProcessor);
         this.context = context;
@@ -35,6 +37,7 @@ public class ActionFutureBuilder extends AbstractConfiguredObjectBuilder<FutureM
     protected FutureManager performBuild() throws Exception {
         FutureManager futureManager = new FutureManager();
         futureManager.setPath(path);
+        futureManager.setDebugEnabled(debugEnabled);
         futureManager.setTransactionManager(transactionManager);
         return futureManager;
     }
@@ -59,4 +62,8 @@ public class ActionFutureBuilder extends AbstractConfiguredObjectBuilder<FutureM
         return getOrApply(new ConcurrentLockConfigurer<>());
     }
 
+    public ActionFutureBuilder debug(boolean debugEnabled) {
+        this.debugEnabled = debugEnabled;
+        return this;
+    }
 }

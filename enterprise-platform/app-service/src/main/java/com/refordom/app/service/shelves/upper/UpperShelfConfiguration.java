@@ -38,7 +38,6 @@ public class UpperShelfConfiguration extends RequestConfigurerAdapter {
                 .and()
                 .addFilter(new AppDetailsFilter(appDetailsManagerService),2)
                 .addFilter(new AppDistroFilter(appDistroManagerService),3)
-                .debug(true)
                 .service()
                 .addServiceProvider(new UpperShelfServiceProvider())
                 .and()
