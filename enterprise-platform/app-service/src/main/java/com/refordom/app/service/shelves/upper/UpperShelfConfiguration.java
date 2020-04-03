@@ -31,7 +31,7 @@ public class UpperShelfConfiguration extends RequestConfigurerAdapter {
     protected void configure(ServeAction builder) throws Exception {
         builder.requestMatcher().actionName("上架")
                 .url(ActionConstant.UPPER_SHELF)
-                .method(HttpMethod.POST)
+                .method(HttpMethod.GET)
                 .and()
                 .paramsCheck()
                 .actionParamParser(new UpperShelfParamParser())

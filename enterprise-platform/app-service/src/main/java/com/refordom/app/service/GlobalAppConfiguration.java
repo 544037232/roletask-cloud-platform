@@ -12,11 +12,6 @@ public class GlobalAppConfiguration extends FeatureConfigurerAdapter {
         futureBuilder
                 .debug(true)
                 .transaction()
-                .jdbc()
-                .and()
-                .and()
-                .concurrentLock()
-                .zk()
-                .connectionStrings("192.168.3.72:2181,192.168.3.72:2182,192.168.3.72:2183");
+                .jdbc();
     }
 }

@@ -14,7 +14,7 @@ import java.util.Collection;
  * @author 王晟权
  * 接口权限判断工具
  */
-@Component("ps")
+@Component("perService")
 public class PermissionService {
     /**
      * 判断接口是否有xxx:xxx权限
@@ -36,4 +36,9 @@ public class PermissionService {
                 .filter(StringUtils::hasText)
                 .anyMatch(x -> PatternMatchUtils.simpleMatch(permission, x));
     }
+
+    public boolean checked(Authentication authentication, int id) {
+        return true;
+    }
+
 }

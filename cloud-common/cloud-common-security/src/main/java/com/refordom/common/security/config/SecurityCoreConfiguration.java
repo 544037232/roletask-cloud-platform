@@ -17,7 +17,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
  */
 @Configuration
 @EnableConfigurationProperties(SecurityProperties.class)
-@ComponentScan("com.refordom.common.security.*")
+@ComponentScan("com.refordom.common.security.**")
 public class SecurityCoreConfiguration {
 
     /**
@@ -40,4 +40,5 @@ public class SecurityCoreConfiguration {
         source.setBasename("classpath:security/messages_zh_CN");
         return source;
     }
+
 }

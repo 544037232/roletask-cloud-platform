@@ -1,6 +1,5 @@
 package com.refordom.app.store;
 
-import com.refordom.common.security.annotation.ResourceServer;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan("com.refordom.app.model.dao")
-@ResourceServer
 @ComponentScan("com.refordom.app.*")
 public class AppStoreApplication {
 

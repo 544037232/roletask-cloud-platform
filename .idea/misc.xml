@@ -15,6 +15,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/cloud-auth-server/pom.xml" />
         <option value="$PROJECT_DIR$/cloud-common/cloud-common-action-builder/pom.xml" />
         <option value="$PROJECT_DIR$/cloud-common/cloud-common-builder/pom.xml" />
         <option value="$PROJECT_DIR$/cloud-common/cloud-common-rpc-user/pom.xml" />

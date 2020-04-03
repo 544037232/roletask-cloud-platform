@@ -25,8 +25,6 @@
     <modules>
         <!-- 云平台公共包 -->
         <module>cloud-common</module>
-        <!-- 云平台统一认证中心 -->
-        <module>cloud-auth-server</module>
         <!-- 开发者平台 -->
         <module>dev-platform</module>
         <!-- 云平台用户 -->

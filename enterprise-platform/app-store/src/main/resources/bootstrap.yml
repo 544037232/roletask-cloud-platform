@@ -15,10 +15,10 @@ spring:
         shared-dataids: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
   profiles:
     active: dev
-
-  redis:
-    database: 1
-    host : 127.0.0.1
-    port: 6379
-    password: 123456
-
+keycloak:
+  realm: oauth2-sample
+  resource: app-store
+  auth-server-url: http://127.0.0.1:8080/auth
+  ssl-required: external
+  public-client: true
+  principal-attribute: preferred_username

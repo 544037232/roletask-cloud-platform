@@ -22,12 +22,13 @@ public class StoreProviderManager implements StoreManager {
     public void attemptExecutor(final ResultToken resultToken) {
         transactionManager.openTransaction();
 
+        ResultToken result = resultToken;
         try {
 
             for (StoreProvider storeProvider : storeProviders) {
 
-                if (storeProvider.supports(resultToken.getClass())) {
-                    storeProvider.provider(resultToken);
+                if (storeProvider.supports(result.getClass())) {
+                    result = storeProvider.provider(result);
                 }
             }
             transactionManager.commit();
