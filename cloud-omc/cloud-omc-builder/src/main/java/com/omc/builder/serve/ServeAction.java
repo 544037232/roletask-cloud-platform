@@ -18,7 +18,6 @@ import com.omc.builder.handler.NullFailureHandler;
 import com.omc.builder.handler.NullSuccessHandler;
 import com.omc.builder.handler.SuccessHandler;
 import com.omc.builder.manager.ActionProviderManager;
-import com.omc.builder.proxy.ServeProxyBeanFactory;
 import com.omc.object.AbstractConfiguredObjectBuilder;
 import com.omc.object.ObjectBuilder;
 import com.omc.object.ObjectPostProcessor;
@@ -80,10 +79,8 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
 
     @Override
     public ServeAction addFilter(Filter filter, Integer sort) {
-
-        Filter filterProxy = ServeProxyBeanFactory.createProxyBean(filter);
-        filterComparator.register(filterProxy, sort);
-        filters.add(filterProxy);
+        filterComparator.register(filter, sort);
+        filters.add(filter);
         return this;
     }
 
