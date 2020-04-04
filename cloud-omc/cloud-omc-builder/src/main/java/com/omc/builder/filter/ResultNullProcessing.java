@@ -13,7 +13,7 @@ import java.io.IOException;
 public class ResultNullProcessing implements ResultProcessing {
 
     @Override
-    public ResultToken init(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public ResultToken builder(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         return new ResultToken(){};
     }
 }

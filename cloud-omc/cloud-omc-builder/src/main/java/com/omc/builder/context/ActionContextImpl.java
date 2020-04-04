@@ -1,5 +1,6 @@
 package com.omc.builder.context;
 
+import com.omc.builder.ResultToken;
 import com.omc.builder.validator.ParamAdapter;
 
 import java.util.ArrayList;
@@ -16,9 +17,9 @@ public class ActionContextImpl implements ActionContext {
 
     private ParamAdapter paramAdapter;
 
-    private List<Object> results = new ArrayList<>();
-
     private Map<Object,Object> process = new ConcurrentHashMap<>();
+
+    private ResultToken resultToken;
 
     // ~ Methods
     // ========================================================================================================
@@ -44,13 +45,13 @@ public class ActionContextImpl implements ActionContext {
     }
 
     @Override
-    public <T> void addResult(T result) {
-        results.add(result);
+    public void setResult(ResultToken result) {
+        this.resultToken = result;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T> List<T> getResult() {
-        return (List<T>) results;
+    public ResultToken getResult() {
+        return resultToken;
     }
+
 }

@@ -35,7 +35,9 @@ public abstract class FeatureConfigurerAdapter implements FeatureConfigurer<Glob
 
         String path = this.getClass().getResource("").getPath();
 
-        futureBuilder = new ActionFeatureBuilder(objectPostProcessor, context, path);
+        futureBuilder = new ActionFeatureBuilder(objectPostProcessor, path);
+
+        futureBuilder.setSharedObject(ApplicationContext.class, context);
 
         futureBuilder.concurrentLock();
 

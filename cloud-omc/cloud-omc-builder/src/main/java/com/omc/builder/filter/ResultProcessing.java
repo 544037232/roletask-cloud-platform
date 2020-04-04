@@ -12,6 +12,6 @@ import java.io.IOException;
  */
 public interface ResultProcessing {
 
-    ResultToken init(HttpServletRequest request, HttpServletResponse response)
+    ResultToken builder(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException;
 }

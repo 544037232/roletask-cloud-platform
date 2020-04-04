@@ -17,7 +17,7 @@ public final class ParamsCheckConfigurer<B extends ActionBuilder<B>>
 
     @Override
     public final void init(B builder) throws Exception {
-        builder.addFilter(paramsCheckFilter, 1);
+        builder.addFilter(paramsCheckFilter);
     }
 
     @Override

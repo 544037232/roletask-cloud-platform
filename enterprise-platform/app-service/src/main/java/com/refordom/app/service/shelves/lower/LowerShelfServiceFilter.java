@@ -23,6 +23,5 @@ public class LowerShelfServiceFilter extends AbstractFilter {
             throw new AppContextException("应用已经下架");
         }
 
-        ActionContextHolder.getContext().addResult(appDistro);
     }
 }

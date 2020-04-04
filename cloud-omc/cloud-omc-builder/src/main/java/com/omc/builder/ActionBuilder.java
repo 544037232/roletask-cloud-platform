@@ -1,8 +1,6 @@
 package com.omc.builder;
 
 import com.omc.builder.api.ProviderManager;
-import com.omc.builder.api.ServiceManager;
-import com.omc.builder.api.StoreManager;
 import com.omc.object.ObjectBuilder;
 import com.omc.object.ObjectConfigurer;
 
@@ -27,11 +25,12 @@ public interface ActionBuilder<H extends ActionBuilder<H>> extends
 
     <C> C getSharedObject(Class<C> sharedType);
 
-    H addFilter(Filter filter, Integer sort);
+    H addFilterAfter(Filter filter, Class<? extends Filter> afterFilter);
+
+    H addFilterBefore(Filter filter, Class<? extends Filter> beforeFilter);
+
+    H addFilter(Filter filter);
 
     H actionMatcher(ActionMatcher actionMatcher);
 
-    H serviceManager(ServiceManager serviceManager);
-
-    H storeManager(StoreManager storeManager);
 }

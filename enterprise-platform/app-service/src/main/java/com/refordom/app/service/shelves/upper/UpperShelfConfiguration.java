@@ -1,6 +1,7 @@
 package com.refordom.app.service.shelves.upper;
 
 import com.omc.builder.RequestConfigurerAdapter;
+import com.omc.builder.filter.ParamsCheckFilter;
 import com.omc.builder.serve.ServeAction;
 import com.refordom.app.config.filter.AppDetailsFilter;
 import com.refordom.app.model.AppDetailsManagerService;
@@ -36,13 +37,15 @@ public class UpperShelfConfiguration extends RequestConfigurerAdapter {
                 .paramsCheck()
                 .actionParamParser(new UpperShelfParamParser())
                 .and()
-                .addFilter(new AppDetailsFilter(appDetailsManagerService),2)
-                .addFilter(new AppDistroFilter(appDistroManagerService),3)
+                .addFilterAfter(new AppDetailsFilter(appDetailsManagerService), ParamsCheckFilter.class)
+                .addFilterAfter(new AppDistroFilter(appDistroManagerService),AppDetailsFilter.class)
                 .service()
                 .addServiceProvider(new UpperShelfServiceProvider())
                 .and()
                 .store()
-                .addStoreProvider(new UpperShelfStoreProvider(appDistroManagerService));
+                .addStoreProvider(new UpperShelfStoreProvider(appDistroManagerService))
+                .transaction()
+                .jdbc();
     }
 
 

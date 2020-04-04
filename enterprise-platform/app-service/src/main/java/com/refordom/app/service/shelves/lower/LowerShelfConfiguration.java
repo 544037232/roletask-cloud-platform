@@ -1,6 +1,7 @@
 package com.refordom.app.service.shelves.lower;
 
 import com.omc.builder.RequestConfigurerAdapter;
+import com.omc.builder.filter.ParamsCheckFilter;
 import com.omc.builder.serve.ServeAction;
 import com.refordom.app.config.DefaultParamParser;
 import com.refordom.app.config.filter.AppDetailsFilter;
@@ -36,8 +37,8 @@ public class LowerShelfConfiguration extends RequestConfigurerAdapter {
                 .paramsCheck()
                 .actionParamParser(new DefaultParamParser())
                 .and()
-                .addFilter(new AppDetailsFilter(appDetailsManagerService),2)
-                .addFilter(new AppDistroFilter(appDistroManagerService),3)
-                .addFilter(new LowerShelfServiceFilter(),4);
+                .addFilterAfter(new AppDetailsFilter(appDetailsManagerService), ParamsCheckFilter.class)
+                .addFilterAfter(new AppDistroFilter(appDistroManagerService), AppDetailsFilter.class)
+                .addFilterAfter(new LowerShelfServiceFilter(), AppDistroFilter.class);
     }
 }

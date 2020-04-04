@@ -7,7 +7,7 @@ import com.omc.builder.global.lock.zk.ZKLockBuilder;
 import com.omc.builder.util.LockUtils;
 
 public class ConcurrentLockConfigurer<B extends FutureBuilder<B>>
-        extends AbstractManagerConfigurer<TransactionManagerConfigurer<B>, B> {
+        extends AbstractManagerConfigurer<ConcurrentLockConfigurer<B>, B> {
 
     private LockBuilder lockBuilder;
 

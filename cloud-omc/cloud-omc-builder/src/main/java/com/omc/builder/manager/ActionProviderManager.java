@@ -3,8 +3,7 @@ package com.omc.builder.manager;
 import com.omc.builder.ActionMatcher;
 import com.omc.builder.ResultToken;
 import com.omc.builder.api.ProviderManager;
-import com.omc.builder.api.ServiceManager;
-import com.omc.builder.api.StoreManager;
+import com.omc.builder.context.ActionContextHolder;
 import com.omc.builder.event.SuccessEvent;
 import com.omc.builder.filter.VirtualFilterChain;
 import com.omc.builder.handler.FailureHandler;
@@ -22,10 +21,6 @@ public class ActionProviderManager implements ProviderManager {
     private List<Filter> filters;
 
     private ActionMatcher actionMatcher;
-
-    private ServiceManager serviceManager;
-
-    private StoreManager storeManager;
 
     private ApplicationEventPublisher eventPublisher;
 
@@ -77,20 +72,12 @@ public class ActionProviderManager implements ProviderManager {
 
         HttpServletResponse response = (HttpServletResponse) rep;
 
-        ResultToken resultToken;
-
         try {
 
             virtualFilterChain.doFilter(req, rep);
 
             if (!virtualFilterChain.hasFinished()) {
                 return;
-            }
-
-            resultToken = serviceManager.attemptExecutor(request, response);
-
-            if (resultToken != null) {
-                storeManager.attemptExecutor(resultToken);
             }
 
         } catch (Exception e) {
@@ -102,7 +89,9 @@ public class ActionProviderManager implements ProviderManager {
             filterChain.doFilter(req, rep);
         }
 
-        successfulExecutor(request, response, resultToken);
+        ResultToken result = ActionContextHolder.getContext().getResult();
+
+        successfulExecutor(request, response, result);
     }
 
     private void successfulExecutor(HttpServletRequest request, HttpServletResponse response, ResultToken resultToken) throws IOException, ServletException {
@@ -127,11 +116,4 @@ public class ActionProviderManager implements ProviderManager {
         this.eventPublisher = eventPublisher;
     }
 
-    public void setStoreManager(StoreManager storeManager) {
-        this.storeManager = storeManager;
-    }
-
-    public void setServiceManager(ServiceManager serviceManager) {
-        this.serviceManager = serviceManager;
-    }
 }

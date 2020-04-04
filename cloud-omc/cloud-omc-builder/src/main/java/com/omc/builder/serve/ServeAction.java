@@ -3,8 +3,6 @@ package com.omc.builder.serve;
 import com.omc.builder.ActionBuilder;
 import com.omc.builder.ActionMatcher;
 import com.omc.builder.api.ProviderManager;
-import com.omc.builder.api.ServiceManager;
-import com.omc.builder.api.StoreManager;
 import com.omc.builder.configurer.ParamsCheckConfigurer;
 import com.omc.builder.configurer.RequestMatcherConfigurer;
 import com.omc.builder.configurer.ServiceProviderConfigurer;
@@ -22,6 +20,7 @@ import com.omc.object.AbstractConfiguredObjectBuilder;
 import com.omc.object.ObjectBuilder;
 import com.omc.object.ObjectPostProcessor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEventPublisher;
 
 import javax.servlet.Filter;
@@ -45,19 +44,13 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
 
     private FailureHandler failureHandler = new NullFailureHandler();
 
-    private FilterComparator filterComparator = new FilterComparator();
+    private FilterComparator comparator = new FilterComparator();
 
     private boolean debugEnabled;
 
     private ActionMatcher actionMatcher;
 
     private boolean continueChainBeforeSuccessfulFilter = false;
-
-    private ServiceManager serviceManager;
-
-    private StoreManager storeManager;
-
-    private FutureManager futureManager;
 
     @SuppressWarnings("unchecked")
     public ServeAction(ObjectPostProcessor<Object> objectPostProcessor, Map<Class<?>, Object> sharedObjects, GlobalManager globalManager, String path) {
@@ -70,7 +63,6 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
 
         for (FutureManager futureManager : globalManager.getFutureManagers()) {
             if (path.contains(futureManager.getPath())) {
-                this.futureManager = futureManager;
                 this.debugEnabled = futureManager.isDebugEnabled();
                 break;
             }
@@ -78,9 +70,27 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
     }
 
     @Override
-    public ServeAction addFilter(Filter filter, Integer sort) {
-        filterComparator.register(filter, sort);
-        filters.add(filter);
+    public ServeAction addFilterAfter(Filter filter, Class<? extends Filter> afterFilter) {
+        comparator.registerAfter(filter.getClass(), afterFilter);
+        return addFilter(filter);
+    }
+
+    @Override
+    public ServeAction addFilterBefore(Filter filter, Class<? extends Filter> beforeFilter) {
+        comparator.registerBefore(filter.getClass(), beforeFilter);
+        return addFilter(filter);
+    }
+
+    @Override
+    public ServeAction addFilter(Filter filter) {
+        Class<? extends Filter> filterClass = filter.getClass();
+        if (!comparator.isRegistered(filterClass)) {
+            throw new IllegalArgumentException(
+                    "The Filter class "
+                            + filterClass.getName()
+                            + " does not have a registered order and cannot be added without a specified order. Consider using addFilterBefore or addFilterAfter instead.");
+        }
+        this.filters.add(filter);
         return this;
     }
 
@@ -91,36 +101,22 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
     }
 
     @Override
-    public ServeAction serviceManager(ServiceManager serviceManager) {
-        this.serviceManager = serviceManager;
-        return this;
-    }
-
-    @Override
-    public ServeAction storeManager(StoreManager storeManager) {
-        this.storeManager = storeManager;
-        return this;
-    }
-
-    @Override
     protected ProviderManager performBuild() throws Exception {
 
         ActionProviderManager actionProviderManager = new ActionProviderManager();
         actionProviderManager.setActionMatcher(actionMatcher);
 
         if (debugEnabled) {
-            addFilter(new DebugFilter(actionProviderManager), Integer.MIN_VALUE);
+            addFilter(new DebugFilter(actionProviderManager));
             log.warn("********** action:" + actionMatcher.getActionName() + " debugging is enabled.***********");
         }
 
-        filters.sort(filterComparator);
+        filters.sort(comparator);
 
         actionProviderManager.setFilters(filters);
         actionProviderManager.setSuccessHandler(successHandler);
         actionProviderManager.setFailureHandler(failureHandler);
         actionProviderManager.setContinueChainBeforeSuccessfulFilter(continueChainBeforeSuccessfulFilter);
-        actionProviderManager.setServiceManager(serviceManager);
-        actionProviderManager.setStoreManager(storeManager);
 
         ApplicationEventPublisher eventPublisher = getSharedObject(ApplicationEventPublisher.class);
         if (eventPublisher != null) {
@@ -155,7 +151,7 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
      * 存储配置，包括持久化执行，事务管理
      */
     public StoreProviderConfigurer<ServeAction> store() throws Exception {
-        return getOrApply(new StoreProviderConfigurer<>(futureManager));
+        return getOrApply(new StoreProviderConfigurer<>(this.getSharedObject(ApplicationContext.class)));
     }
 
     public ServeAction successHandler(SuccessHandler successHandler) {

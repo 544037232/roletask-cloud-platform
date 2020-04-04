@@ -6,7 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.util.StringUtils;
 
 public class RequestMatcherConfigurer<B extends ActionBuilder<B>>
-        extends AbstractActionConfigurer<ParamsCheckConfigurer<B>, B> {
+        extends AbstractActionConfigurer<RequestMatcherConfigurer<B>, B> {
 
     private String url;
 

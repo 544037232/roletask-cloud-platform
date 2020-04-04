@@ -1,5 +1,6 @@
 package com.omc.builder.context;
 
+import com.omc.builder.ResultToken;
 import com.omc.builder.validator.ParamAdapter;
 
 import java.io.Serializable;
@@ -21,7 +22,7 @@ public interface ActionContext extends Serializable {
 
     Object getProcessObj(Object key);
 
-    <T> void addResult(T result);
+    void setResult(ResultToken result);
 
-    <T> List<T> getResult();
+    ResultToken getResult();
 }

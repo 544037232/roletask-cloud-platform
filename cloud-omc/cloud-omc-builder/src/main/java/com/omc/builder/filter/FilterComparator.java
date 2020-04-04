@@ -8,9 +8,18 @@ import java.util.Map;
 
 public final class FilterComparator implements Comparator<Filter>, Serializable {
 
+    private static final int INITIAL_ORDER = 100;
+    private static final int ORDER_STEP = 100;
     private final Map<String, Integer> filterToOrder = new HashMap<>();
 
-    private final Map<String, Boolean> registered = new HashMap<>();
+    public FilterComparator() {
+        Step order = new Step(INITIAL_ORDER, ORDER_STEP);
+        put(DebugFilter.class, order.next());
+        put(ParamsCheckFilter.class, order.next());
+        put(ResultBuilderFilter.class, order.next());
+        put(ServiceProviderFilter.class, order.next());
+        put(StoreProviderFilter.class, order.next());
+    }
 
     public int compare(Filter lhs, Filter rhs) {
         Integer left = getOrder(lhs.getClass());
@@ -18,10 +27,65 @@ public final class FilterComparator implements Comparator<Filter>, Serializable 
         return left.compareTo(right);
     }
 
+    /**
+     * Determines if a particular {@link Filter} is registered to be sorted
+     *
+     * @param filter
+     * @return
+     */
+    public boolean isRegistered(Class<? extends Filter> filter) {
+        return getOrder(filter) != null;
+    }
+
+    /**
+     * Registers a {@link Filter} to exist after a particular {@link Filter} that is
+     * already registered.
+     * @param filter the {@link Filter} to register
+     * @param afterFilter the {@link Filter} that is already registered and that
+     * {@code filter} should be placed after.
+     */
+    public void registerAfter(Class<? extends Filter> filter,
+                              Class<? extends Filter> afterFilter) {
+        Integer position = getOrder(afterFilter);
+        if (position == null) {
+            throw new IllegalArgumentException(
+                    "Cannot register after unregistered Filter " + afterFilter);
+        }
+
+        put(filter, position + 1);
+    }
+
+    /**
+     * Registers a {@link Filter} to exist before a particular {@link Filter} that is
+     * already registered.
+     * @param filter the {@link Filter} to register
+     * @param beforeFilter the {@link Filter} that is already registered and that
+     * {@code filter} should be placed before.
+     */
+    public void registerBefore(Class<? extends Filter> filter,
+                               Class<? extends Filter> beforeFilter) {
+        Integer position = getOrder(beforeFilter);
+        if (position == null) {
+            throw new IllegalArgumentException(
+                    "Cannot register after unregistered Filter " + beforeFilter);
+        }
+
+        put(filter, position - 1);
+    }
+
+    private void put(Class<? extends Filter> filter, int position) {
+        String className = filter.getName();
+        filterToOrder.put(className, position);
+    }
+
+    /**
+     * Gets the order of a particular {@link Filter} class taking into consideration
+     * superclasses.
+     *
+     * @param clazz the {@link Filter} class to determine the sort order
+     * @return the sort order or null if not defined
+     */
     private Integer getOrder(Class<?> clazz) {
-
-        Class<?> delegate = clazz;
-
         while (clazz != null) {
             Integer result = filterToOrder.get(clazz.getName());
             if (result != null) {
@@ -29,33 +93,25 @@ public final class FilterComparator implements Comparator<Filter>, Serializable 
             }
             clazz = clazz.getSuperclass();
         }
-
-        throw new IllegalArgumentException(
-                "this Filter " + delegate.getName() + " already exist");
+        return null;
     }
 
-    public void register(Filter filter, Integer sort) {
-        String filterName = filter.getClass().getName();
+    private static class Step {
 
-        if (filterToOrder.get(filterName) != null && isRegister(filterName)) {
-            throw new IllegalArgumentException(
-                    "this Filter " + filterName + " already exist");
+        private int value;
+        private final int stepSize;
+
+        Step(int initialValue, int stepSize) {
+            this.value = initialValue;
+            this.stepSize = stepSize;
         }
-        filterToOrder.put(filterName, sort);
 
-        registered.put(filterName, true);
+        int next() {
+            int value = this.value;
+            this.value += this.stepSize;
+            return value;
+        }
+
     }
 
-    private Boolean isRegister(String filterName) {
-        Boolean isRegister = registered.get(filterName);
-
-        return isRegister == null ? false : isRegister;
-    }
-
-    public void reset(Class<? extends Filter> filter, Integer sort) {
-        String filterName = filter.getName();
-
-        filterToOrder.put(filterName, sort);
-        registered.put(filterName, false);
-    }
 }

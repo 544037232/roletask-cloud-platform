@@ -10,8 +10,6 @@ public class GlobalAppConfiguration extends FeatureConfigurerAdapter {
     @Override
     protected void configure(ActionFeatureBuilder futureBuilder) throws Exception {
         futureBuilder
-                .debug(true)
-                .transaction()
-                .jdbc();
+                .debug(true);
     }
 }

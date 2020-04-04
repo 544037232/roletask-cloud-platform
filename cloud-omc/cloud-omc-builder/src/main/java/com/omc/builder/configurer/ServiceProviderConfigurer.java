@@ -2,16 +2,18 @@ package com.omc.builder.configurer;
 
 import com.omc.builder.ActionBuilder;
 import com.omc.builder.api.ServiceProvider;
+import com.omc.builder.filter.ResultBuilderFilter;
+import com.omc.builder.filter.ServiceProviderFilter;
 import com.omc.builder.filter.ResultNullProcessing;
 import com.omc.builder.filter.ResultProcessing;
-import com.omc.builder.manager.ServiceProviderManager;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceProviderConfigurer<B extends ActionBuilder<B>>
         extends AbstractActionConfigurer<ServiceProviderConfigurer<B>, B> {
 
-    private LinkedList<ServiceProvider> serviceProviders = new LinkedList<>();
+    private List<ServiceProvider> serviceProviders = new ArrayList<>();
 
     private ResultProcessing resultProcessing;
 
@@ -24,11 +26,12 @@ public class ServiceProviderConfigurer<B extends ActionBuilder<B>>
 
     @Override
     public void configure(B builder) throws Exception {
-        ServiceProviderManager serviceProviderManager = new ServiceProviderManager(serviceProviders);
+        ServiceProviderFilter filterServiceInterceptor = new ServiceProviderFilter(serviceProviders);
 
-        serviceProviderManager.setResultProcessing(resultProcessing);
+        ResultBuilderFilter filterResultInterceptor = new ResultBuilderFilter(resultProcessing);
 
-        builder.serviceManager(serviceProviderManager);
+        builder.addFilter(filterServiceInterceptor);
+        builder.addFilter(filterResultInterceptor);
     }
 
     public ServiceProviderConfigurer<B> addServiceProvider(ServiceProvider serviceProvider) {
