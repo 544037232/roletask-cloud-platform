@@ -17,17 +17,10 @@ public class VirtualFilterChain implements FilterChain {
 
     private final List<Filter> filters;
 
-    private final boolean continueChainBeforeSuccessfulFilter;
 
-    private FilterChain originChain;
-
-    public VirtualFilterChain(FilterChain chain,
-                              List<Filter> filters,
-                              boolean continueChainBeforeSuccessfulFilter) {
-        this.originChain = chain;
+    public VirtualFilterChain(List<Filter> filters) {
         this.size = filters.size();
         this.filters = filters;
-        this.continueChainBeforeSuccessfulFilter = continueChainBeforeSuccessfulFilter;
     }
 
     public boolean hasFinished() {
@@ -36,14 +29,8 @@ public class VirtualFilterChain implements FilterChain {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse response) throws IOException, ServletException {
-        if (currentPosition == size) {
+        if (currentPosition != size) {
 
-            if (!continueChainBeforeSuccessfulFilter) {
-                return;
-            }
-
-            originChain.doFilter(req, response);
-        } else {
             currentPosition++;
 
             Filter nextFilter = filters.get(currentPosition - 1);

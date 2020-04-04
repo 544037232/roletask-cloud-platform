@@ -66,7 +66,7 @@ public class ActionProviderManager implements ProviderManager {
     @Override
     public void attemptExecutor(ServletRequest req, ServletResponse rep, FilterChain filterChain) throws IOException, ServletException {
 
-        VirtualFilterChain virtualFilterChain = new VirtualFilterChain(filterChain, filters, continueChainBeforeSuccessfulFilter);
+        VirtualFilterChain virtualFilterChain = new VirtualFilterChain(filters);
 
         HttpServletRequest request = (HttpServletRequest) req;
 
