@@ -2,7 +2,6 @@ package com.omc.builder.filter;
 
 import com.omc.builder.ResultToken;
 import com.omc.builder.context.ActionContextHolder;
-import com.omc.builder.filter.ResultProcessing;
 import org.springframework.util.Assert;
 
 import javax.servlet.*;
