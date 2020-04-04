@@ -13,17 +13,11 @@ public class UpperShelfStoreProvider implements StoreProvider {
     }
 
     @Override
-    public ResultToken provider(ResultToken result) {
+    public void provider(ResultToken result) {
         UpperShelfResultToken appDistro = (UpperShelfResultToken) result;
         appDistro.getAppDistro().setShelves(true);
         appDistroManagerService.updateDistroAppByAppId(appDistro.getAppDistro());
 
-        return appDistro;
-    }
-
-    @Override
-    public boolean supports(Class<?> rst) {
-        return UpperShelfResultToken.class.isAssignableFrom(rst);
     }
 
 }
