@@ -30,7 +30,7 @@ public class UpperShelfConfiguration extends RequestConfigurerAdapter {
 
     @Override
     protected void configure(ServeAction builder) throws Exception {
-        builder.requestMatcher().actionName("上架")
+        builder.debug(true).requestMatcher().actionName("上架")
                 .url(ActionConstant.UPPER_SHELF)
                 .method(HttpMethod.GET)
                 .and()

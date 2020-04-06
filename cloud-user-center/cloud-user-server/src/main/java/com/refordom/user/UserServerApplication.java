@@ -1,6 +1,5 @@
 package com.refordom.user;
 
-import com.refordom.common.security.annotation.ResourceServer;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +16,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @MapperScan("com.refordom.user.dao")
 @SpringBootApplication
 @EnableDiscoveryClient
-@ResourceServer
 public class UserServerApplication {
 
     public static void main(String[] args) {

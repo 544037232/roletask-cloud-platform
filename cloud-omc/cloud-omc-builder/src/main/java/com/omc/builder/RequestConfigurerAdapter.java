@@ -1,6 +1,5 @@
 package com.omc.builder;
 
-import com.omc.builder.global.GlobalManager;
 import com.omc.builder.serve.ServeAction;
 import com.omc.builder.serve.ServeRequest;
 import com.omc.object.ObjectPostProcessor;
@@ -18,8 +17,6 @@ public class RequestConfigurerAdapter implements RequestConfigurer<ServeRequest>
     private ServeAction serveAction;
 
     private ApplicationContext context;
-
-    private GlobalManager globalManager;
 
     private ApplicationEventPublisher eventPublisher;
 
@@ -50,9 +47,7 @@ public class RequestConfigurerAdapter implements RequestConfigurer<ServeRequest>
         }
         Map<Class<?>, Object> sharedObjects = createSharedObjects();
 
-        String path = this.getClass().getResource("").getPath();
-
-        serveAction = new ServeAction(objectPostProcessor, sharedObjects, globalManager, path);
+        serveAction = new ServeAction(objectPostProcessor, sharedObjects);
 
         serveAction
                 .paramsCheck()
@@ -80,9 +75,8 @@ public class RequestConfigurerAdapter implements RequestConfigurer<ServeRequest>
     }
 
     @Autowired
-    public void setApplicationContext(ApplicationContext context, GlobalManager globalManager) {
+    public void setApplicationContext(ApplicationContext context) {
         this.context = context;
-        this.globalManager = globalManager;
     }
 
     @Override

@@ -9,8 +9,6 @@ import com.omc.builder.configurer.ServiceProviderConfigurer;
 import com.omc.builder.configurer.StoreProviderConfigurer;
 import com.omc.builder.filter.DebugFilter;
 import com.omc.builder.filter.FilterComparator;
-import com.omc.builder.global.GlobalManager;
-import com.omc.builder.global.feature.FutureManager;
 import com.omc.builder.handler.FailureHandler;
 import com.omc.builder.handler.NullFailureHandler;
 import com.omc.builder.handler.NullSuccessHandler;
@@ -53,7 +51,7 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
     private boolean continueChainBeforeSuccessfulFilter = false;
 
     @SuppressWarnings("unchecked")
-    public ServeAction(ObjectPostProcessor<Object> objectPostProcessor, Map<Class<?>, Object> sharedObjects, GlobalManager globalManager, String path) {
+    public ServeAction(ObjectPostProcessor<Object> objectPostProcessor, Map<Class<?>, Object> sharedObjects) {
 
         super(objectPostProcessor);
 
@@ -61,12 +59,6 @@ public class ServeAction extends AbstractConfiguredObjectBuilder<ProviderManager
             setSharedObject((Class<Object>) entry.getKey(), entry.getValue());
         }
 
-        for (FutureManager futureManager : globalManager.getFutureManagers()) {
-            if (path.contains(futureManager.getPath())) {
-                this.debugEnabled = futureManager.isDebugEnabled();
-                break;
-            }
-        }
     }
 
     @Override

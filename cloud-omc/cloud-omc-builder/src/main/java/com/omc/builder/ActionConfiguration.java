@@ -1,7 +1,6 @@
 package com.omc.builder;
 
 import com.omc.builder.constant.ActionConstant;
-import com.omc.builder.global.FeatureManagerConfiguration;
 import com.omc.builder.serve.ServeRequest;
 import com.omc.object.ObjectConfigurer;
 import com.omc.object.ObjectPostProcessor;
@@ -10,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
  * @author pricess.wang
  * @date 2020/2/1 18:38
  */
-@Import(FeatureManagerConfiguration.class)
+@Configuration
 public class ActionConfiguration {
 
     private ServeRequest serveRequest;

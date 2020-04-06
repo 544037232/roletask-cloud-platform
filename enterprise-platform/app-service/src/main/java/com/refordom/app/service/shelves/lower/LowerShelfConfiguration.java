@@ -30,7 +30,7 @@ public class LowerShelfConfiguration extends RequestConfigurerAdapter {
 
     @Override
     protected void configure(ServeAction builder) throws Exception {
-        builder.requestMatcher()
+        builder.debug(true).requestMatcher()
                 .actionName("下架")
                 .url(ActionConstant.LOWER_SHELF)
                 .and()
