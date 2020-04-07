@@ -4,7 +4,7 @@ import com.omc.builder.ActionBuilder;
 import com.omc.builder.api.ServiceProvider;
 import com.omc.builder.filter.ResultBuilderFilter;
 import com.omc.builder.filter.ServiceProviderFilter;
-import com.omc.builder.filter.ResultNullProcessing;
+import com.omc.builder.filter.DefaultResultProcessing;
 import com.omc.builder.filter.ResultProcessing;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class ServiceProviderConfigurer<B extends ActionBuilder<B>>
     @Override
     public void init(B builder) throws Exception {
         if (resultProcessing == null){
-            resultProcessing = new ResultNullProcessing();
+            resultProcessing = new DefaultResultProcessing();
         }
     }
 
