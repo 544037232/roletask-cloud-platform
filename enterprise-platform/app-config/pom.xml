@@ -13,8 +13,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.refordom</groupId>
-            <artifactId>cloud-omc-builder</artifactId>
+            <groupId>com.pricess</groupId>
+            <artifactId>omc-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>

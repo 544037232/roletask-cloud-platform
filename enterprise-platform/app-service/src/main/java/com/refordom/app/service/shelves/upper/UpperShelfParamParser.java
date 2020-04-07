@@ -1,7 +1,7 @@
 package com.refordom.app.service.shelves.upper;
 
-import com.omc.builder.validator.ParamAdapter;
-import com.omc.builder.validator.ParamParser;
+import com.pricess.omc.validator.ParamAdapter;
+import com.pricess.omc.validator.ParamParser;
 
 import javax.servlet.http.HttpServletRequest;
 

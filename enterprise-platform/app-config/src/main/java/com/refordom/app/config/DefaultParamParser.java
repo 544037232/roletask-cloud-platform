@@ -1,8 +1,7 @@
 package com.refordom.app.config;
 
-
-import com.omc.builder.validator.ParamAdapter;
-import com.omc.builder.validator.ParamParser;
+import com.pricess.omc.validator.ParamAdapter;
+import com.pricess.omc.validator.ParamParser;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author pricess.wang
  * @date 2019/12/31 19:40
  */
-public class DefaultParamParser implements  ParamParser {
+public class DefaultParamParser implements ParamParser {
 
     @Override
     public ParamAdapter build(HttpServletRequest request) {

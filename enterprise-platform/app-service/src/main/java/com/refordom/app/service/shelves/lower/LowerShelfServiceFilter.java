@@ -1,8 +1,8 @@
 package com.refordom.app.service.shelves.lower;
 
-import com.omc.builder.context.ActionContextHolder;
-import com.omc.builder.exception.AppContextException;
-import com.omc.builder.filter.AbstractFilter;
+import com.pricess.omc.context.ActionContextHolder;
+import com.pricess.omc.exception.AppContextException;
+import com.pricess.omc.filter.AbstractFilter;
 import com.refordom.app.model.entity.AppDistro;
 
 import javax.servlet.http.HttpServletRequest;

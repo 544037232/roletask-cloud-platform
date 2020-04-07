@@ -1,7 +1,7 @@
 package com.refordom.app.config.filter;
 
-import com.omc.builder.context.ActionContextHolder;
-import com.omc.builder.exception.DeprecatedException;
+import com.pricess.omc.context.ActionContextHolder;
+import com.pricess.omc.exception.DeprecatedException;
 import com.refordom.app.core.constant.ParamConstant;
 import com.refordom.app.core.AppDetails;
 import com.refordom.app.core.AppEnum;

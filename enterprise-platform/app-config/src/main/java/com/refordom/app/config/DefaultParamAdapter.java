@@ -1,6 +1,6 @@
 package com.refordom.app.config;
 
-import com.omc.builder.validator.ParamAdapter;
+import com.pricess.omc.validator.ParamAdapter;
 import com.refordom.app.core.AppEnum;
 import com.refordom.app.core.constant.ParamConstant;
 import lombok.Getter;

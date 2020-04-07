@@ -1,8 +1,8 @@
 package com.refordom.app.service.shelves.upper;
 
-import com.omc.builder.RequestConfigurerAdapter;
-import com.omc.builder.filter.ParamsCheckFilter;
-import com.omc.builder.serve.ServeAction;
+import com.pricess.omc.RequestConfigurerAdapter;
+import com.pricess.omc.filter.ParamsCheckFilter;
+import com.pricess.omc.serve.ServeAction;
 import com.refordom.app.config.filter.AppDetailsFilter;
 import com.refordom.app.model.AppDetailsManagerService;
 import com.refordom.app.model.AppDistroManagerService;

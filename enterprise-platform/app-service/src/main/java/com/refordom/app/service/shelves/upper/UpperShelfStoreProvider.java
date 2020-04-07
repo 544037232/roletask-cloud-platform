@@ -1,7 +1,7 @@
 package com.refordom.app.service.shelves.upper;
 
-import com.omc.builder.ResultToken;
-import com.omc.builder.api.StoreProvider;
+import com.pricess.omc.ResultToken;
+import com.pricess.omc.api.StoreProvider;
 import com.refordom.app.model.AppDistroManagerService;
 
 public class UpperShelfStoreProvider implements StoreProvider {
