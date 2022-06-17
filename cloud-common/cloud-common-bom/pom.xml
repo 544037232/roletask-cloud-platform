@@ -29,7 +29,7 @@
         <!-- jwt -->
         <jwt.version>0.9.1</jwt.version>
         <!-- 阿里fastjson -->
-        <fastjson.version>1.2.68</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <!-- aviator表达式引擎 -->
         <aviator.version>4.2.5</aviator.version>
         <!-- guava -->
